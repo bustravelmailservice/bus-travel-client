@@ -379,7 +379,7 @@
     align-items: flex-start;
   }
 
-  .additional-fields .picking-field:nth-child(2) {
+  .additional-fields .picking-field {
     gap: 15px;
   }
 
