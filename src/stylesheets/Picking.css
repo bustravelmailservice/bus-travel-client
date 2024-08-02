@@ -255,10 +255,6 @@
 
 
 @media (max-width: 768px) {
-  .from-field .css-13xzpp8-singleValue,
-  .to-field .css-13xzpp8-singleValue{
-    margin-left: 5px !important;
-  }
   .picking-container {
     padding-bottom: 74px;
   }
@@ -303,10 +299,13 @@
 }
 
 @media (max-width: 426px) {
+  .from-field .css-13xzpp8-singleValue,
+  .to-field .css-13xzpp8-singleValue{
+    margin-left: 5px !important;
+  }
 
   .from-to-container {
     flex-direction: column;
-
   }
 
   .from-to-container .picking-field,
