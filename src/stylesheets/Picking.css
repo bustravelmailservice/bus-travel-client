@@ -151,10 +151,12 @@
 
 .from-field .css-13xzpp8-singleValue {
   margin-left: 0px !important;
+  margin-right: 0 !important;
 }
 
 .to-field .css-13xzpp8-singleValue {
   margin-left: 20px !important;
+  margin-right: 0 !important;
 }
 
 #react-select-3-input {
