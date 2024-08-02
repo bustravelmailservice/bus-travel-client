@@ -92,6 +92,11 @@
 	gap: 5px;
 }
 
+
+.NameSectionFooter i {
+	display: none;
+}
+
 @media (max-width: 1024px) {
 	.LeftFoooter {
 		position: absolute;
@@ -103,6 +108,7 @@
 	.UpFooter {
 		margin-top: 70px;
 	}
+	
 }
 
 @media (max-width: 769px) {
@@ -176,12 +182,13 @@
 	.NameSectionFooter:focus {
 		background-color: transparent;
 	}
+	.NameSectionFooter i {
+		display: block;
+	}
+
 }
 
 @media (min-width: 426px) {
-	.NameSectionFooter i {
-		display: none;
-	}
 
 	.NameSectionFooter {
 		cursor: default;
