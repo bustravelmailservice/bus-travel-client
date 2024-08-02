@@ -302,6 +302,7 @@
 }
 
 @media (max-width: 426px) {
+
   .from-to-container {
     flex-direction: column;
 
@@ -372,6 +373,10 @@
 
   .picking-datepicke{
     height: 14px;
+  }
+
+  .additional-fields{
+    align-items: flex-start;
   }
 
   .additional-fields .picking-field:nth-child(2) {
