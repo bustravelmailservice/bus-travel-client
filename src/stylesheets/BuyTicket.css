@@ -356,20 +356,7 @@
   z-index: 10001;
 }
 
-@media (max-width:768px) {
-  .RouteSymbolBuyTicket {
-    height: fit-content;
-  }
-
-  .NameTitle {
-    gap: 10px;
-  }
-
-  .Stage {
-    width: 30px;
-    height: 30px;
-  }
-
+@media (max-width:1024px) {
   .MainInfoBuyTicketUser {
     flex-direction: column;
   }
@@ -389,6 +376,21 @@
   .AddInfoTicketBT,
   .PriceBuyTicket {
     font-size: var(--mbfs);
+  }
+}
+
+@media (max-width:768px) {
+  .RouteSymbolBuyTicket {
+    height: fit-content;
+  }
+
+  .NameTitle {
+    gap: 10px;
+  }
+
+  .Stage {
+    width: 30px;
+    height: 30px;
   }
 }
 
