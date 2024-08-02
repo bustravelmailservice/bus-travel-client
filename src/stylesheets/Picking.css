@@ -285,6 +285,14 @@
     width: calc(50% - 18px);
   }
 
+  .from-field label,
+  .css-13xzpp8-singleValue{
+    margin-right: 0;
+  }
+
+  #react-select-3-input{
+    margin-right: 40px;
+  }
 }
 
 @media (max-width: 426px) {
@@ -341,7 +349,7 @@
   }
 
   .to-field label,
-  .from-field label{
+  .from-field label {
     margin-left: 15px !important;
   }
 
@@ -350,16 +358,20 @@
     height: 30px;
   }
 
-  .picking-passengers input {
+  .picking-passengers input,
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container,
+  .picking-datepicker {
     height: 30px;
   }
 
-  .react-datepicker-wrapper{
-    height: 30px;
-  }
-
-  .additional-fields .picking-field:nth-child(2){
+  .additional-fields .picking-field:nth-child(2) {
     gap: 15px;
+  }
+
+  .from-field label,
+  .to-field label {
+    margin-left: 15px !important;
   }
 }
 
