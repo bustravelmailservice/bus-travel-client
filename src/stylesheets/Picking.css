@@ -153,6 +153,10 @@
   margin-left: 0px !important;
 }
 
+.to-field .css-13xzpp8-singleValue {
+  margin-left: 40px;
+}
+
 /* Responsive styles */
 @media (max-width: 1920px) {
   .additional-fields {
