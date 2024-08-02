@@ -255,7 +255,9 @@
 
 
 @media (max-width: 768px) {
-
+  .from-field .css-13xzpp8-singleValue{
+    margin-left: 5px !important;
+  }
   .picking-container {
     padding-bottom: 74px;
   }
@@ -364,9 +366,12 @@
 
   .picking-passengers input,
   .react-datepicker-wrapper,
-  .react-datepicker__input-container,
-  .picking-datepicker {
+  .react-datepicker__input-container{
     height: 30px;
+  }
+
+  .picking-datepicke{
+    height: 14px;
   }
 
   .additional-fields .picking-field:nth-child(2) {
