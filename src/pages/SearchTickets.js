@@ -46,8 +46,15 @@ function SearchTickets() {
         filteredTravels.sort((a, b) => {
           const dateA = new Date(a.date_departure);
           const dateB = new Date(b.date_departure);
+          const timeA = a.departure.split(':').map(Number);
+          const timeB = b.departure.split(':').map(Number);
+        
+          dateA.setHours(timeA[0], timeA[1]);
+          dateB.setHours(timeB[0], timeB[1]);
+        
           return dateA - dateB;
         });
+        
 
         console.log('Sorted travels:', filteredTravels);
 
