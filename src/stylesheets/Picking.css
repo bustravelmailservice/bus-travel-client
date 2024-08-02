@@ -287,11 +287,11 @@
 
   .from-field label,
   .css-13xzpp8-singleValue{
-    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   #react-select-3-input{
-    margin-right: 40px !important;
+    margin-left: 40px !important;
   }
 }
 
