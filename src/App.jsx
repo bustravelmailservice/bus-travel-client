@@ -32,7 +32,7 @@ function App() {
     }
 
     // Fetch data from your server on Heroku
-    fetch('https://bus-travel-4dba9713d4f4.herokuapp.com/api/endpoint')
+    fetch('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/endpoint')
       .then(response => response.json())
       .then(data => {
         console.log(data);

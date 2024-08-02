@@ -26,7 +26,7 @@ function SearchTickets() {
           throw new Error('Missing search parameters');
         }
 
-        const response = await axios.get('https://bus-travel-4dba9713d4f4.herokuapp.com/api/flights/', {
+        const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
           params: { from, to, startDate }
         });
 

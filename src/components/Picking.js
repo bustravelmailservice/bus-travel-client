@@ -33,7 +33,7 @@ const Picking = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get('https://bus-travel-4dba9713d4f4.herokuapp.com/api/cities', {});
+        const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/cities', {});
         const cities = response.data;
         const options = cities.map(city => ({
           value: city.value,  // Используем название города

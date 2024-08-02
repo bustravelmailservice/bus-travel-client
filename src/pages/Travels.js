@@ -33,7 +33,7 @@ function Travels() {
         return;
       }
 
-      const response = await axios.get('https://bus-travel-4dba9713d4f4.herokuapp.com/api/tickets/', {
+      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets/', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -56,7 +56,7 @@ function Travels() {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get('https://bus-travel-4dba9713d4f4.herokuapp.com/api/cities');
+        const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/cities');
         setCities(response.data);
       } catch (error) {
         console.error('Error fetching cities:', error);

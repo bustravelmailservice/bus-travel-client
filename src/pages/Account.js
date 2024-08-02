@@ -34,7 +34,7 @@ function Account() {
         return;
       }
   
-      const response = await axios.get('https://bus-travel-4dba9713d4f4.herokuapp.com/api/tickets/', {
+      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets/', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
