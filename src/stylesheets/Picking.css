@@ -392,6 +392,10 @@
   .to-field label {
     margin-left: 15px !important;
   }
+
+  .picking-datepicker{
+    height: 12px !important;
+  }
 }
 
 @media (max-width: 320px) {
