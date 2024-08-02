@@ -90,7 +90,7 @@
 }
 
 .picking-datepicker {
-  height: 12px;
+  height: 14px;
 }
 
 .picking-datepicker {
@@ -285,11 +285,11 @@
   }
 
   .additional-fields .picking-field:nth-child(1) {
-    width: calc(50% - 18px);
+    width: calc(50% - 9px);
   }
 
   .additional-fields .picking-field:nth-child(2) {
-    width: calc(50% - 18px);
+    width: calc(50% - 9px);
   }
 
   .from-field label {
