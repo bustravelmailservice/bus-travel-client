@@ -67,8 +67,11 @@
   background-color: var(--dark-blue);
 }
 
-.to-field label,
-.from-field label {
+.from-field label{
+  margin-left: 8px !important;
+}
+
+.to-field label {
   margin-left: 30px !important;
 }
 
