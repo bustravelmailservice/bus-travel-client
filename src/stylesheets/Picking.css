@@ -393,7 +393,7 @@
     margin-left: 15px !important;
   }
 
-  .picking-datepicker{
+  .picking-datepicker {
     height: 12px !important;
   }
 }
@@ -406,7 +406,6 @@
   }
 
   .picking-search {
-    top: 243px;
+    top: 245px;
   }
-
 }

@@ -15,7 +15,7 @@
 }
 
 .TicketInfoBuy {
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -81,7 +81,7 @@
 }
 
 .AddInfoTicketBuy {
-  width: 30%;
+  width: 20%;
   background-color: var(--gray);
   padding: 20px;
   border-radius: 8px;
@@ -352,11 +352,67 @@
   bottom: 0;
 }
 
-.react-tel-input .country-list{
+.react-tel-input .country-list {
   z-index: 10001;
 }
 
-@media (max-width:1024px) {
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100vh;
+  height: 100vw;
+  background-color: none;
+  padding: 25vh 10vw;
+}
+
+.modal-content {
+  width: 80vw;
+  height: 50vh;
+  background-color: var(--mbc);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 20vh;
+}
+
+.modal-content>span {
+  font-style: var(--mbfs);
+  color: var(--mtcb);
+  text-align: center;
+}
+
+.modal-content>button {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+  background-color: var(--blue);
+  color: var(--mtc);
+  border-radius: 8px;
+  transition: 0.5s;
+}
+
+.modal-content>button:hover {
+  background-color: var(--dark-blue);
+  transition: 0.5s;
+}
+
+@media (max-width:768px) {
+  .RouteSymbolBuyTicket {
+    height: fit-content;
+  }
+
+  .NameTitle {
+    gap: 10px;
+  }
+
+  .Stage {
+    width: 30px;
+    height: 30px;
+  }
+
   .MainInfoBuyTicketUser {
     flex-direction: column;
   }
@@ -376,21 +432,6 @@
   .AddInfoTicketBT,
   .PriceBuyTicket {
     font-size: var(--mbfs);
-  }
-}
-
-@media (max-width:768px) {
-  .RouteSymbolBuyTicket {
-    height: fit-content;
-  }
-
-  .NameTitle {
-    gap: 10px;
-  }
-
-  .Stage {
-    width: 30px;
-    height: 30px;
   }
 }
 
