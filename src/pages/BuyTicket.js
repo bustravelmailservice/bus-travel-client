@@ -10,8 +10,9 @@ import { Helmet } from 'react-helmet-async';
 const BuyTicket = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const { travel, passengers, language } = location.state || {};
   const navigate = useNavigate();
+  const { travel, passengers, language } = location.state || {};
+  
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [smallBaggage, setSmallBaggage] = useState(0);
@@ -59,7 +60,6 @@ const BuyTicket = () => {
       document.body.classList.remove('modal-open');
     }
   }, [showModal]);
-  
 
   const calculatePrice = () => {
     const basePrice = language === 'ua' ? parseInt(travel.priceUA, 10) : parseInt(travel.priceEN, 10);
@@ -136,7 +136,7 @@ const BuyTicket = () => {
         buttonText: 'OK',
         onClick: () => {
           setShowModal(false);
-          history.push('/account');
+          navigate('/account');
         }
       });
       setShowModal(true);
@@ -150,7 +150,6 @@ const BuyTicket = () => {
       setShowModal(true);
     }
   };
-
 
   const totalPrice = calculatePrice();
 
@@ -308,7 +307,6 @@ const BuyTicket = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

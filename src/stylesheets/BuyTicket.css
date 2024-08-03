@@ -362,11 +362,11 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* добавлено для затемнения фона */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  justify-content: center; /* добавлено для центрирования по вертикали */
-  align-items: center; /* добавлено для центрирования по горизонтали */
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
   padding: 25vh 10vw;
 }
@@ -380,7 +380,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* изменено для центрирования по горизонтали */
+  align-items: center;
   gap: 20vh;
 }
 
@@ -397,8 +397,8 @@
   color: var(--mtc);
   border-radius: 8px;
   transition: 0.5s;
-  justify-content: center; /* добавлено для центрирования текста кнопки */
-  align-items: center; /* добавлено для центрирования текста кнопки */
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content > button:hover {
@@ -409,6 +409,7 @@
 body.modal-open {
   overflow: hidden;
 }
+
 
 @media (max-width:768px) {
   .RouteSymbolBuyTicket {
