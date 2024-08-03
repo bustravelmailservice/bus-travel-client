@@ -357,11 +357,17 @@
 }
 
 .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* добавлено для затемнения фона */
   display: flex;
   flex-direction: column;
-  width: 100vh;
-  height: 100vw;
-  background-color: none;
+  justify-content: center; /* добавлено для центрирования по вертикали */
+  align-items: center; /* добавлено для центрирования по горизонтали */
+  z-index: 1000;
   padding: 25vh 10vw;
 }
 
@@ -374,29 +380,34 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center; /* изменено для центрирования по горизонтали */
   gap: 20vh;
 }
 
-.modal-content>span {
+.modal-content > span {
   font-style: var(--mbfs);
   color: var(--mtcb);
   text-align: center;
 }
 
-.modal-content>button {
+.modal-content > button {
   display: flex;
-  flex-direction: column;
   padding: 5px 20px;
   background-color: var(--blue);
   color: var(--mtc);
   border-radius: 8px;
   transition: 0.5s;
+  justify-content: center; /* добавлено для центрирования текста кнопки */
+  align-items: center; /* добавлено для центрирования текста кнопки */
 }
 
-.modal-content>button:hover {
+.modal-content > button:hover {
   background-color: var(--dark-blue);
   transition: 0.5s;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 @media (max-width:768px) {

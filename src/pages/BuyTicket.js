@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import '../stylesheets/BuyTicket.css';
@@ -11,7 +11,7 @@ const BuyTicket = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const { travel, passengers, language } = location.state || {};
-  const history = useHistory();
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [smallBaggage, setSmallBaggage] = useState(0);
@@ -51,6 +51,15 @@ const BuyTicket = () => {
   useEffect(() => {
     validateInputs();
   }, [firstName, lastName, email, phone, validateInputs]);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  }, [showModal]);
+  
 
   const calculatePrice = () => {
     const basePrice = language === 'ua' ? parseInt(travel.priceUA, 10) : parseInt(travel.priceEN, 10);
