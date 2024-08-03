@@ -360,8 +360,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 80vw;
+  height: 50vh;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -385,7 +385,7 @@
 }
 
 .modal-content > span {
-  font-style: var(--mbfs);
+  font-style: var(--vbfs);
   color: var(--mtcb);
   text-align: center;
 }
@@ -394,11 +394,12 @@
   display: flex;
   padding: 5px 20px;
   background-color: var(--blue);
-  color: var(--mtc);
+  color: var(--mbfs);
   border-radius: 8px;
   transition: 0.5s;
   justify-content: center;
   align-items: center;
+  border: none;
 }
 
 .modal-content > button:hover {
