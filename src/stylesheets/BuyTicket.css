@@ -394,7 +394,8 @@
   display: flex;
   padding: 5px 20px;
   background-color: var(--blue);
-  color: var(--mbfs);
+  font-size: var(--mbfs);
+  color: var(--mtc);
   border-radius: 8px;
   transition: 0.5s;
   justify-content: center;
