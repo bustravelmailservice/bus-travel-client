@@ -12,7 +12,7 @@ const BuyTicket = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { travel, passengers, language } = location.state || {};
-  
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [smallBaggage, setSmallBaggage] = useState(0);
@@ -21,7 +21,7 @@ const BuyTicket = () => {
   const [phone, setPhone] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => { } });
+  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => {} });
 
   const fromToTicketRef = useRef(null);
   const routeSymbolRef = useRef(null);
@@ -46,11 +46,11 @@ const BuyTicket = () => {
     const isValidLastName = lastName.length > 0 && lastName.length <= 60;
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const isValidPhone = phone.length > 0;
-    setButtonDisabled(!(isValidName && isValidLastName && isValidEmail && isValidPhone));
+    return isValidName && isValidLastName && isValidEmail && isValidPhone;
   }, [firstName, lastName, email, phone]);
 
   useEffect(() => {
-    validateInputs();
+    setButtonDisabled(!validateInputs());
   }, [firstName, lastName, email, phone, validateInputs]);
 
   useEffect(() => {
@@ -69,6 +69,16 @@ const BuyTicket = () => {
   };
 
   const handleBuyTicket = async () => {
+    if (!validateInputs()) {
+      setModalContent({
+        text: t('FailedBuyTicket'),
+        buttonText: 'OK',
+        onClick: () => setShowModal(false)
+      });
+      setShowModal(true);
+      return;
+    }
+
     const formatDate = (dateString) => {
       const date = new Date(dateString);
       if (isNaN(date)) {
@@ -291,7 +301,6 @@ const BuyTicket = () => {
           <div className='ButtonConfirmBuyTicket'>
             <button
               onClick={handleBuyTicket}
-              disabled={buttonDisabled}
               style={{ backgroundColor: buttonDisabled ? 'red' : 'var(--blue)' }}
             >
               {t('ConfirmPurchase')}
