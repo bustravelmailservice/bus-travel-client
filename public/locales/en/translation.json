@@ -276,5 +276,7 @@
     "adminpanel": "Admin Panel",
     "qr-code": "QR Code"
   },
-  "ua":"ua"
+  "ua":"ua",
+  "FailedBuyTicket": "Couldn't buy a ticket, try checking the data!",
+  "SuccesBuyTicket": "You have been successful in booking a ticket! You will be contacted shortly."
 }

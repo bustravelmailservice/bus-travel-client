@@ -405,6 +405,7 @@
 .modal-content > button:hover {
   background-color: var(--dark-blue);
   transition: 0.5s;
+  cursor: pointer;
 }
 
 body.modal-open {
