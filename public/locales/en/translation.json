@@ -277,6 +277,6 @@
     "qr-code": "QR Code"
   },
   "ua":"ua",
-  "FailedBuyTicket": "Couldn't buy a ticket, try checking the data!",
+  "FailedBuyTicket": "Ticket order failed, try checking the data!",
   "SuccesBuyTicket": "You have been successful in booking a ticket! You will be contacted shortly."
 }
