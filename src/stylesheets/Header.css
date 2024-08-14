@@ -1,3 +1,13 @@
+.Header {
+	display: flex;
+	align-items: center;
+	padding: 42px 53px;
+	background-color: var(--mtc);
+	color: white;
+	justify-content: space-between;
+	font-size: var(--mls)
+}
+
 .Navigation {
 	background-color: var(--blue);
 	color: var(--mtc);
@@ -12,31 +22,29 @@
 }
 
 .Logo {
-	height: 50px;
 	object-fit: contain;
 }
 
 .Logo a {
 	display: block;
-	height: 100%;
 }
 
 .Logo img {
-	width: 78px;
-	height: 50px;
+	width: 85px;
+	height: 32px;
 }
 
 .links {
-	margin-left: 5%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 20px;
-	
+	justify-content: center;
+	align-self: center;
+	gap: 60px;
 }
 
 .links a {
-	color: var(--mtc);
+	color: var(--light-black) !important;
 	text-decoration: none;
 	white-space: nowrap;
 	overflow: hidden;
@@ -60,17 +68,34 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 40px;
-	margin-left: auto;
-	color: var(--mtc);
+	gap: 10px;
+	color: var(--light-black) !important;
 }
 
-.NotLogged a:nth-child(1) {
+.NotLogged {
+	border-radius: calc(var(--link-height) / 2);
+	padding: 10px 28px;
+	background-color: var(--dark-blue);
+}
+
+.NotLogged::after {
+	content: '';
 	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	line-height: 1;
+	font-size: inherit;
 }
 
-.NotLogged a:nth-child(2) {
-	display: none;
+.NotLogged {
+	--link-height: calc(1em + 20px);
+	/* Высота ссылки = размер шрифта (1em) + padding */
+}
+
+.NotLogged a {
+	display: block;
+	color: var(--mtc) !important;
 }
 
 .BurgerButton {
@@ -91,15 +116,77 @@
 	font-size: var(--mbfs);
 }
 
-.close-button{
+.close-button {
 	display: none;
 }
 
+@media (max-width: 1440px) {
+	.Header {
+		padding: 37px 53px;
+	}
+
+	.Logo img {
+		width: 85px;
+		height: 32px;
+	}
+}
+
 @media (max-width: 1024px) {
+	.Header {
+		padding: 31px 35px;
+	}
+
+	.Logo img {
+		width: 71px;
+		height: 27px;
+	}
+
 	.fa-times {
 		display: block;
 	}
 
+	.links {
+		gap: 40px;
+	}
+
+	.NotLogged {
+		padding: 5px 15px;
+	}
+}
+
+@media (max-width: 768px) {
+	.Header {
+		padding: 25px 25px;
+	}
+
+	.Logo img {
+		width: 41px;
+		height: 16px;
+	}
+
+	.Translation {
+		display: none;
+	}
+
+	.CurrentTranslation {
+		width: 54px !important;
+	}
+
+	.links {
+		gap: 35px;
+	}
+
+	.NotLogged {
+		padding: 5px 10px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 680px) {
 	.links {
 		display: none;
 		margin: 0 !important;
@@ -107,6 +194,13 @@
 
 	.BurgerButton {
 		display: block;
+		color: var(--light-black) !important;
+	}
+
+	.BurgerButton i {
+		display: block;
+		color: var(--light-black) !important;
+		font-size: 10px;
 	}
 
 	.links-container {
@@ -117,7 +211,7 @@
 		top: 0;
 		right: 0;
 		height: 100%;
-		width: 30%;
+		width: 50%;
 		background-color: var(--dark-gray);
 		font-size: var(--mbfs);
 		flex-direction: column;
@@ -147,7 +241,6 @@
 	.links-container .links {
 		margin-left: 0;
 		margin-top: 60px;
-		/* Розміщуємо контент трохи нижче */
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
@@ -155,30 +248,26 @@
 	}
 }
 
-@media (max-width: 768px) {
-	.links-container {
-		width: 50%;
-	}
-
-	.Translation {
-		display: none;
-	}
-
-	.CurrentTranslation {
-		width: 54px !important;
-	}
-}
-
 @media (max-width: 425px) {
+	.Header {
+		padding: 20px 20px;
+	}
+
 	.links-container {
 		width: 100%;
 	}
+	.NotLogged {
+		padding: 4px 10px;
+	}
+}
 
-	.NotLogged a:nth-child(1) {
-		display: none;
+@media (max-width: 320px) {
+	.Header {
+		padding: 15px 15px;
 	}
 
-	.NotLogged a:nth-child(2) {
-		display: block;
+	.Logo img {
+		width: 37px;
+		height: 14px;
 	}
 }

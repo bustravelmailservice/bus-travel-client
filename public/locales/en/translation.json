@@ -16,8 +16,8 @@
   "Main_info": "Information about us",
   "Passenger_rights_rules": "Passenger rights and rules",
   "Privacy_policy": "Privacy policy",
-  "MainGreeting": "Welcome to BusTravel!",
-  "SecondGreeting": "Get to know us, or go straight to booking tickets.",
+  "MainGreeting": "Discover new horizons with 'Bus Travel'",
+  "SecondGreeting": "Our company offers convenient and safe bus transportation throughout the country. We care about your comfort and do our best to make your trip smooth and enjoyable.",
   "Luggage": "Additional luggage",
   "No": "No",
   "LuggageStatusNo": "No",
@@ -255,9 +255,9 @@
   "LoginButton": "Register",
   "register": "Log in to your account",
   "AlertUser": "Sorry, something was entered incorrectly, please check if you entered everything correctly and try again.",
-  "AuthenticationError":"Error during authentication",
-  "InvalidEmailError":"Error entering email address. Please make sure the email address is correct.",
-  "PasswordLengthError":"Error entering password. The password must be at least 8 characters and no more than 32 characters.",
+  "AuthenticationError": "Error during authentication",
+  "InvalidEmailError": "Error entering email address. Please make sure the email address is correct.",
+  "PasswordLengthError": "Error entering password. The password must be at least 8 characters and no more than 32 characters.",
   "TotalPrice": "Total price: ",
   "titles": {
     "home": "Home",
@@ -276,7 +276,8 @@
     "adminpanel": "Admin Panel",
     "qr-code": "QR Code"
   },
-  "ua":"ua",
+  "ua": "ua",
   "FailedBuyTicket": "Ticket order failed, try checking the data!",
-  "SuccesBuyTicket": "You have been successful in booking a ticket! You will be contacted shortly."
+  "SuccesBuyTicket": "You have been successful in booking a ticket! You will be contacted shortly.",
+  "Search_Trips_Span": "Search for bus services"
 }

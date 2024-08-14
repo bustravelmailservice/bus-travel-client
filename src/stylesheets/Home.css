@@ -1,460 +1,615 @@
 .Home {
-    padding: 60px 5% 60px 5%;
-    width: 90%;
-    color: var(--mtc);
-    background-image: url('../background_images/pic-bus-1.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+  color: var(--mtc);
+  background-color: #fff;
 }
+
+.Map .MainContent {
+  padding: 50px 0px !important;
+  width: 100%;
+}
+
+.Map .MainContent .Picking {
+  padding: 0px 250px;
+  margin-bottom: 50px;
+}
+
+.map-container {
+  margin-top: 150px !important;
+  width: 100%;
+}
+
+.Map .MainContent .Picking .TopPicking {
+  display: none;
+}
+
+.Map .MainContent .Picking .picking-container {
+  border-top-left-radius: 40px;
+}
+
+
 
 .TR {
-    background-color: var(--mbcg);
-    width: 100%;
-    height: 2px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+  background-color: var(--mbcg);
+  width: 100%;
+  height: 2px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.MainContent {
-    padding: 0px 0px 40px 0px;
-}
 
 .WelcomminPart {
-    color: var(--blue);
-    padding: 20px 5%;
-    width: 90%;
+  background-color: var(--mbc);
+  color: var(--blue);
+  width: calc(100% - calc(250px*2));
+  padding: 0 250px 54px 250px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .TextWelcommingPart {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .MainGreeting {
-    font-size: var(--vbfs);
+  font-size: var(--vbfs);
+  color: var(--mtcd);
+  letter-spacing: -0.01em;
+  font-family: 'Benzin' !important;
+  font-weight: 500 !important;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #2571FF;
 }
 
 .SecondGreeting {
-    font-size: var(--mfs);
+  font-size: var(--mls);
+  color: var(--dark-gray);
+  letter-spacing: -0.01em;
+  font-family: 'Benzin' !important;
+  font-weight: normal !important;
+  font-weight: 400;
+  padding: 0px 200px;
 }
 
 .PickingPart {
-    margin-top: 40px;
+  background-image: url('../background_images/pic-bus-1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
 }
 
 .InfoAndLinks {
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-    width: calc(100% - 40px);
-    background-color: var(--light-gray);
-    padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  background-color: var(--mtc);
 }
 
 .AdditionalLinks {
-    width: calc(100%);
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+  justify-content: space-between;
+}
+
+.MainContent {
+  padding: 220px 15% 150px 15%;
+  width: calc(70%);
+  background-color: white;
+}
+
+
+.AddLink {
+  width: 100%;
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: var(--dark-blue);
+  color: var(--mtc) !important;
+  transition: 0.5s;
+  border-radius: calc(var(--link-height) / 2);
+}
+
+.AddLink::after {
+  content: '';
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  line-height: 0;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .AddLink {
-    border: 3px solid var(--dark-gray);
-    padding: 10px 20px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 5px;
-    border-radius: 5px;
-    background-color: var(--mbc);
-    color: var(--dark-gray);
-    transition: 0.5s;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  --link-height: calc(1em + 80px);
 }
 
 .AddLink span {
-    color: var(--mtcb) !important;
-    font-size: var(--mfs);
-
+  margin-left: 25px;
+  color: var(--mtc) !important;
+  font-size: var(--mbfs);
 }
 
 .AddLink i {
-    color: var(--dark-gray) !important;
-    font-size: calc(var(--mfs));
+  color: var(--mtc) !important;
+  font-size: calc(var(--mbfs));
 }
 
 .AddLink:hover {
-    transition: 0.5s;
-    box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
 }
 
 .AdditionalDescriptions {
-    margin-top: 60px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: start;
-    gap: 30px;
+  margin: 150px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 60px;
 }
 
 .AdditionalDescr {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  text-align: center;
 }
 
 .TextAddLink {
-    color: var(--mtcb) !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+  color: var(--mtcb) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 
 .AdditionalDescr i {
-    font-size: calc(var(--vbfs) + 4px);
-    color: var(--light-black) !important;
+  font-size: 40px;
+  color: var(--dark-blue) !important;
 
 }
 
 .TextAddLink span:nth-child(1) {
-    font-size: calc(var(--mbfs) - 4px);
-    font-weight: 400;
+  font-size: var(--mls);
+  color: var(--light-black);
 }
 
 .TextAddLink span:nth-child(2) {
-    font-size: calc(var(--mfs) - 2px);
+  font-size: var(--mls);
+  color: var(--light-gray);
+  font-weight: 400;
 }
 
 .MapSegment {
-    margin-top: 60px;
-    width: calc(100% + 0px);
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    transform: translateX(-20px);
-    padding: 0 20px;
-    background-color: var(--light-gray);
-    transition: 0.5s !important;
-}
-
-.MapSegment:hover {
-    background-color: var(--gray);
-    transition: 0.5s !important;
-
+  width: calc(100% + 0px);
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background-color: var(--light-gray);
+  transition: 0.5s !important;
+  background-color: #FFFFFF;
+  box-shadow: 0px 8px 52.3px rgba(0, 0, 0, 0.19);
+  border-radius: 40px;
 }
 
 .ImageMap {
-    height: 180px;
-    object-fit: contain;
+  height: 180px;
+  object-fit: contain;
 }
 
 .ImageMap img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
 }
 
 .TextMapSeg {
-    justify-content: space-around;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    color: var(--mtcb);
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--mtcb);
 }
 
 .TextPartMap {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.TextMapSeg span {
-    color: var(--mtcb) !important;
-    font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .MainNameMapSeg {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 5px;
-    font-size: var(--mbfs);
-    font-weight: 600 !important;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 5px;
+  font-size: var(--mbfs);
+  font-weight: 500 !important;
+  color: var(--light-black) !important;
 }
 
 .AddNameMapSeg {
-    font-size: var(--mls);
+  font-size: var(--mls) !important;
+  color: var(--light-black) !important;
 }
 
 .AddNameMapSeg i {
-    font-size: calc(var(--mls)) !important;
-    color: var(--mtcb) !important;
+  font-size: calc(var(--mls)) !important;
+  color: var(--light-black) !important;
 }
 
 .SecNameMapSeg {
-    font-size: var(--mfs);
+  font-size: var(--mls);
+  color: var(--light-black) !important;
 }
 
 .DescriptionOfServices {
-    background-color: var(--mbc);
-    border-radius: 8px;
-    padding: 20px 20%;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    color: var(--mtcb);
+  background-color: var(--mbc);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  color: var(--mtcb);
+  margin-top: 100px;
+}
+
+.DescriptionOfServices>.TextDescSer:nth-child(1),
+.DescriptionOfServices>.TextDescSer:nth-child(3) {
+  padding-right: 25%;
+}
+
+.DescriptionOfServices>.TextDescSer:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-left: 25%;
 }
 
 .TextDescSer {
-    margin: 15px 0px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  margin: 15px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .TextDescSer span:nth-child(1) {
-    font-size: var(--mbfs);
-    font-weight: 600;
+  font-size: var(--mbfs);
+  font-weight: 400;
+  color: var(--light-black) !important;
 }
 
 .TextDescSer span:nth-child(2) {
-    font-size: var(--mfs);
-    font-weight: 400;
+  font-size: var(--mls);
+  color: var(--light-black);
+  font-weight: 400;
+}
+
+.reverse {
+  display: flex;
+  flex-direction: column-reverse;
+
 }
 
 @media (max-width:1440px) {
-    .AddLink span {
-        color: var(--mtcb) !important;
-        font-size: calc(var(--mfs) - 4px);
+  .Map .MainContent .Picking {
+    padding: 0px 50px;
+  }
 
-    }
+  .AdditionalDescriptions {
+    margin: 120px 0px;
+    margin-bottom: 120px;
+    gap: 30px;
+  }
 
-    .AddLink i {
-        color: var(--dark-gray) !important;
-        font-size: calc(var(--mfs) - 4px);
-    }
+  .MainContent {
+    padding: 220px 3% 120px 3%;
+    width: 94%;
+  }
 
-    .AdditionalDescriptions {
-        flex-direction: column;
-        gap: 30px;
-    }
+  .AddLink {
+    padding: 17px 0px;
+  }
 
-    .AdditionalDescr:nth-child(1),
-    .AdditionalDescr:nth-child(3) {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: start;
-        text-align: start;
-        gap: 20px;
-    }
+  .WelcomminPart {
+    width: calc(100% - calc(100px*2));
+    padding: 0 100px 54px 100px;
+  }
 
-    .AdditionalDescr:nth-child(2),
-    .AdditionalDescr:nth-child(4) {
-        flex-direction: row-reverse;
-        align-items: flex-start;
-        justify-content: end;
-        text-align: start;
-        gap: 0px;
-    }
+  .SecondGreeting {
+    padding: 0px 50px;
+  }
 
-    .AdditionalDescr:nth-child(1) .TextAddLink,
-    .AdditionalDescr:nth-child(3) .TextAddLink {
-        align-items: flex-start;
+  .AddLink {
+    width: 100%;
+  }
 
-    }
+  .AddLink span {
+    font-size: calc(var(--mfs) - 4px);
 
-    .AdditionalDescr:nth-child(2) .TextAddLink,
-    .AdditionalDescr:nth-child(4) .TextAddLink {
-        align-items: flex-end;
-    }
+  }
 
-    .AdditionalDescr:nth-child(2) .TextAddLink span:nth-child(2),
-    .AdditionalDescr:nth-child(4) .TextAddLink span:nth-child(2) {
-        display: flex;
-        justify-content: end;
-    }
-
-
-
-    .AdditionalDescr span {
-        width: 60%;
-    }
-
-    .AdditionalDescr i {
-        font-size: 40px;
-    }
+  .AddLink i {
+    font-size: calc(var(--mfs) - 4px);
+  }
 }
 
 @media (max-width:1024px) {
-    .AdditionalDescr span {
-        width: 70%;
-    }
+  .Map .MainContent .Picking {
+    padding: 0px 100px;
+  }
 
-    .PickingPart {
-        margin-top: 40px;
-    }
+  .AdditionalDescriptions {
+    margin: 120px 0px;
+    gap: 35px;
+  }
 
-    .AdditionalLinks {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 10px;
-    }
+  .AdditionalDescr {
+    gap: 20px;
+  }
 
-    .AddLink {
-        width: auto;
-    }
+  .WelcomminPart {
+    width: calc(100% - calc(60px*2));
+    padding: 0 60px 54px 60px;
+  }
 
+  .SecondGreeting {
+    padding: 0px 50px;
+  }
 
+  .AdditionalLinks {
+    gap: 40px;
+  }
+
+  .MainContent {
+    padding: 180px 10.7% 80px 10.7%;
+    width: 78.6%;
+  }
+
+  .AddLink {
+    padding: 11px 0px;
+  }
+
+  .AddLink span {
+    margin-left: 15px;
+  }
+
+  .AddLink {
+    width: 100%;
+  }
 }
 
 @media (max-width:768px) {
-    .DescriptionOfServices {
-        padding: 20px;
-        gap: 0px;
-    }
+  .Map .MainContent .Picking {
+    padding: 0px 75px;
+  }
 
-    .MapSegment {
-        flex-direction: column-reverse;
-        width: calc(100% + 0px);
-        padding: 0 20px;
-        margin: 30px 0px;
+  .AdditionalDescriptions {
+    margin: 55px 0px;
+  }
 
-    }
+  .WelcomminPart {
+    width: calc(100% - calc(50px*2));
+    padding: 0 50px 54px 50px;
+  }
 
-    .TextMapSeg {
-        gap: 20px;
-    }
+  .SecondGreeting {
+    padding: 0px 50px;
+  }
 
-    .TextPartMap {
-        gap: 2px;
-    }
+  .DescriptionOfServices {
+    padding: 20px;
+    gap: 0px;
+  }
 
-    .ImageMap {
-        height: auto;
-    }
+  .MapSegment>div {
+    width: 40%;
+  }
 
+  .TextMapSeg {
+    gap: 20px;
+  }
 
-    .MainNameMapSeg {
-        font-size: calc(var(--mbfs) + 4px);
-    }
+  .TextPartMap {
+    gap: 2px;
+  }
 
-    .SecNameMapSeg {
-        font-size: calc(var(--mfs) + 0px);
-    }
+  .ImageMap {
+    height: auto;
+  }
 
-    .PickingPart {
-        margin-top: 40px;
-    }
+  .AdditionalLinks {
+    gap: 30px;
+  }
 
-    .AdditionalLinks {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+  .MainContent {
+    padding: 160px 7.5% 30px 7.5%;
+    width: 85%;
+  }
 
-    .AddLink {
-        width: auto;
-        align-items: center;
-        justify-content: start;
-        gap: 20px;
+  .AddLink span {
+    margin-left: 10px;
+  }
 
-    }
+  .AddLink {
+    padding: 8px 0px;
+    width: 100%;
+  }
 
-    .AddLink i,
-    .AddLink span {
-        font-size: var(--mbfs);
-    }
+  .AddLink i,
+  .AddLink span {
+    font-size: var(--mbfs);
+  }
 
-    .AddLink i {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-    }
-
-    .PickingPart {
-        margin-top: 30px;
-    }
-
-
+  .AddLink i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+  }
 }
 
+@media (max-width:550px) {
+  .Map .MainContent{
+    padding-top: 0px;
+  }
+  .Map .MainContent .Picking {
+    padding: 0px 45px;
+  }
+
+  .MapSegment {
+    flex-direction: column;
+    width: calc(100% - 40px);
+    padding: 0 20px 20px 20px;
+    margin: 30px 0px;
+  }
+
+  .DescriptionOfServices {
+    display: none;
+  }
+
+  .MapSegment>div {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+  }
+
+  .TextPartMap,
+  .AddNameMapSeg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .AdditionalLinks {
+    gap: 15px;
+  }
+
+  .MainContent {
+    padding: 160px 2.5% 30px 2.5%;
+    width: 95%;
+  }
+
+  .AdditionalDescriptions {
+    margin: 80px 0px;
+    gap: 55px;
+    flex-direction: column;
+  }
+
+  .AdditionalDescr {
+    gap: 35px;
+  }
+
+  .reverse {
+    flex-direction: column;
+  }
+}
 
 @media (max-width:426px) {
-    .TextMapSeg {
-        gap: 15px;
-    }
+  .Map .MainContent .Picking {
+    padding: 0px 10px;
+  }
 
-    .MainNameMapSeg {
-        font-size: calc(var(--mbfs) + 10px) !important;
-        display: flex;
-        flex-direction: row;
-        gap: 5px;
-        align-items: flex-end;
-    }
+  .AdditionalLinks {
+    flex-direction: column;
+  }
 
-    .AddNameMapSeg {
-        font-size: var(--mfs);
-    }
+  .MainContent {
+    padding: 120px 60px 20px 60px;
+    width: calc(100% - 120px);
+  }
 
-    .AddNameMapSeg i {
-        font-size: calc(var(--mfs) + 0px) !important;
-    }
+  .AddLink span {
+    margin-left: 10px;
+  }
+
+  .WelcomminPart {
+    text-align: left !important;
+    width: calc(100% - calc(30px*2));
+    margin-left: 20px;
+    padding: 0 0px 26px 0px;
+  }
+
+  .MainGreeting {
+    text-align: left !important;
+  }
+
+  .SecondGreeting {
+    text-align: left !important;
+    padding: 0px 0px;
+  }
+
+  .TextMapSeg {
+    gap: 15px;
+  }
+
+  .MainNameMapSeg {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: flex-end;
+  }
+
+  .ImageMap {
+    width: 100%;
+    height: auto;
+  }
+
+  .AdditionalDescriptions {
+    margin: 50px 0px;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .AdditionalDescr span {
+    width: 100%;
+  }
+
+  .AddLink span {
+    margin-left: 3px;
+  }
 
 
+  .TextMapSeg {
+    gap: 10px;
+  }
 
-    .ImageMap {
-        width: 100%;
-        height: auto;
-    }
+  .SecondGreeting {
+    text-align: left !important;
+    padding: 0px 0px;
+    font-size: 6px;
+    padding-right: 50px;
+    font-family: 'Benzin-Regular';
+    font-style: normal;
+    font-weight: 400;
+  }
+}
 
-    .SecNameMapSeg {
-        font-size: calc(var(--mfs) + 2px);
-    }
+@media (max-width:320px) {
+  .AdditionalDescriptions {
+    margin: 55px 0px;
+    gap: 40px;
+  }
 
+  .AdditionalLinks {
+    flex-direction: column;
+  }
 
-    .PickingPart {
-        margin-top: 30px;
-    }
+  .MainContent {
+    padding: 100px 75px 20px 35px;
+    width: calc(100% - 60px);
+  }
 
-    .AdditionalDescriptions {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .AdditionalDescr {
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        gap: 10px !important;
-    }
-
-    .AdditionalDescr span {
-        width: 100%;
-    }
-
-    .TextAddLink span:nth-child(1) {
-        font-size: calc(var(--mbfs) + 4px);
-    }
-
-    .TextAddLink span:nth-child(2) {
-        font-size: calc(var(--mfs));
-    }
-
-    .TextMapSeg {
-        gap: 10px;
-    }
-
+  .AdditionalDescr {
+    gap: 20px;
+  }
 }

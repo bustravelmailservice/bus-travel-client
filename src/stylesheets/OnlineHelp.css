@@ -38,13 +38,7 @@
 	justify-content: space-between;
 }
 
-.Header {
-	display: flex;
-	align-items: center;
-	padding: 10px;
-	background-color: var(--blue);
-	color: white;
-}
+
 
 .ConsultantIcon {
 	font-size: 20px;

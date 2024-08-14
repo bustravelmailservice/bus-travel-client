@@ -1,7 +1,25 @@
+@font-face {
+  font-family: 'Benzin';
+  src: url('./fonts/Benzin-Regular.woff2') format('woff2'),
+    url('./fonts/Benzin-Regular.woff') format('woff'),
+    url('./fonts/Benzin-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Benzin';
+  src: url('./fonts/Benzin-Medium.woff2') format('woff2'),
+    url('./fonts/Benzin-Medium.woff') format('woff'),
+    url('./fonts/Benzin-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 * {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Benzin', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "wdth" 100;
@@ -37,11 +55,6 @@ a * {
   transition: color 0.5s !important;
 }
 
-a:hover * {
-  color: var(--gray) !important;
-  transition: color 0.5s !important;
-}
-
 /* ДОКА ПО ROOT
 mtc - main text color - для текста 
 
@@ -61,25 +74,25 @@ mbc - main background color
 :root {
   --mtc: #ffffff;
   --mtcb: #000000;
-  --mtcd: #2356ff;
+  --mtcd: #2571ff;
   --mbc: #ffffff;
   --mbcg: #a3a3a3;
   --mbcb: #000000;
   --blue: #1e92ff;
-  --dark-blue: #2356ff;
-  --light-gray: #EFEFEF;
+  --dark-blue: #2571ff;
+  --light-gray: #949494;
   --gray: #cecece;
   --dark-gray: #a3a3a3;
-  --light-black: #505050;
+  --light-black: #494949;
   --danger-red: #ff0505;
 }
 
 @media (max-width:1920px) {
   :root {
-    --mls: 16px;
+    --mls: 14px;
     --mfs: 20px;
-    --mbfs: 32px;
-    --vbfs: 46px;
+    --mbfs: 24px;
+    --vbfs: 64px;
   }
 }
 
@@ -87,26 +100,26 @@ mbc - main background color
   :root {
     --mls: 14px;
     --mfs: 18px;
-    --mbfs: 28px;
-    --vbfs: 42px;
-  }
-}
-
-@media (max-width:1024px) {
-  :root {
-    --mls: 12px;
-    --mfs: 16px;
     --mbfs: 24px;
-    --vbfs: 38px;
+    --vbfs: 64px;
   }
 }
 
 @media (max-width:1024px) {
   :root {
     --mls: 10px;
+    --mfs: 16px;
+    --mbfs: 14px;
+    --vbfs: 48px;
+  }
+}
+
+@media (max-width:768px) {
+  :root {
+    --mls: 8px;
     --mfs: 14px;
-    --mbfs: 20px;
-    --vbfs: 34px;
+    --mbfs: 14px;
+    --vbfs: 36px;
   }
 }
 
@@ -115,15 +128,15 @@ mbc - main background color
     --mls: 8px;
     --mfs: 12px;
     --mbfs: 16px;
-    --vbfs: 32px;
+    --vbfs: 24px;
   }
 }
 
 @media (max-width:320px) {
   :root {
-    --mls: 6px;
+    --mls: 8px;
     --mfs: 10px;
     --mbfs: 14px;
-    --vbfs: 24px;
+    --vbfs: 20px;
   }
 }

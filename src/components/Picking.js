@@ -84,82 +84,88 @@ const Picking = () => {
   }
 
   return (
-    <div className="picking-container">
-      <div className="from-to-container">
-        <div className="picking-field from-field">
-          <label>{t('From')}</label>
-          <Select
-            className="picking-select"
-            value={from}
-            onChange={setFrom}
-            options={cityOptions}
-            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-            styles={{
-              control: (provided) => ({
-                ...provided,
-                paddingRight: '40px',
-              }),
-              singleValue: (provided) => ({
-                ...provided,
-                marginRight: '40px',
-              })
-            }}
-          />
-        </div>
-        <button className="swap-button" onClick={swapCities}>
-          &#x21C4;
-        </button>
-        <div className="picking-field to-field">
-          <label>{t('To')}</label>
-          <Select
-            className="picking-select"
-            value={to}
-            onChange={setTo}
-            options={cityOptions}
-            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-            styles={{
-              control: (provided) => ({
-                ...provided,
-                paddingRight: '40px',
-              }),
-              singleValue: (provided) => ({
-                ...provided,
-                marginRight: '40px',
-              }),
-              input: (provided) => ({
-                ...provided,
-                textIndent: '29px'
-              })
-            }}
-          />
-        </div>
+    <div className='picking'>
+      <div className='TopPicking'>
+        <i class="fa-solid fa-ticket"></i>
+        <span>{t("Search_Trips_Span")}</span>
       </div>
-      <div className="additional-fields">
-        <div className="picking-field">
-          <label>{t('Departure')}</label>
-          <DatePicker
-            className="picking-datepicker"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            dateFormat="dd MMM yyyy"
-            locale={locale}
-          />
-        </div>
-        <div className="picking-field">
-          <label>{t('Passengers')}</label>
-          <div className="picking-passengers">
-            <button onClick={() => setPassengers(Math.max(passengers - 1, 1))}>-</button>
-            <input
-              type="number"
-              value={passengers}
-              onChange={handlePassengersChange}
-              min="1"
-              max="120"
+      <div className="picking-container">
+        <div className="from-to-container">
+          <div className="picking-field from-field">
+            <label>{t('From')}</label>
+            <Select
+              className="picking-select"
+              value={from}
+              onChange={setFrom}
+              options={cityOptions}
+              components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  paddingRight: '40px',
+                }),
+                singleValue: (provided) => ({
+                  ...provided,
+                  marginRight: '40px',
+                })
+              }}
             />
-            <button onClick={() => setPassengers(Math.min(passengers + 1, 120))}>+</button>
+          </div>
+          <button className="swap-button" onClick={swapCities}>
+            &#x21C4;
+          </button>
+          <div className="picking-field to-field">
+            <label>{t('To')}</label>
+            <Select
+              className="picking-select"
+              value={to}
+              onChange={setTo}
+              options={cityOptions}
+              components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  paddingRight: '40px',
+                }),
+                singleValue: (provided) => ({
+                  ...provided,
+                  marginRight: '40px',
+                }),
+                input: (provided) => ({
+                  ...provided,
+                  textIndent: '29px'
+                })
+              }}
+            />
           </div>
         </div>
-        <button className="picking-search" onClick={handleSearch}>{t('Search')}</button>
+        <div className="additional-fields">
+          <div className="picking-field">
+            <label>{t('Departure')}</label>
+            <DatePicker
+              className="picking-datepicker"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="dd MMM yyyy"
+              locale={locale}
+            />
+          </div>
+          <div className="picking-field">
+            <label>{t('Passengers')}</label>
+            <div className="picking-passengers">
+              <button onClick={() => setPassengers(Math.max(passengers - 1, 1))}>-</button>
+              <input
+                type="number"
+                value={passengers}
+                onChange={handlePassengersChange}
+                min="1"
+                max="120"
+              />
+              <button onClick={() => setPassengers(Math.min(passengers + 1, 120))}>+</button>
+            </div>
+          </div>
+          <button className="picking-search" onClick={handleSearch}>{t('Search')}</button>
+        </div>
       </div>
     </div>
   );

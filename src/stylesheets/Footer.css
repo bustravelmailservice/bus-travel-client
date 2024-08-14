@@ -1,7 +1,7 @@
 .Footer {
-	width: 90%;
-	padding: 30px 5%;
-	background-color: var(--dark-blue);
+	width: calc(100% - 100px);
+	padding: 0px 50px 90px 50px;
+	background-color: var(--mtc);
 	display: flex;
 	flex-direction: column;
 	gap: 60px;
@@ -26,34 +26,38 @@
 }
 
 .LogoFooter a img {
-	width: 77.8px;
-	height: 50px;
+	width: 85px;
+	height: 32px;
 }
 
 .LinksFooter {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+	color: var(--light-black) !important;
+	font-size: var(--mls) !important;
+}
+
+
+.LinksFooter a {
+	color: var(--light-black) !important;
+	font-size: var(--mls) !important;
 }
 
 .SocialMedia {
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
-	font-size: var(--mbfs);
+	font-size: var(--mls);
 }
 
 .NameSectionFooter {
-	font-size: var(--mbfs);
-	color: var(--mtc);
+	font-size: var(--mls);
+	color: var(--dark-blue);
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-.MiddleRightFooter .active {
-	color: var(--mtc) !important;
 }
 
 .NameSectionFooter i {
@@ -72,6 +76,14 @@
 	gap: 2px;
 }
 
+.DLeftPartFooter a>span,
+.DLeftPartFooter>span,
+.DRightPartFooter>span {
+	font-size: var(--mlfs) !important;
+	color: var(--light-black) !important;
+	gap: 20px;
+}
+
 .DownFooter {
 	display: flex;
 	flex-direction: row;
@@ -81,6 +93,7 @@
 }
 
 .DRightPartFooter .fa-copyright {
+	color: var(--light-black) !important; 
 	font-size: var(--mls);
 	display: flex;
 	align-items: center;
@@ -97,33 +110,45 @@
 	display: none;
 }
 
-@media (max-width: 1024px) {
-	.LeftFoooter {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		top: 30px;
+@media (max-width: 1440px) {
+	.Footer {
+		padding: 0px 50px 50px 50px;
 	}
 
-	.UpFooter {
-		margin-top: 70px;
+	.LogoFooter a img {
+		width: 85px;
+		height: 32px;
 	}
-	
+}
+
+@media (max-width: 1024px) {
+	.Footer {
+		padding: 0px 50px 40px 50px;
+	}
+	.LogoFooter a img {
+		width: 71px;
+		height: 27px;
+	}
+
 }
 
 @media (max-width: 769px) {
+	.Footer {
+		padding: 0px 50px 40px 50px;
+	}
+	.LogoFooter a img {
+		width: 41px;
+		height: 16px;
+	}
+
 	.DownFooter {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		gap: 10px;
-
 	}
 
-	.DownFooter {
-		font-size: var(--mbfs);
-		gap: 20px;
-	}
+
 
 	.DLeftPartFooter {
 		flex-direction: column;
@@ -151,9 +176,6 @@
 		width: 100%;
 	}
 
-	.LinksFooter a {
-		font-size: var(--mfs);
-	}
 
 	.LinksFooter.open {
 		max-height: 500px;
@@ -174,23 +196,35 @@
 	}
 
 	.LogoFooter a img {
-		width: 77.8px;
-		height: 50px;
+		width: 65px;
+		height: 25px;
 	}
 
 	.NameSectionFooter:active,
 	.NameSectionFooter:focus {
 		background-color: transparent;
 	}
+
 	.NameSectionFooter i {
 		display: block;
+		color: var(--dark-blue) !important;
+		font-size: var(--mls) !important;
 	}
 
 }
 
-@media (min-width: 426px) {
-
+@media (max-width: 426px) {
+	.Footer {
+		padding: 0px 50px 20px 50px;
+	}
 	.NameSectionFooter {
 		cursor: default;
+	}
+}
+
+@media (max-width: 320px) {
+	.LogoFooter a img {
+		width: 64px;
+		height: 25px;
 	}
 }

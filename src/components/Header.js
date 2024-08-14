@@ -65,15 +65,14 @@ function Header() {
           ) : (
             <div className='NotLogged'>
               <a href='/Authorisation' onClick={handleLoginClick}>{t('ProposeLogin')}</a>
-              <a href='/Authorisation' onClick={handleLoginClick}><i className="fa-solid fa-user"></i></a>
             </div>
           )
         }
 
-        <div className="LanguageSwitcher">
+        {/* <div className="LanguageSwitcher">
           <LanguageSwitcher />
         </div>
-
+ */}
         <div className='BurgerButton' onClick={toggleMenu}>
           <i className="fa-solid fa-bars"></i>
         </div>
