@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../stylesheets/Header.css';
-import LanguageSwitcher from './LanguageSwitcher';
+/* import LanguageSwitcher from './LanguageSwitcher'; */
 import LogoBig from '../images/logo_big.png';
 import { useTranslation } from 'react-i18next';
 import { StoreContext } from '../store/store';
