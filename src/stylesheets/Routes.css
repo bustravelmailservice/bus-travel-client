@@ -43,25 +43,21 @@
 }
 
 .CityItem {
-  background-color: var(--dark-blue);
-  font-size: var(--mbfs);
-  color: var(--mtc);
-  border-radius: 8px;
-  padding: 10px 0px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.CityItem {
 	border-radius: calc(var(--link-height) / 2);
 	padding: 10px 0px;
 	background-color: var(--dark-blue);
 }
 
 .CityItem::after {
+  background-color: var(--dark-blue);
+  font-size: var(--mbfs);
+  color: var(--mtc);
+  padding: 10px 0px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 	content: '';
 	display: block;
 	height: 0;
