@@ -43,12 +43,6 @@
 }
 
 .CityItem {
-	border-radius: calc(var(--link-height) / 2);
-	padding: 10px 0px;
-	background-color: var(--dark-blue);
-}
-
-.CityItem::after {
   background-color: var(--dark-blue);
   font-size: var(--mbfs);
   color: var(--mtc);
@@ -58,6 +52,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  border-radius: calc(var(--link-height) / 2);
+	padding: 10px 0px;
+	background-color: var(--dark-blue);
+}
+
+.CityItem::after {
 	content: '';
 	display: block;
 	height: 0;
