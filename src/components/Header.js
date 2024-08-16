@@ -49,7 +49,7 @@ function Header() {
 
       <div className="links">
         <a href="/map">{t('F_Link')}</a>
-        <a href="/travels">{t('S_Link')}</a>
+        <a href={store.isAuth ? "/travels" : "/Authorisation"}>{t('S_Link')}</a>
         <a href="/routes">{t('T_Link')}</a>
         <a href="/help">{t('Th_Link')}</a>
       </div>

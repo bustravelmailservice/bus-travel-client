@@ -29,13 +29,9 @@ function Routes() {
       </Helmet>
       <div className='MainInfoPagesRoutes'>
         <div className='InformationRoutesPage'>
-          <span>{t('InformationRoutesPage')}</span>
           <span>{t('AdditionalInformationRoutesPage')}</span>
         </div>
         <div className='MainContentRoutesPage'>
-          <div className='NameTitleMainContentRoutesPage'>
-            <span>{t('MainContentRoutesPage')}</span>
-          </div>
           <div className='AllRoutesList'>
             {cities.map(city => (
               <div key={city._id} className='CityItem'>
