@@ -90,7 +90,6 @@
 
 .NotLogged {
 	--link-height: calc(1em + 20px);
-	/* Высота ссылки = размер шрифта (1em) + padding */
 }
 
 .NotLogged a {
