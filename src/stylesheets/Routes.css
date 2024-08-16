@@ -15,6 +15,7 @@
   flex-direction: column;
   text-align: center;
   gap: 10px;
+  padding: 0px 14%;
 }
 
 .InformationRoutesPage span {
@@ -63,6 +64,7 @@
   text-align: center;
   font-size: var(--mls);
   color: var(--light-black);
+  padding: 0px 14%;
 }
 
 /* Responsive styles */
