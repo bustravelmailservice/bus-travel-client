@@ -37,6 +37,7 @@
 }
 
 .AllRoutesList {
+  margin: 20px 0px;
   display: grid;
   gap: 20px;
 }
@@ -54,9 +55,25 @@
   text-align: center;
 }
 
+.CityItem {
+	border-radius: calc(var(--link-height) / 2);
+	padding: 10px 0px;
+	background-color: var(--dark-blue);
+}
+
+.CityItem::after {
+	content: '';
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	line-height: 1;
+	font-size: inherit;
+}
+
 .CityItem span {
   font-size: var(--mfs);
-  color: var(--mtcb);
+  color: var(--mtc);
 }
 
 .AdditionalInfoRoutesPage {
