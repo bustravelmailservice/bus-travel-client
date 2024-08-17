@@ -44,15 +44,15 @@
 
 .CityItem {
   background-color: var(--dark-blue);
-  font-size: var(--mbfs); /* Переменная для размера шрифта */
+  font-size: var(--mbfs);
   color: var(--mtc);
-  padding: 10px 0px; /* Определяет высоту элемента вместе с содержимым */
+  padding: 10px 0px; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-radius: calc(0.5 * (1em + 20px)); /* Пример расчета радиуса на основе шрифта и padding */
+  border-radius: calc(0.5 * (1em + 20px)); 
 }
 
 .CityItem::after {

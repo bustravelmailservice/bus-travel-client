@@ -1,48 +1,101 @@
-.Help {
-    width: 90%;
-    padding: 60px 5%;
-    background-image: url('../background_images/pic-bus-4.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+.content {
+	padding: 60px 18.2% 150px 18.2%;
+	background-color: var(--mtc);
 }
 
 .MainPart {
-    width: calc(70% + 0px);
-    padding: 20px 15%;
-    margin-top: 0px;
-    border-radius: 8px;
-    background-color: var(--mbc);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.MainPart span:nth-child(1) {
+	text-align: center;
+	color: var(--dark-blue);
+	font-size: var(--vbfs);
+	font-weight: 500;
+}
+
+.MainPart span:nth-child(2) {
+	text-align: center;
+	padding: 0px 23%;
+	margin-bottom: 134px;
+	color: var(--light-black);
+	font-size: var(--mls);
 }
 
 .Heading {
-    color: var(--mtcb);
-    font-size: var(--mbfs);
-}
-
-.Subheading {
-    color: var(--mtcb);
-    font-size: var(--mfs);
+	font-size: var(--mbfs);
+	color: var(--light-black);
 }
 
 .Text_subheading {
-    color: var(--mtcb);
-    font-size: var(--mfs);
+	color: var(--light-black);
+	font-size: var(--mls);
+	margin-bottom: 60px;
+}
+
+@media (max-width:1440px) {
+	.content {
+		padding: 50px 4.2%
+	}
+
+	.MainPart span:nth-child(2) {
+		margin-bottom: 100px;
+	}
+
+	.Text_subheading {
+		margin-bottom: 60px;
+	}
+}
+
+
+@media (max-width:1024px) {
+	.content {
+		padding: 50px 3.1%
+	}
+
+	.MainPart span:nth-child(2) {
+		margin-bottom: 60px;
+	}
+
+	.Text_subheading {
+		margin-bottom: 50px;
+	}
 }
 
 @media (max-width:768px) {
-    .MainPart {
-        width: calc(80% + 0px);
-        padding: 20px 10%;
-    }
+	.content {
+		padding: 40px 5.7%
+	}
+
+	.MainPart span:nth-child(2) {
+		margin-bottom: 50px;
+	}
+
+	.Text_subheading {
+		margin-bottom: 30px;
+	}
 }
 
 @media (max-width:426px) {
-    .MainPart {
-        width: calc(90% + 0px);
-        padding: 20px 5%;
-    }
+	.content {
+		padding: 25px 4.7%
+	}
+
+	.MainPart span:nth-child(2) {
+		margin-bottom: 45px;
+	}
+
+	.Text_subheading {
+		margin-bottom: 30px;
+	}
+
+	.MainPart span:nth-child(1) {
+		text-align: left;
+	}
+	
+	.MainPart span:nth-child(2) {
+		text-align: left;
+		padding: 0px 0%;
+	}
 }
