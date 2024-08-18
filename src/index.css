@@ -85,7 +85,7 @@ mbc - main background color
   --dark-gray: #a3a3a3;
   --light-black: #494949;
   --dark-gray: #949494;
-  --danger-red: #ff0505;
+  --danger-red: #ff3535;
 }
 
 @media (max-width:1920px) {

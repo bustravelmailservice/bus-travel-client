@@ -266,23 +266,17 @@
 .ButtonLogout button {
 	height: 40px;
 	width: fit-content;
-	border-radius: 20px;
 	border: none;
 	background-color: var(--danger-red);
 	font-size: var(--mfs);
 	color: var(--mtc);
-	padding: 20px;
+	padding: 10px 65px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	gap: 10px;
 	cursor: pointer;
-}
-
-.ButtonLogout button i {
-	transform: rotate(-180deg);
-	font-size: var(--mfs);
+	border-radius: calc(1em + 20px);
 }
 
 @media (max-width: 1440px) {}
