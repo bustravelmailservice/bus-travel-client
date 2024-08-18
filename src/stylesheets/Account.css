@@ -216,6 +216,7 @@
 	transition: 0.5s ease !important;
 	cursor: pointer;
 	border-radius: calc(1em + 24px);
+	align-self: center;
 }
 
 .ShowAllButton span {
