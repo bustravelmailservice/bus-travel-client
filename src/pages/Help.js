@@ -74,11 +74,14 @@ function Help() {
           {t('Text_subheading_Help_9_1')}
         </span>
 
-        <div className='Subheading'>
+        <div className='Heading'>
           {t('Subheading_Help_Contact')}
         </div>
         <span className='Text_subheading'>
-          {t('Text_subheading_Help_Contact_1')}
+          <span>{t('Text_subheading_Help_Contact_1')}</span>
+          <span><a href='email:bustravel.mailservice@gmail.com'>bustravel.mailservice@gmail.com</a></span>
+          <span>{t('Text_subheading_Help_Contact_1_add')}</span>
+          <span><a href='tel:+380991111111'>+380991111111</a>.</span>
         </span>
       </div>
     </div>

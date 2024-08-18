@@ -1,7 +1,7 @@
 .content .Help,
 .content .InfoAboutUs,
 .content .Rules,
-.content .PrivacyPolicy{
+.content .PrivacyPolicy {
 	padding: 60px 18.2% 150px 18.2%;
 	background-color: var(--mtc);
 }
@@ -35,6 +35,20 @@
 	color: var(--light-black);
 	font-size: var(--mls);
 	margin-bottom: 60px;
+}
+
+.Text_subheading span{
+	padding: 0 !important;
+	gap: 0 !important;
+	color: var(--light-black) !important;
+	font-size: var(--mls) !important;
+}
+
+.Text_subheading span a{
+	padding: 0 !important;
+	gap: 0 !important;
+	color: var(--dark-blue) !important;
+	font-size: var(--mls) !important;
 }
 
 @media (max-width:1440px) {
@@ -96,7 +110,7 @@
 	.MainPart span:nth-child(1) {
 		text-align: left;
 	}
-	
+
 	.MainPart span:nth-child(2) {
 		text-align: left;
 		padding: 0px 0%;

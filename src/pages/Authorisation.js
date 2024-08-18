@@ -85,10 +85,10 @@ function Authorisation() {
                 <span>{t('SignIn')}</span>
               </button>
             </div>
-            <div className='SocialIcons'>
+           {/*  <div className='SocialIcons'>
               <i className="fab fa-google"></i>
               <i className="fab fa-apple"></i>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
