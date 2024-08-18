@@ -258,6 +258,13 @@
 	gap: 20px;
 }
 
+.NameLogout{
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	text-align: center;
+}
+
 .NameLogout span:nth-child(1)  {
 	font-size: var(--mbfs);
 	color: var(--light-black);
