@@ -1,60 +1,40 @@
 .Account {
 	display: flex;
 	flex-direction: column;
-	background-image: url('../background_images/pic-bus-6.png');
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
+	padding: 100px 3.5%;
+	background-color: var(--mtc);
 }
 
 .MainContentAccount {
-	width: 80%;
 	overflow: hidden;
 	justify-content: space-between;
-	margin: 60px 10%;
 }
 
 .WelcomePartAccount {
 	display: flex;
 	flex-direction: row;
-	gap: 20px;
-	width: calc(100% - 0px);
+	gap: 5px;
 }
 
 .UserWelcome {
-	background-color: var(--mbc);
+	background-color: var(--mtc);
 	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	width: calc(60% - 40px);
-	padding: 20px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-
-.InfoPartTravel {
-	background-color: var(--mbc);
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	width: calc(40% - 40px);
-	padding: 20px;
-}
-
 .UserWelcome h1 {
-	font-size: var(--mbfs);
-	color: var(--mtcb);
+	font-size: var(--vbfs);
+	color: var(--dark-blue);
 }
 
 .UserWelcome h2 {
-	font-size: var(--mfs);
-	color: var(--mtcb);
+	font-size: var(--mls);
+	color: var(--light-black);
 }
 
-.UserName {
-	font-size: var(--mbfs);
-	color: var(--mtcd);
-}
 
 .InfoTravelsUser {
 	font-size: var(--mfs);
@@ -301,100 +281,12 @@
 	font-size: var(--mfs);
 }
 
-@media (max-width: 1440px) {
-	.MainContentAccount {
-		width: 90%;
-		margin: 60px 5%;
-	}
-}
+@media (max-width: 1440px) {}
 
-@media (max-width: 1024px) {
-	.FutureTravels {
-		display: flex;
-		flex-direction: column;
-	}
+@media (max-width: 1024px) {}
 
-	.AllTickets {
-		flex-direction: column;
-	}
+@media (max-width: 768px) {}
 
-	.TravelsAcc,
-	.PastTravelsAcc {
-		width: calc(100% - 40px);
-	}
+@media (max-width: 425px) {}
 
-	.MainInfo {
-		height: auto;
-	}
-}
-
-@media (max-width: 768px) {
-	.ButtonBuyTickets {
-		padding: 5px;
-		border: 2px solid var(--dark-blue);
-		border-radius: 25px;
-		margin-top: 20px;
-	}
-
-	.Trip {
-		flex-direction: column;
-		gap: 20px;
-		padding: 10px;
-	}
-
-	.AdditionalInfo {
-		flex-direction: row;
-		gap: 10px;
-		margin-top: 0;
-	}
-
-	.Time {
-		height: 120px;
-		margin-right: 0;
-	}
-
-	.RouteSymbol {
-		height: 120px;
-	}
-
-	.RouteSymbol .Circle {
-		width: 11px;
-		height: 11px;
-	}
-
-	.RouteSymbol .Circle .InnerCircle {
-		width: 6px;
-		height: 6px;
-	}
-
-	.SmallCircle {
-		width: 3px;
-		height: 3px;
-	}
-
-	.RouteSymbol .Line {
-		width: 2px;
-	}
-
-	.Travels {
-		gap: 20px;
-	}
-
-	.WelcomePartAccount {
-		flex-direction: column;
-	}
-
-	.UserWelcome {
-		width: calc(100% - 40px);
-	}
-
-	.InfoPartTravel {
-		width: calc(100% - 40px);
-	}
-}
-
-@media (max-width: 426px) {
-	.RouteSymbol {
-		margin: 0 10px;
-	}
-}
+@media (max-width: 320px) {}

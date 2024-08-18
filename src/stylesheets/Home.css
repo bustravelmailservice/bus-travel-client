@@ -3,6 +3,9 @@
   background-color: #fff;
 }
 
+.tawk-message-preview {
+  background-color: var(--mtc);
+}
 
 .Map .MainContent {
   padding: 50px 0px !important;

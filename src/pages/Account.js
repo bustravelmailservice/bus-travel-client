@@ -184,11 +184,6 @@ function Account() {
             <h1>{t('HiUser')} <span className='UserName'>{store.user?.email}</span>!</h1>
             <h2>{t('PastAndFutureTripsMessage')}</h2>
           </div>
-          <div className='InfoPartTravel'>
-            <span className='InfoTravelsUser'>
-              {renderInfoText()}
-            </span>
-          </div>
         </div>
         <div className='FutureTravels'>
           <div className='AllTickets'>
