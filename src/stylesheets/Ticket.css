@@ -170,6 +170,12 @@
     padding: 25px 25px;
   }
 
+  .PriceInfoTicket{
+    flex-direction: column;
+    margin-top: 0;
+    gap: 0px;
+  }
+
   .AddInfoTicket {
     flex-direction: column;
     margin-top: 0;

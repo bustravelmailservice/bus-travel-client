@@ -40,12 +40,13 @@ const Ticket = ({ travel, passengers }) => {
           <div className='DepartureTicket'><span>{travel.departure}</span></div>
           <div className='ArrivalTicket'><span>{travel.arrival}</span></div>
         </div>
+
+      </div>
+      <div className='PriceInfoTicket'>
         <div className='AddInfoTicket'>
           <div className='DurationTicket'><span>{travel.duration} {t('hours')}</span></div>
           <div className='PassengersTicket'><span>{t('Passengers')}: {travel.passengers}</span></div>
         </div>
-      </div>
-      <div className='PriceInfoTicket'>
         <div className='PriceTicket'>
           <span>
             {i18n.language === 'ua' ? formatPrice(travel.priceUA, 'UAH') : formatPrice(travel.priceEN, 'EUR')}
