@@ -233,9 +233,7 @@ function Account() {
         </div>
         <div className='Logout'>
           <div className='NameLogout'>
-            <span>{t('TextLogout1')}</span>
-            <span>{t('TextLogout2')}</span>
-            <span>{t('TextLogout3')}</span>
+            <span>{t('TextLogout')}</span>
           </div>
           <div className='ButtonLogout'>
             <button className='LogOutBtn' href='/#' onClick={handleLogout}>

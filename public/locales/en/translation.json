@@ -245,10 +245,10 @@
   "NameTitleBuyTicketDataBaggage": "Baggage",
   "NameTitleBuyTicketDataDataContactUser": "Additional information for communication",
   "DurationTicket": "Duration: ",
+  "LogoutInfo":"Log out of your account",
   "Logout": "Log out of your account",
-  "TextLogout1": "Click on the button ",
-  "TextLogout2": "log out",
-  "TextLogout3": " of your account",
+  "TextLogout1": "Click on the button log out of your account",
+  
   "InformationRoutesPage": "Welcome to the BusTravel website!",
   "AdditionalInformationRoutesPage": "Here you can find all the cities where BusTravel operates",
   "AdditionalInfoRoutesPage": "If you don't find your city on this list, it will probably be added soon! Follow the route updates on this page.",
