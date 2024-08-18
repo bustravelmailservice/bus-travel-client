@@ -86,7 +86,7 @@ function Account() {
 
   const groupedActiveTrips = groupTripsByDate(activeTrips);
   const groupedPastTrips = groupTripsByDate(pastTrips);
-
+/* 
   const renderInfoText = () => {
     if (activeTrips.length === 0 && pastTrips.length === 0) {
       return t('TicketsMessage1');
@@ -97,7 +97,7 @@ function Account() {
     } else {
       return t('TicketsMessage4');
     }
-  };
+  }; */
 
   const handleShowAllActiveTrips = () => {
     setShowAllActiveTrips(true);
