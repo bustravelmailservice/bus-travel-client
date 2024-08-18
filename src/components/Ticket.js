@@ -23,26 +23,18 @@ const Ticket = ({ travel, passengers }) => {
       <div className='MainInfoTicket'>
         <div className='FromToTicket'>
           <div className='FromTicket'>
-          <span>{language === 'ua' ? travel.fromUA : travel.fromEN}</span>
+            <span>{language === 'ua' ? travel.fromUA : travel.fromEN}</span>
             <span>{language === 'ua' ? travel.fromLocationUA : travel.fromLocationEN}</span>
           </div>
           <div className='ToTicket'>
-          <span>{language === 'ua' ? travel.toUA : travel.toEN}</span>
+            <span>{language === 'ua' ? travel.toUA : travel.toEN}</span>
             <span>{language === 'ua' ? travel.toLocationUA : travel.toLocationEN}</span>
           </div>
         </div>
         <div className='ProgressSymbol'>
           <div className='Line'></div>
-          <div className='Circle left'>
-            <div className='InnerCircle'>
-              <div className='SmallCircle'></div>
-            </div>
-          </div>
-          <div className='Circle right'>
-            <div className='InnerCircle'>
-              <div className='SmallCircle'></div>
-            </div>
-          </div>
+          <div className='Circle left'></div>
+          <div className='Circle right'></div>
         </div>
         <div className='TimeTicket'>
           <div className='DepartureTicket'><span>{travel.departure}</span></div>

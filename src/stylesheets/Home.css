@@ -145,7 +145,7 @@
 
 .AddLink:hover {
   transition: 0.5s;
-  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .AdditionalDescriptions {
@@ -200,7 +200,7 @@
   background-color: var(--light-gray);
   transition: 0.5s !important;
   background-color: #FFFFFF;
-  box-shadow: 0px 8px 52.3px rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 40px;
 }
 

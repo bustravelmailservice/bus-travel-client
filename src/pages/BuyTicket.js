@@ -269,14 +269,8 @@ const BuyTicket = () => {
             <div className='RouteSymbolBuyTicket' ref={routeSymbolRef}>
               <div className='Line'></div>
               <div className='Circle top'>
-                <div className='InnerCircle'>
-                  <div className='SmallCircle'></div>
-                </div>
               </div>
               <div className='Circle bottom'>
-                <div className='InnerCircle'>
-                  <div className='SmallCircle'></div>
-                </div>
               </div>
             </div>
             <div className='FromToTicketTicketBuyVertical' ref={fromToTicketRef}>

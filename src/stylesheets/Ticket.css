@@ -1,15 +1,14 @@
 .ticket {
   margin: 5px 0;
-  border: 1px solid #ccc;
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 40px 76px;
   width: calc(100% - 40px);
   background-color: var(--gray);
-  border-radius: 8px;
+  border-radius: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   gap: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -27,14 +26,17 @@
 }
 
 .FromToTicket div span {
+  color: var(--light-black);
   font-size: var(--mbfs);
 }
 
 .FromToTicket div span:nth-child(2) {
-  font-size: var(--mfs);
+  color: var(--dark-gray);
+  font-size: var(--mls);
 }
 
 .TimeTicket div span {
+  color: var(--dark-gray);
   font-size: var(--mfs);
 }
 
@@ -57,7 +59,8 @@
 }
 
 .AddInfoTicket div span {
-  font-size: var(--mfs);
+  color: var(--dark-gray);
+  font-size: var(--mls);
 }
 
 .ProgressSymbol {
@@ -118,10 +121,11 @@
 .PriceInfoTicket {
   width: 20%;
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: start;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: end;
   height: 100%;
+  gap: 10px;
 }
 
 .PriceTicket {
@@ -131,27 +135,21 @@
 }
 
 .BuyTicket {
-  border-radius: 8px;
-  background-color: var(--blue);
+  background-color: var(--dark-blue);
   width: calc(100% - 40px);
   height: 100%;
-  padding: 10px 20px;
+  padding: 5px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
   border: none;
   cursor: pointer;
-  transition: 0.5s;
-}
-
-.BuyTicket:hover {
-  background-color: var(--dark-blue);
-  transition: 0.5s;
+  border-radius: calc(1em + 10px);
 }
 
 .BuyTicketText {
-  font-size: var(--mfs);
+  font-size: var(--mls);
   color: var(--mtc);
 }
 

@@ -4,6 +4,7 @@
   padding: 145px 2.8%;
   border-radius: 8px;
   gap: 40px;
+  background-color: var(--mtcd);
 }
 
 .date-section h2 {
