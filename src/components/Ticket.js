@@ -42,19 +42,21 @@ const Ticket = ({ travel, passengers }) => {
         </div>
 
       </div>
-      <div className='PriceInfoTicket'>
+      <div className='AddInfo'>
         <div className='AddInfoTicket'>
           <div className='DurationTicket'><span>{travel.duration} {t('hours')}</span></div>
           <div className='PassengersTicket'><span>{t('Passengers')}: {travel.passengers}</span></div>
         </div>
-        <div className='PriceTicket'>
-          <span>
-            {i18n.language === 'ua' ? formatPrice(travel.priceUA, 'UAH') : formatPrice(travel.priceEN, 'EUR')}
-          </span>
+        <div className='PriceInfoTicket'>
+          <div className='PriceTicket'>
+            <span>
+              {i18n.language === 'ua' ? formatPrice(travel.priceUA, 'UAH') : formatPrice(travel.priceEN, 'EUR')}
+            </span>
+          </div>
+          <button onClick={handleBuyTicket} className='BuyTicket'>
+            <span className='BuyTicketText'>{t('BuyTicketText')}</span>
+          </button>
         </div>
-        <button onClick={handleBuyTicket} className='BuyTicket'>
-          <span className='BuyTicketText'>{t('BuyTicketText')}</span>
-        </button>
       </div>
     </div>
   );
