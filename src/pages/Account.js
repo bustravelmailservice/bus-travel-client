@@ -233,6 +233,7 @@ function Account() {
         </div>
         <div className='Logout'>
           <div className='NameLogout'>
+            <span>{t('Logout')}</span>
             <span>{t('TextLogout')}</span>
           </div>
           <div className='ButtonLogout'>
