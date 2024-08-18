@@ -52,7 +52,7 @@
   gap: 10px;
 }
 
-.AddInfoTicket > div {
+.AddInfoTicket>div {
   display: flex;
   flex-direction: row;
 }
@@ -153,62 +153,32 @@
   color: var(--mtc);
 }
 
-@media (max-width: 1024px) {
-
-  .PriceInfoTicket {
-    width: 30%;
-    display: flex;
-    justify-content: end;
+@media (max-width: 1440px) {
+  .ticket {
+    padding: 40px 60px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .ticket {
-    flex-direction: column;
-  }
-
-  .PriceInfoTicket {
-    width: calc(100% - 0px);
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .PriceTicket {
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    width: calc(100% + 0px);
-  }
-
-  .PriceTicket span {
-    width: 100%;
-    font-size: calc(var(--mbfs) + 4px);
-  }
-
-  .BuyTicket {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px 0px;
-    margin-top: 0;
-  }
-
-  .BuyTicketText {
-    display: flex;
-    align-self: center;
-    font-size: var(--mbfs) !important;
-    width: auto !important;
+    padding: 25px 35px;
   }
 }
 
 @media (max-width: 425px) {
-  .PriceTicket span {
-    font-size: calc(var(--mfs) + 4px);
+  .ticket {
+    padding: 25px 25px;
   }
 
-  .BuyTicketText {
-    font-size: var(--mfs) !important;
+  .AddInfoTicket {
+    flex-direction: column;
+    margin-top: 0;
+    gap: 0px;
+  }
+}
+
+@media (max-width: 320px) {
+  .ticket {
+    padding: 20px 20px;
   }
 }
