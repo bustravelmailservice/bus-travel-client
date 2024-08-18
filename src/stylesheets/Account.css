@@ -59,6 +59,10 @@
 
 .TravelsInfo {
 	margin-top: 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	text-align: center;
 }
 
 .TravelsInfo>span {
