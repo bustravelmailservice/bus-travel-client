@@ -1,4 +1,7 @@
-.content {
+.content .Help,
+.content .InfoAboutUs,
+.content .Rules,
+.content .PrivacyPolicy{
 	padding: 60px 18.2% 150px 18.2%;
 	background-color: var(--mtc);
 }
