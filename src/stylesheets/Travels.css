@@ -74,7 +74,7 @@
 }
 
 .ButtonBuyTickets {
-    padding: 10px;
+    padding: 12px 34px;
     border: 2px solid var(--dark-blue);
     border-radius: 25px;
     margin-top: 20px;
@@ -82,16 +82,11 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    transition: 0.5s ease !important;
-}
-
-.ButtonBuyTickets:hover {
-    transition: 0.5s ease !important;
 }
 
 .ButtonBuyTickets span {
-    font-size: var(--mfs) !important;
-    color: var(--dark-blue) !important;
+    font-size: var(--mls) !important;
+    color: var(--mtc) !important;
 }
 
 .HaveTravels {

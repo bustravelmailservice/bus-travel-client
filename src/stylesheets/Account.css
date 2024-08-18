@@ -66,7 +66,7 @@
 }
 
 .TravelsInfo>span {
-	color: var(--blue);
+	color: var(--light-black);
 	font-size: var(--mbfs);
 }
 
@@ -233,14 +233,17 @@
 	gap: 20px;
 	justify-content: flex-start !important;
 	align-items: center;
+	text-align: center;
 }
 
 .ProposeBuyTicketAcc>span {
-	align-self: flex-start;
+	text-align: center;
+	color: var(--light-black);
+	font-size: var(--mls);
 }
 
 .ButtonBuyTicketsAcc {
-	width: 250px;
+	width: fit-content;
 }
 
 .Logout {
