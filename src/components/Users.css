@@ -2,7 +2,8 @@
   padding: 20px;
 }
 
-.User a i{
+.User a,
+.User a i {
   color: var(--light-black);
   font-size: var(--mls);
 }

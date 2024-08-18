@@ -75,13 +75,14 @@
 
 .ButtonBuyTickets {
     padding: 12px 34px;
-    border: 2px solid var(--dark-blue);
-    border-radius: 25px;
+    background-color: var(--dark-blue);
+    border: none;
     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    border-radius: calc(1em + 24px);
 }
 
 .ButtonBuyTickets span {

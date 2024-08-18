@@ -33,26 +33,26 @@ function Account() {
         setIsLoadingTrips(false);
         return;
       }
-  
+
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets/', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-  
+
       const trips = response.data;
       const active = trips
         .filter(trip => trip.isActive && isTripActive(trip))
         .sort((a, b) => {
           return moment(a.date_departure) - moment(b.date_departure);
         });
-  
+
       const past = trips
         .filter(trip => trip.isActive && !isTripActive(trip))
         .sort((a, b) => {
           return moment(b.date_departure) - moment(a.date_departure);
         });
-  
+
       setActiveTrips(active);
       setPastTrips(past);
     } catch (error) {
@@ -62,7 +62,7 @@ function Account() {
       setIsLoadingTrips(false);
     }
   }, [isTripActive]);
-  
+
 
   useEffect(() => {
     store.checkAuth().then(() => {
@@ -86,18 +86,18 @@ function Account() {
 
   const groupedActiveTrips = groupTripsByDate(activeTrips);
   const groupedPastTrips = groupTripsByDate(pastTrips);
-/* 
-  const renderInfoText = () => {
-    if (activeTrips.length === 0 && pastTrips.length === 0) {
-      return t('TicketsMessage1');
-    } else if (activeTrips.length === 0) {
-      return t('TicketsMessage2');
-    } else if (pastTrips.length === 0) {
-      return t('TicketsMessage3');
-    } else {
-      return t('TicketsMessage4');
-    }
-  }; */
+  /* 
+    const renderInfoText = () => {
+      if (activeTrips.length === 0 && pastTrips.length === 0) {
+        return t('TicketsMessage1');
+      } else if (activeTrips.length === 0) {
+        return t('TicketsMessage2');
+      } else if (pastTrips.length === 0) {
+        return t('TicketsMessage3');
+      } else {
+        return t('TicketsMessage4');
+      }
+    }; */
 
   const handleShowAllActiveTrips = () => {
     setShowAllActiveTrips(true);
@@ -202,7 +202,7 @@ function Account() {
                 <>
                   {renderTrips(groupedActiveTrips, showAllActiveTrips)}
                   {activeTrips.length > 5 && !showAllActiveTrips && (
-                    <button className='ShowAllButton' onClick={handleShowAllActiveTrips}>{t('ShowAllActiveTrips')}</button>
+                    <button className='ShowAllButton' onClick={handleShowAllActiveTrips}><span>{t('ShowAllActiveTrips')}</span></button>
                   )}
                 </>
               )}
@@ -224,7 +224,7 @@ function Account() {
                 <>
                   {renderTrips(groupedPastTrips, showAllPastTrips)}
                   {!showAllPastTrips && (
-                    <button className='ShowAllButton' onClick={handleShowAllPastTrips}>{t('ShowAllPastTrips')}</button>
+                    <button className='ShowAllButton' onClick={handleShowAllPastTrips}><span>{t('ShowAllPastTrips')}</span></button>
                   )}
                 </>
               )}

@@ -204,9 +204,9 @@
 }
 
 .ShowAllButton {
-	padding: 10px;
+	padding: 12px 34px;
 	background-color: var(--dark-blue);
-	border-radius: 25px;
+	border: none;
 	margin-top: 20px;
 	display: flex;
 	align-items: center;
@@ -214,6 +214,7 @@
 	text-align: center;
 	transition: 0.5s ease !important;
 	cursor: pointer;
+	border-radius: calc(1em + 24px);
 }
 
 .ShowAllButton span {
