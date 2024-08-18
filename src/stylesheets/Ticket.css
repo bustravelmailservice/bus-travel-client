@@ -45,6 +45,12 @@
   justify-content: space-between;
 }
 
+.AddInfo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .AddInfoTicket {
   margin-top: 20px;
   display: flex;
@@ -115,12 +121,6 @@
 
 .ProgressSymbol .Circle.right {
   right: 0;
-}
-
-.AddInfo{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .PriceInfoTicket {
