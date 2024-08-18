@@ -2,7 +2,6 @@
   margin: 5px 0;
   margin-top: 20px;
   padding: 40px 75px;
-  background-color: var(--gray);
   border-radius: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   gap: 20px;
@@ -45,7 +44,7 @@
   justify-content: space-between;
 }
 
-.AddInfo{
+.AddInfo {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -64,6 +63,8 @@
 }
 
 .AddInfoTicket div span {
+  display: flex;
+  flex-direction: row;
   color: var(--dark-gray);
   font-size: var(--mls);
 }
@@ -176,7 +177,7 @@
     padding: 25px 25px;
   }
 
-  .PriceInfoTicket{
+  .PriceInfoTicket {
     flex-direction: column;
     margin-top: 0;
     gap: 0px;
