@@ -86,12 +86,6 @@
   z-index: 1;
 }
 
-.InfoAndLinks {
-  border-radius: 8px;
-  margin-top: 20px;
-  background-color: var(--mtc);
-}
-
 .AdditionalLinks {
   display: flex;
   flex-direction: row;

@@ -37,15 +37,9 @@ html {
 
 a,
 i {
-  text-decoration: none !important;
-  color: var(--mtc) !important;
-  transition: color 0.5s !important;
-}
-
-a:hover,
-i:hover {
-  color: var(--gray) !important;
-  transition: color 0.5s !important;
+  color: var(--light-black);
+  font-size: var(--mls);
+  text-decoration: none;
 }
 
 /* Застосування кольору для всіх дочірніх елементів всередині посилання */

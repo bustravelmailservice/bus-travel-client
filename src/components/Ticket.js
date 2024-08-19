@@ -44,7 +44,7 @@ const Ticket = ({ travel, passengers }) => {
       </div>
       <div className='AddInfo'>
         <div className='AddInfoTicket'>
-          <div className='DurationTicket'><span>{travel.duration}</span><span>:</span> <span>{t('hours')}</span></div>
+          <div className='DurationTicket'><span>{travel.duration}</span><span>{t('hours')}</span></div>
           <div className='PassengersTicket'><span>{t('Passengers')}</span><span>:</span> <span>{travel.passengers}</span></div>
         </div>
         <div className='PriceInfoTicket'>
