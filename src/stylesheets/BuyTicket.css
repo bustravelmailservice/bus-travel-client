@@ -14,7 +14,7 @@
   gap: 30px;
 }
 
-.InfoBuyTicketUser h1{
+.InfoBuyTicketUser h1 {
   font-size: var(--mbfs);
   color: var(--dark-blue);
 }
@@ -32,8 +32,6 @@
   align-items: center;
   text-align: center;
   font-size: 20px;
-  width: 40px;
-  height: 40px;
   background-color: var(--dark-blue);
   color: var(--mtc);
   padding: 10px;
@@ -47,14 +45,15 @@
   align-items: center;
 }
 
-.Stage{
+.Stage {
   font-size: var(--mls) !important;
   color: var(--mtc);
 }
 
-.NameTitle span:nth-child(2){
+.NameTitle span:nth-child(2) {
   font-size: var(--mls) !important;
   color: var(--light-black);
+  font-weight: 500;
 }
 
 .MainInputsNameUser {
@@ -71,6 +70,7 @@
   border: 1px solid var(--light-gray);
   padding: 0px 0px 0px 10px;
   transition: border-color 0.5s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .MainInputsNameUser input:focus-visible {
@@ -86,10 +86,11 @@
 .StageDiv {
   display: flex;
   flex-direction: column;
-  background-color: var(--gray);
-  border-radius: 8px;
+  background-color: var(--mtc);
+  border-radius: 40px;
   padding: 30px;
   gap: 14px;
+  box-shadow: 0px 8px 52.4px rgba(0, 0, 0, 0.19);
 }
 
 .AddInfoTicketBuy {
@@ -107,11 +108,13 @@
 }
 
 .BaggageDiv span {
-  font-size: var(--mbfs);
+  font-size: var(--mls);
+  color: var(--light-black);
 }
 
 .AddInfoBaggage {
-  font-size: var(--mfs) !important;
+  font-size: var(--mls) !important;
+  color: var(--dark-gray);
 }
 
 .InfoBaggageType {
@@ -128,11 +131,13 @@
 .picking-baggage input {
   width: 60px;
   height: 36px;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: var(--mfs);
+  background-color: var(--mtc);
 }
 
 .GorisontalLine {
@@ -172,9 +177,10 @@
   height: 100%;
   font-size: var(--mfs);
   border: 1px solid var(--gray);
-  border-radius: 4px;
+  border-radius: 20px;
   padding: 0px 0px 0px 10px;
   transition: border-color 0.5s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .DataContactUserMain div input:focus-visible {
@@ -275,6 +281,10 @@
   gap: 10px;
 }
 
+.RightPartBaggage>div:nth-child(2)>span {
+  color: var(--dark-gray);
+}
+
 .AddInfoTicketBT,
 .PriceBuyTicket {
   margin-top: 20px;
@@ -309,17 +319,17 @@
   color: var(--dark-gray);
 }
 
-.DurationTicket{
+.DurationTicket {
   font-size: var(--mls);
   color: var(--dark-gray);
 }
 
-.TicketPrice span{
+.TicketPrice span {
   font-size: var(--mls);
   color: var(--dark-gray);
 }
 
-.TicketPrice span:nth-child(2){
+.TicketPrice span:nth-child(2) {
   color: var(--dark-blue);
 }
 
@@ -410,13 +420,13 @@
   gap: 20vh;
 }
 
-.modal-content > span {
+.modal-content>span {
   font-style: var(--vbfs);
   color: var(--mtcb);
   text-align: center;
 }
 
-.modal-content > button {
+.modal-content>button {
   display: flex;
   padding: 5px 20px;
   background-color: var(--blue);
@@ -429,7 +439,7 @@
   border: none;
 }
 
-.modal-content > button:hover {
+.modal-content>button:hover {
   background-color: var(--dark-blue);
   transition: 0.5s;
   cursor: pointer;
