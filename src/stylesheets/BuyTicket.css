@@ -128,6 +128,7 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-items: center;
 }
 
 .picking-baggage input {
@@ -161,6 +162,7 @@
   border: none;
   color: var(--mtc);
   font-size: var(--mfs);
+  font-size: 7px !important;
 }
 
 .DataContactUserMain {
