@@ -2,10 +2,10 @@
   padding: 20px;
 }
 
-.User a,
-.User a i {
-  color: var(--light-black);
-  font-size: var(--mls);
+.User > a,
+.User a > i {
+  color: var(--light-black) !important;
+  font-size: var(--mls) !important; 
 }
 
 .search-bar {
