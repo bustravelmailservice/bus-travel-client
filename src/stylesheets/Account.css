@@ -301,6 +301,16 @@
 		width: 14px;
 		height: 14px;
 	}
+
+	.Trip {
+		padding: 10px;
+		flex-direction: column;
+	}
+
+	.AdditionalInfo {
+		flex-direction: row;
+		gap: 50px;
+	}
 }
 
 @media (max-width: 425px) {}
