@@ -154,8 +154,8 @@
 
 .RouteSymbol .Circle {
 	position: absolute;
-	width: 28px;
-	height: 28px;
+	width: 18px;
+	height: 18px;
 	border-radius: 50%;
 	background-color: var(--dark-blue);
 	display: flex;
@@ -296,8 +296,18 @@
 
 @media (max-width: 1024px) {}
 
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+	.RouteSymbol .Circle {
+		width: 14px;
+		height: 14px;
+	}
+}
 
 @media (max-width: 425px) {}
 
-@media (max-width: 320px) {}
+@media (max-width: 320px) {
+	.RouteSymbol .Circle {
+		width: 10px;
+		height: 10px;
+	}
+}
