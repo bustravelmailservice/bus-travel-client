@@ -161,14 +161,12 @@
 }
 
 .RouteSymbol .Line {
-	position: absolute;
 	width: 3px;
 	height: 100%;
 	background-color: var(--dark-blue);
 }
 
 .RouteSymbol .Circle {
-	position: absolute;
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
