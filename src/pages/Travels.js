@@ -89,7 +89,7 @@ function Travels() {
     return tripsToShow.map((trip, index) => (
       <div key={index} className='Trip'>
         <div className='Date'>
-        <span>{formatDate(trip.date_departure)}</span>
+          <span>{formatDate(trip.date_departure)}</span>
         </div>
         <div className='Downpart'>
           <div className='MainInfo'>
@@ -103,10 +103,8 @@ function Travels() {
             </div>
             <div className='RouteSymbol'>
               <div className='Line'></div>
-              <div className='Circle top'>
-              </div>
-              <div className='Circle bottom'>
-              </div>
+              <div className='Circle top'></div>
+              <div className='Circle bottom'></div>
             </div>
             <div className='Route'>
               <div className='From'>
