@@ -119,7 +119,7 @@ function Account() {
     return tripsToShow.map((trip, index) => (
       <div key={index} className='Trip'>
         <div className='Date'>
-        <span>{formatDate(trip.date_departure)}</span>
+          <span>{formatDate(trip.date_departure)}</span>
         </div>
         <div className='DownpartACC'>
           <div className='MainInfo'>
