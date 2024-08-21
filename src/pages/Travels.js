@@ -67,9 +67,14 @@ function Travels() {
     fetchTrips();
   }, [fetchTrips]);
 
+  const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('uk-UA', options);
+  };
+
   const groupTripsByDate = (trips) => {
     return trips.reduce((groupedTrips, trip) => {
-      const date = trip.date_departure;
+      const date = trip.date_departure.split('T')[0]; // Группировка по дате (без времени)
       if (!groupedTrips[date]) {
         groupedTrips[date] = [];
       }
@@ -79,6 +84,54 @@ function Travels() {
   };
 
   const groupedTrips = groupTripsByDate(trips);
+
+  const renderTrips = (groupedTrips) => {
+    return Object.keys(groupedTrips).map((date, index) => (
+      <div key={index} className='date-section'>
+        <h2>{t('Travels_on')}: {formatDate(date)}</h2>
+        {groupedTrips[date].map((trip, tripIndex) => (
+          <div key={tripIndex} className='TripContainer'>
+            <div className='TripTravels'>
+              <div className='MainInfoTravels'>
+                <div className='TimeTravels'>
+                  <div className='TimeDepTravels'>
+                    <span>{trip.departure}</span>
+                  </div>
+                  <div className='TimeArrTravels'>
+                    <span>{trip.arrival}</span>
+                  </div>
+                </div>
+                <div className='RouteSymbolTravels'>
+                  <div className='Line'></div>
+                  <div className='Circle top'></div>
+                  <div className='Circle bottom'></div>
+                </div>
+                <div className='RouteTravels'>
+                  <div className='FromTravels'>
+                    <div className='PlaceTravels'>
+                      <span>{getCityNameById(trip.from, i18n.language, cities)}</span>
+                      <span>{trip.fromLocation}</span>
+                    </div>
+                  </div>
+                  <div className='ToTravels'>
+                    <div className='PlaceTravels'>
+                      <span>{getCityNameById(trip.to, i18n.language, cities)}</span>
+                      <span>{trip.toLocation}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='AdditionalInfoTravels'>
+                <span>{t('Baggage')}: {trip.baggage.smallBaggage} кг, {trip.baggage.largeBaggage} кг</span>
+                <span>{t('Passengers')}: {trip.passengers}</span>
+                <span>{t('Price')}: {trip.priceUA} грн</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ));
+  };
 
   if (isLoadingTrips) {
     return <div>Loading...</div>;
@@ -99,53 +152,7 @@ function Travels() {
         <div className='UserTravels'>
           {Object.keys(groupedTrips).length > 0 ? (
             <div className='HaveTravels'>
-              {Object.keys(groupedTrips).map((date, index) => (
-                <div key={index}>
-                  <div className='Date'><span className='DateInfo'>{t('DateInfo')}</span>{date}</div>
-                  {groupedTrips[date].map((trip, tripIndex) => (
-                    <div key={tripIndex} className='TripContainer'>
-                      <div className='TripTravels'>
-                        <div className='MainInfoTravels'>
-                          <div className='TimeTravels'>
-                            <div className='TimeDepTravels'>
-                              <span>{trip.departure}</span>
-                            </div>
-                            <div className='TimeArrTravels'>
-                              <span>{trip.arrival}</span>
-                            </div>
-                          </div>
-                          <div className='RouteSymbolTravels'>
-                            <div className='Line'></div>
-                            <div className='Circle top'>
-                            </div>
-                            <div className='Circle bottom'>
-                            </div>
-                          </div>
-                          <div className='RouteTravels'>
-                            <div className='FromTravels'>
-                              <div className='PlaceTravels'>
-                                <span>{getCityNameById(trip.from, i18n.language, cities)}</span>
-                                <span>{trip.fromLocation}</span>
-                              </div>
-                            </div>
-                            <div className='ToTravels'>
-                              <div className='PlaceTravels'>
-                                <span>{getCityNameById(trip.to, i18n.language, cities)}</span>
-                                <span>{trip.toLocation}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='AdditionalInfoTravels'>
-                          <span>{t('Baggage')}: {trip.baggage.smallBaggage} кг, {trip.baggage.largeBaggage} кг</span>
-                          <span>{t('Passengers')}: {trip.passengers}</span>
-                          <span>{t('Price')}: {trip.priceUA} грн</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              {renderTrips(groupedTrips)}
             </div>
           ) : (
             <div className='DontHaveTravels'>
