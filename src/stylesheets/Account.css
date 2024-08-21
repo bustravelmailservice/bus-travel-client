@@ -84,6 +84,7 @@
 .Trip {
 	border-radius: 8px;
 	padding: 20px;
+	gap: 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

@@ -25,6 +25,11 @@ function Account() {
     return now.isBefore(tripArrivalDateTime);
   }, [now]);
 
+  const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('uk-UA', options);
+  };
+
   const fetchTrips = useCallback(async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -114,7 +119,7 @@ function Account() {
     return tripsToShow.map((trip, index) => (
       <div key={index} className='Trip'>
         <div className='Date'>
-          <span>{trip.date_departure}</span>
+        <span>{formatDate(trip.date_departure)}</span>
         </div>
         <div className='Downpart'>
           <div className='MainInfo'>
