@@ -104,8 +104,7 @@
 	height: 100%;
 }
 
-.Time,
-.RouteSymbol {
+.Time{
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -157,12 +156,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 	margin: 0 20px;
 }
 
 .RouteSymbol .Line {
 	width: 3px;
-	height: 183px;
+	height: 143px;
 	background-color: var(--dark-blue);
 }
 
@@ -308,17 +308,21 @@
 
 @media (max-width: 1440px) {
 	.RouteSymbol .Line {
-		height: 176px;
+		height: 136px;
 	}
 }
 
 @media (max-width: 1024px) {
 	.RouteSymbol .Line {
-		height: 143px;
+		height: 103px;
 	}
 }
 
 @media (max-width: 768px) {
+	.RouteSymbol .Line {
+		height: 100px;
+	}
+
 	.RouteSymbol .Circle {
 		width: 14px;
 		height: 14px;
@@ -343,9 +347,17 @@
 	}
 }
 
-@media (max-width: 425px) {}
+@media (max-width: 425px) {
+	.RouteSymbol .Line {
+		height: 96px;
+	}
+}
 
 @media (max-width: 320px) {
+	.RouteSymbol .Line {
+		height: 100px;
+	}
+
 	.RouteSymbol .Circle {
 		width: 10px;
 		height: 10px;
