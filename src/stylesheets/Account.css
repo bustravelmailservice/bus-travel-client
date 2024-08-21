@@ -151,13 +151,13 @@
 
 .RouteSymbol {
 	position: relative;
-	width: 20px;
-	height: 100%;
+	width: fit-content;
+	margin: 0 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	margin: 0 20px;
+	height: 100%;
 }
 
 .RouteSymbol .Line {
@@ -176,31 +176,12 @@
 	justify-content: center;
 }
 
-.RouteSymbol .Circle .InnerCircle {
-	width: 18px;
-	height: 18px;
-	border-radius: 50%;
-	background-color: var(--mtc);
-	z-index: 999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .SmallCircle {
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
 	background-color: var (--dark-blue);
 	z-index: 999;
-}
-
-.RouteSymbol .Circle.top {
-	top: 0;
-}
-
-.RouteSymbol .Circle.bottom {
-	bottom: 0;
 }
 
 .AdditionalInfo {
