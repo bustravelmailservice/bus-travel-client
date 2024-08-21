@@ -46,10 +46,17 @@ function Travels() {
 
       setTrips(activeTrips);
     } catch (error) {
-      setError('Error fetching trips');
       console.error('Error fetching trips:', error);
-    } finally {
-      setIsLoadingTrips(false);
+      if (error.response) {
+        // Сервер ответил с ошибкой
+        console.error('Server responded with:', error.response.status, error.response.data);
+      } else if (error.request) {
+        // Запрос был сделан, но ответа не было
+        console.error('No response received:', error.request);
+      } else {
+        // Ошибка при настройке запроса
+        console.error('Error setting up request:', error.message);
+      }
     }
   }, [isTripActive]);
 
