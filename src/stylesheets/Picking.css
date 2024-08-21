@@ -175,7 +175,7 @@
   height: 40px;
   width: 170px;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s;
   align-self: flex-end;
@@ -402,7 +402,7 @@
 
   .from-field .css-13xzpp8-singleValue,
   .to-field .css-13xzpp8-singleValue {
-    margin-left: 5px !important;
+    margin-left: 4px !important;
   }
 
   .from-to-container {
@@ -439,11 +439,11 @@
 
   .picking-container {
     padding-bottom: 84px;
-    padding: 20px 15px 85px 15px;
+    padding: 20px 15px 30px 15px;
   }
 
   .picking-search {
-    top: 330px;
+    top: 285px;
   }
 
   .css-qbdosj-Input,
@@ -523,7 +523,7 @@
 
 @media (max-width: 320px) {
   .PickingPart {
-    padding: 60px 75px 0px 35px;
+    padding: 60px 75px 0px 20px;
     width: calc(100% - 60px);
   }
 
@@ -534,6 +534,6 @@
   }
 
   .picking-search {
-    top: 300px;
+    top: 285px;
   }
 }
