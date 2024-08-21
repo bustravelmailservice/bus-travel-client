@@ -162,7 +162,7 @@
 
 .RouteSymbol .Line {
 	width: 3px;
-	height: 187px;
+	height: 183px;
 	background-color: var(--dark-blue);
 }
 
@@ -306,9 +306,17 @@
 	border-radius: calc(1em + 20px);
 }
 
-@media (max-width: 1440px) {}
+@media (max-width: 1440px) {
+	.RouteSymbol .Line {
+		height: 176px;
+	}
+}
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+	.RouteSymbol .Line {
+		height: 143px;
+	}
+}
 
 @media (max-width: 768px) {
 	.RouteSymbol .Circle {

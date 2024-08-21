@@ -132,11 +132,9 @@ function Account() {
               </div>
             </div>
             <div className='RouteSymbol'>
+              <div className='Circle top'></div>
               <div className='Line'></div>
-              <div className='Circle top'>
-              </div>
-              <div className='Circle bottom'>
-              </div>
+              <div className='Circle bottom'></div>
             </div>
             <div className='Route'>
               <div className='From'>
