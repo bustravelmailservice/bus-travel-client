@@ -33,11 +33,15 @@ function Travels() {
         return;
       }
 
+      console.log('Attempting to fetch trips with accessToken:', accessToken);
+
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets/', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
+      console.log('Response data:', response.data);
 
       const trips = response.data;
       const activeTrips = trips.filter(isTripActive).sort((a, b) => {
@@ -50,20 +54,27 @@ function Travels() {
       if (error.response) {
         // Сервер ответил с ошибкой
         console.error('Server responded with:', error.response.status, error.response.data);
+        setError(`Server error: ${error.response.status}`);
       } else if (error.request) {
         // Запрос был сделан, но ответа не было
         console.error('No response received:', error.request);
+        setError('No response from server');
       } else {
         // Ошибка при настройке запроса
         console.error('Error setting up request:', error.message);
+        setError(`Request error: ${error.message}`);
       }
+    } finally {
+      setIsLoadingTrips(false);
     }
   }, [isTripActive]);
 
   useEffect(() => {
     const fetchCities = async () => {
       try {
+        console.log('Attempting to fetch cities...');
         const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/cities');
+        console.log('Cities data:', response.data);
         setCities(response.data);
       } catch (error) {
         console.error('Error fetching cities:', error);
