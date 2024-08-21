@@ -109,9 +109,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	height: 100%;
 	justify-content: space-between;
-	height: 100%;
 	margin-right: 20px;
 	font-size: var(--mfs);
 }
@@ -155,7 +153,6 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	height: 100%;
 }
 
 .RouteSymbol .Line {
@@ -183,7 +180,6 @@
 }
 
 .Time, .RouteSymbol, .Route {
-  height: 100%; /* Заставляем элементы растянуться по высоте родителя */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -191,9 +187,14 @@
 
 
 .TimeDep, .TimeArr {
-  flex-grow: 1; /* Распределяет пространство равномерно */
+  flex-grow: 1;
   display: flex;
-  align-items: center; /* Центрирует текст по вертикали */
+  align-items: center;
+}
+
+.TimeArr{
+	display: flex;
+	align-items: flex-end;
 }
 
 .Route {
