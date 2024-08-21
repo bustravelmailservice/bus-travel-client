@@ -1,136 +1,129 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/SearchTickets.css';
 import Ticket from '../components/Ticket';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
+import moment from 'moment';
 
 function SearchTickets() {
   const { t } = useTranslation();
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
-  const [groupedTravels, setGroupedTravels] = useState({});
+  const [activeTrips, setActiveTrips] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Логируем полученные параметры поиска
-    console.log('Received search parameters:', { from, to, startDate, passengers });
-  }, [from, to, startDate, passengers]);
+  const now = moment();
 
-  useEffect(() => {
-    const fetchTravels = async () => {
-      try {
-        // Проверяем наличие обязательных параметров
-        if (!from || !to || !startDate) {
-          throw new Error('Missing search parameters');
-        }
+  // Проверяем, активна ли поездка (для фильтрации)
+  const isTripActive = useCallback((trip) => {
+    const tripArrivalDateTime = moment(trip.date_arrival).add(2, 'hours');
+    return now.isBefore(tripArrivalDateTime);
+  }, [now]);
 
-        // Запрос к API с логированием запроса и ответа
-        console.log('Sending request to API with params:', { from, to, startDate });
-        const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
-          params: { from, to, startDate }
-        });
-
-        // Логируем ответ от сервера
-        const travels = response.data;
-        console.log('Fetched travels:', travels);
-
-        if (!Array.isArray(travels)) {
-          throw new Error('Invalid data format received from API');
-        }
-
-        // Преобразуем дату поиска для фильтрации
-        const searchStartDate = new Date(startDate);
-
-        // Фильтруем поездки
-        const filteredTravels = travels.filter(travel => {
-          const travelDate = new Date(travel.date_departure);
-          return travelDate >= searchStartDate && travel.fromEN === from && travel.toEN === to;
-        });
-
-        // Логируем отфильтрованные данные
-        console.log('Filtered travels:', filteredTravels);
-
-        // Сортировка поездок по дате и времени отправления
-        filteredTravels.sort((a, b) => {
-          const dateA = new Date(a.date_departure);
-          const dateB = new Date(b.date_departure);
-          const timeA = a.departure.split(':').map(Number);
-          const timeB = b.departure.split(':').map(Number);
-
-          dateA.setHours(timeA[0], timeA[1]);
-          dateB.setHours(timeB[0], timeB[1]);
-
-          return dateA - dateB;
-        });
-
-        // Логируем отсортированные данные
-        console.log('Sorted travels:', filteredTravels);
-
-        // Группировка поездок по дате
-        const grouped = filteredTravels.reduce((acc, travel) => {
-          const dateKey = travel.date_departure.split('T')[0];
-          if (!acc[dateKey]) {
-            acc[dateKey] = [];
-          }
-          acc[dateKey].push(travel);
-          return acc;
-        }, {});
-
-        // Логируем сгруппированные данные
-        console.log('Grouped travels:', grouped);
-
-        // Устанавливаем состояние с сгруппированными данными
-        setGroupedTravels(grouped);
-      } catch (error) {
-        // Логируем ошибку
-        setError(error.message || 'Error fetching travels');
-        console.error('Error fetching travels:', error);
-      } finally {
-        // Отключаем состояние загрузки
-        setIsLoading(false);
+  const fetchTrips = useCallback(async () => {
+    try {
+      if (!from || !to || !startDate) {
+        throw new Error('Missing search parameters');
       }
-    };
 
-    // Вызываем функцию загрузки данных
-    fetchTravels();
-  }, [from, to, startDate]);
+      console.log('Sending request to API with params:', { from, to, startDate });
+      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
+        params: { from, to, startDate }
+      });
 
-  // Функция для форматирования даты
+      const trips = response.data;
+      console.log('Fetched trips:', trips);
+
+      if (!Array.isArray(trips)) {
+        throw new Error('Invalid data format received from API');
+      }
+
+      const active = trips
+        .filter(trip => isTripActive(trip))
+        .sort((a, b) => {
+          return moment(a.date_departure) - moment(b.date_departure);
+        });
+
+      setActiveTrips(active);
+    } catch (error) {
+      setError(error.message || 'Error fetching trips');
+      console.error('Error fetching trips:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [from, to, startDate, isTripActive]);
+
+  useEffect(() => {
+    fetchTrips();
+  }, [fetchTrips]);
+
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return new Date(dateString).toLocaleDateString('uk-UA', options);
   };
 
-  // Если произошла ошибка - отображаем её
+  if (isLoading) {
+    return <div>{t('Loading...')}</div>;
+  }
+
   if (error) {
     return <div>{error}</div>;
   }
 
-  // Рендеринг компонента
   return (
     <div className='SearchTickets'>
       <Helmet>
         <title>{t('titles.search')}</title>
       </Helmet>
-      {isLoading ? (
-        <div>{t('Loading...')}</div>
+      {activeTrips.length === 0 ? (
+        <div>{t('No tickets found')}</div>
       ) : (
-        Object.keys(groupedTravels).length > 0 ? (
-          Object.keys(groupedTravels).map(date => (
-            <div key={date} className="date-section">
-              <h2>{t('Travels_on')}: {formatDate(date)}</h2>
-              {groupedTravels[date].map((travel, index) => (
-                <Ticket key={index} travel={travel} passengers={passengers} />
-              ))}
+        activeTrips.map((trip, index) => (
+          <div key={index} className='Trip'>
+            <div className='Date'>
+              <span>{formatDate(trip.date_departure)}</span>
             </div>
-          ))
-        ) : (
-          <div>{t('No tickets found')}</div>
-        )
+            <div className='Downpart'>
+              <div className='MainInfo'>
+                <div className='Time'>
+                  <div className='TimeDep'>
+                    <span>{trip.departure}</span>
+                  </div>
+                  <div className='TimeArr'>
+                    <span>{trip.arrival}</span>
+                  </div>
+                </div>
+                <div className='RouteSymbol'>
+                  <div className='Line'></div>
+                  <div className='Circle top'></div>
+                  <div className='Circle bottom'></div>
+                </div>
+                <div className='Route'>
+                  <div className='From'>
+                    <div className='Place'>
+                      <span>{trip.from}</span>
+                      <span>{trip.fromLocation}</span>
+                    </div>
+                  </div>
+                  <div className='To'>
+                    <div className='Place'>
+                      <span>{trip.to}</span>
+                      <span>{trip.toLocation}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='AdditionalInfo'>
+                <span>{t('Baggage')}: {trip.baggage === "yes" ? t('Yes') : t('No')}</span>
+                <span>{t('Passengers')}: {passengers}</span>
+              </div>
+            </div>
+          </div>
+        ))
       )}
     </div>
   );
