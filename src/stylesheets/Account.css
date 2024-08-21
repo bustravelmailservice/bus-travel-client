@@ -101,6 +101,7 @@
 .MainInfo{
 	display: flex;
 	flex-direction: row;
+	align-items: stretch;
 	height: 100%;
 }
 
@@ -110,9 +111,6 @@
 	flex-direction: column;
 	height: 100%;
 	justify-content: space-between;
-}
-
-.Time {
 	height: 100%;
 	margin-right: 20px;
 	font-size: var(--mfs);
@@ -182,6 +180,24 @@
 	border-radius: 50%;
 	background-color: var (--dark-blue);
 	z-index: 999;
+}
+
+.Time, .RouteSymbol, .Route {
+  height: 100%; /* Заставляем элементы растянуться по высоте родителя */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.TimeDep, .TimeArr {
+  flex-grow: 1; /* Распределяет пространство равномерно */
+  display: flex;
+  align-items: center; /* Центрирует текст по вертикали */
+}
+
+.Route {
+  flex-grow: 1; /* Если нужно, чтобы Route заполнял оставшееся пространство */
 }
 
 .AdditionalInfo {
