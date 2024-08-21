@@ -97,16 +97,16 @@
 	justify-content: space-between;
 }
 
-.MainInfo {
+.MainInfo,
+.Time,
+.RouteSymbol  {
 	display: flex;
 	align-items: center;
 	height: 100%;
+	justify-content: space-between;
 }
 
 .Time {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 	height: 100%;
 	margin-right: 20px;
 	font-size: var(--mfs);
