@@ -102,16 +102,13 @@
 	display: flex;
 	align-items: center;
 	flex-direction: row;
-	height: fit-content;
+	height: 100%;
 	justify-content: space-between;
 }
 
-.MainInfo > div{
-	height: 100%;
-}
-
 .Time,
-.RouteSymbol{
+.RouteSymbol,
+.Route  {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -135,15 +132,8 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: start;
 	gap: 40px;
 	font-size: var(--mbfs) !important;
-}
-
-.Downpart{
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
 }
 
 .Place {
