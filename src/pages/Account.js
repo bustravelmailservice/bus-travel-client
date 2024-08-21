@@ -121,7 +121,7 @@ function Account() {
         <div className='Date'>
         <span>{formatDate(trip.date_departure)}</span>
         </div>
-        <div className='Downpart'>
+        <div className='DownpartACC'>
           <div className='MainInfo'>
             <div className='Time'>
               <div className='TimeDep'>
