@@ -85,9 +85,15 @@
 	border-radius: 8px;
 	padding: 20px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Downpart{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .MainInfo {
@@ -306,6 +312,13 @@
 		padding: 10px;
 		gap: 25px;
 		flex-direction: column;
+	}
+
+	.Downpart{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 25px;
 	}
 
 	.AdditionalInfo {

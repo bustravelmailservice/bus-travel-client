@@ -113,40 +113,45 @@ function Account() {
 
     return tripsToShow.map((trip, index) => (
       <div key={index} className='Trip'>
-        <div className='MainInfo'>
-          <div className='Time'>
-            <div className='TimeDep'>
-              <span>{trip.departure}</span>
-            </div>
-            <div className='TimeArr'>
-              <span>{trip.arrival}</span>
-            </div>
-          </div>
-          <div className='RouteSymbol'>
-            <div className='Line'></div>
-            <div className='Circle top'>
-            </div>
-            <div className='Circle bottom'>
-            </div>
-          </div>
-          <div className='Route'>
-            <div className='From'>
-              <div className='Place'>
-                <span>{trip.from}</span>
-                <span>{trip.fromLocation}</span>
-              </div>
-            </div>
-            <div className='To'>
-              <div className='Place'>
-                <span>{trip.to}</span>
-                <span>{trip.toLocation}</span>
-              </div>
-            </div>
-          </div>
+        <div className='Date'>
+          <span>{trip.date_departure}</span>
         </div>
-        <div className='AdditionalInfo'>
-          <span>{t('Baggage')}: {trip.baggage === "yes" ? t('Yes') : t('No')}</span>
-          <span>{t('Passengers')}: {trip.passengers}</span>
+        <div className='Downpart'>
+          <div className='MainInfo'>
+            <div className='Time'>
+              <div className='TimeDep'>
+                <span>{trip.departure}</span>
+              </div>
+              <div className='TimeArr'>
+                <span>{trip.arrival}</span>
+              </div>
+            </div>
+            <div className='RouteSymbol'>
+              <div className='Line'></div>
+              <div className='Circle top'>
+              </div>
+              <div className='Circle bottom'>
+              </div>
+            </div>
+            <div className='Route'>
+              <div className='From'>
+                <div className='Place'>
+                  <span>{trip.from}</span>
+                  <span>{trip.fromLocation}</span>
+                </div>
+              </div>
+              <div className='To'>
+                <div className='Place'>
+                  <span>{trip.to}</span>
+                  <span>{trip.toLocation}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='AdditionalInfo'>
+            <span>{t('Baggage')}: {trip.baggage === "yes" ? t('Yes') : t('No')}</span>
+            <span>{t('Passengers')}: {trip.passengers}</span>
+          </div>
         </div>
       </div>
     ));

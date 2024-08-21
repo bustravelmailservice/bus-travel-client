@@ -86,6 +86,12 @@
   z-index: 1;
 }
 
+.Date span {
+  color: var(--mtcb);
+  font-size: var(--mfs);
+  margin-bottom: 20px;
+}
+
 .AdditionalLinks {
   display: flex;
   flex-direction: row;
