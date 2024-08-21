@@ -2,7 +2,7 @@
 .content .InfoAboutUs,
 .content .Rules,
 .content .PrivacyPolicy {
-	padding: 60px 18.2% 150px 18.2%;
+	padding: 60px 19% 150px 19%;
 	background-color: var(--mtc);
 }
 
@@ -52,12 +52,20 @@
 }
 
 .InfoAndLinks {
-  border-radius: 8px;
-  margin-top: 20px;
-  background-color: var(--mtc);
+	border-radius: 8px;
+	margin-top: 20px;
+	background-color: var(--mtc);
 }
 
 @media (max-width:1440px) {
+	.content .Help,
+	.content .InfoAboutUs,
+	.content .Rules,
+	.content .PrivacyPolicy {
+		padding: 60px 6.5% 120px 6.5%;
+		background-color: var(--mtc);
+	}
+
 	.InfoAndLinks {
 		padding: 50px 0px;
 	}
@@ -73,6 +81,14 @@
 
 
 @media (max-width:1024px) {
+	.content .Help,
+	.content .InfoAboutUs,
+	.content .Rules,
+	.content .PrivacyPolicy {
+		padding: 60px 13.6% 90px 13.6%;
+		background-color: var(--mtc);
+	}
+
 	.InfoAndLinks {
 		padding: 50px 0px;
 	}
@@ -87,6 +103,14 @@
 }
 
 @media (max-width:768px) {
+	.content .Help,
+	.content .InfoAboutUs,
+	.content .Rules,
+	.content .PrivacyPolicy {
+		padding: 50px 14.3% 50px 14.3%;
+		background-color: var(--mtc);
+	}
+
 	.InfoAndLinks {
 		padding: 40px 0px;
 	}
@@ -101,6 +125,14 @@
 }
 
 @media (max-width:426px) {
+	.content .Help,
+	.content .InfoAboutUs,
+	.content .Rules,
+	.content .PrivacyPolicy {
+		padding: 45px 4.2% 45px 4.2%;
+		background-color: var(--mtc);
+	}
+
 	.InfoAndLinks {
 		padding: 25px 0px;
 	}
@@ -120,5 +152,15 @@
 	.MainPart span:nth-child(2) {
 		text-align: left;
 		padding: 0px 0%;
+	}
+}
+
+@media (max-width:320px) {
+	.content .Help,
+	.content .InfoAboutUs,
+	.content .Rules,
+	.content .PrivacyPolicy {
+		padding: 60px 4.6% 60px 4.6%;
+		background-color: var(--mtc);
 	}
 }

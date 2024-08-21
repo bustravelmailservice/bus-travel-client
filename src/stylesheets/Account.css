@@ -304,7 +304,7 @@
 
 	.Trip {
 		padding: 10px;
-		gap: 10px;
+		gap: 25px;
 		flex-direction: column;
 	}
 
