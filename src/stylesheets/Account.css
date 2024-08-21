@@ -162,7 +162,7 @@
 
 .RouteSymbol .Line {
 	width: 3px;
-	height: 163px;
+	flex-grow: 1;
 	background-color: var(--dark-blue);
 }
 
@@ -307,20 +307,13 @@
 }
 
 @media (max-width: 1440px) {
-	.RouteSymbol .Line {
-		height: 156px;
-	}
 }
 
 @media (max-width: 1024px) {
-	.RouteSymbol .Line {
-		height: 123px;
-	}
 }
 
 @media (max-width: 768px) {
 	.RouteSymbol .Line {
-		height: 120px;
 		width: 2px;
 	}
 
@@ -350,15 +343,9 @@
 }
 
 @media (max-width: 425px) {
-	.RouteSymbol .Line {
-		height: 116px;
-	}
 }
 
 @media (max-width: 320px) {
-	.RouteSymbol .Line {
-		height: 120px;
-	}
 
 	.RouteSymbol .Circle {
 		width: 10px;
