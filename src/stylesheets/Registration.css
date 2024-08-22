@@ -109,14 +109,6 @@
     text-align: center;
 }
 
-.RightPart h2 {
-    margin-bottom: 10px;
-}
-
-.RightPart p {
-    margin-bottom: 20px;
-}
-
 .RightPart a {
     background-color: var(--secondary-button-bg);
     color: var(--secondary-button-color);
