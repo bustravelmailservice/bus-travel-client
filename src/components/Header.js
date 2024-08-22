@@ -51,7 +51,10 @@ function Header() {
   };
 
   return (
-    <div className={`Header ${isDimmed ? 'dimmed' : ''}`}>
+    <div className="Header">
+      {/* Затемняющий слой */}
+      <div className={`overlay ${isDimmed ? 'visible' : ''}`} onClick={closeMenu}></div>
+
       <div className="Logo">
         <a href="/">
           <img src={LogoBig} alt="Logo" />

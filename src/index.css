@@ -82,6 +82,42 @@ mbc - main background color
   --danger-red: #ff3535;
 }
 
+@media (max-width:7680px) {
+  :root {
+    --mls: 28px;
+    --mfs: 40px;
+    --mbfs: 48px;
+    --vbfs: 128px;
+  }
+}
+
+@media (max-width:5760px) {
+  :root {
+    --mls: 24px;
+    --mfs: 36px;
+    --mbfs: 42px;
+    --vbfs: 112px;
+  }
+}
+
+@media (max-width:3840px) {
+  :root {
+    --mls: 20px;
+    --mfs: 28px;
+    --mbfs: 32px;
+    --vbfs: 96px;
+  }
+}
+
+@media (max-width:2560px) {
+  :root {
+    --mls: 16px;
+    --mfs: 24px;
+    --mbfs: 28px;
+    --vbfs: 80px;
+  }
+}
+
 @media (max-width:1920px) {
   :root {
     --mls: 14px;
