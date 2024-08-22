@@ -164,7 +164,7 @@ const Picking = () => {
               <button onClick={() => setPassengers(Math.min(passengers + 1, 120))}>+</button>
             </div>
           </div>
-          <button className="picking-search" onClick={handleSearch}>{t('Search')}</button>
+          <button className="picking-search" onClick={handleSearch}><i class="fa-solid fa-magnifying-glass"></i>{t('Search')}</button>
         </div>
       </div>
     </div>

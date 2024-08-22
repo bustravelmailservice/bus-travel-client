@@ -27,9 +27,6 @@ function PrivacyPolicy() {
         <span className='Text_subheading'>
           {t('Text_subheading1_3')}
         </span>
-        <span className='Heading'>
-          {t('Heading2')}
-        </span>
         <span className='Subheading'>
           {t('Subheading2')}
         </span>
@@ -63,9 +60,6 @@ function PrivacyPolicy() {
         <span className='Text_subheading'>
           {t('Text_subheading2_10')}
         </span>
-        <span className='Heading'>
-          {t('Heading3')}
-        </span>
         <span className='Subheading'>
           {t('Subheading3')}
         </span>
@@ -80,9 +74,6 @@ function PrivacyPolicy() {
         </span>
         <span className='Text_subheading'>
           {t('Text_subheading3_4')}
-        </span>
-        <span className='Heading'>
-          {t('Heading4')}
         </span>
         <span className='Subheading'>
           {t('Subheading4')}
@@ -117,9 +108,6 @@ function PrivacyPolicy() {
         <span className='Text_subheading'>
           {t('Text_subheading4_10')}
         </span>
-        <span className='Heading'>
-          {t('Heading5')}
-        </span>
         <span className='Subheading'>
           {t('Subheading5')}
         </span>
@@ -128,9 +116,6 @@ function PrivacyPolicy() {
         </span>
         <span className='Text_subheading'>
           {t('Text_subheading5_2')}
-        </span>
-        <span className='Heading'>
-          {t('Heading6')}
         </span>
         <span className='Subheading'>
           {t('Subheading6')}
@@ -143,9 +128,6 @@ function PrivacyPolicy() {
         </span>
         <span className='Text_subheading'>
           {t('Text_subheading6_3')}
-        </span>
-        <span className='Heading'>
-          {t('Heading7')}
         </span>
         <span className='Subheading'>
           {t('Subheading7')}
@@ -162,9 +144,6 @@ function PrivacyPolicy() {
         <span className='Text_subheading'>
           {t('Text_subheading7_4')}
         </span>
-        <span className='Heading'>
-          {t('Heading8')}
-        </span>
         <span className='Subheading'>
           {t('Subheading8')}
         </span>
@@ -180,17 +159,11 @@ function PrivacyPolicy() {
         <span className='Text_subheading'>
           {t('Text_subheading8_4')}
         </span>
-        <span className='Heading'>
-          {t('Heading9')}
-        </span>
         <span className='Subheading'>
           {t('Subheading9')}
         </span>
         <span className='Text_subheading'>
           {t('Text_subheading9_1')}
-        </span>
-        <span className='Heading'>
-          {t('Heading10')}
         </span>
         <span className='Subheading'>
           {t('Subheading10')}
@@ -201,9 +174,6 @@ function PrivacyPolicy() {
         <span className='Text_subheading'>
           {t('Text_subheading10_2')}
         </span>
-        <span className='Heading'>
-          {t('Heading11')}
-        </span>
         <span className='Subheading'>
           {t('Subheading11')}
         </span>
@@ -212,9 +182,6 @@ function PrivacyPolicy() {
         </span>
         <span className='Text_subheading'>
           {t('Text_subheading11_2')}
-        </span>
-        <span className='Heading'>
-          {t('Heading12')}
         </span>
         <span className='Subheading'>
           {t('Subheading12')}
@@ -227,9 +194,6 @@ function PrivacyPolicy() {
         </span>
         <span className='Text_subheading'>
           {t('Text_subheading12_3')}
-        </span>
-        <span className='Heading'>
-          {t('Heading13')}
         </span>
         <span className='Subheading'>
           {t('Subheading13')}

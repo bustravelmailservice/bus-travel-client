@@ -7,31 +7,32 @@
 }
 
 .content.dimmed {
-  background-color: rgba(0, 0, 0, 0.25);
-  transition: background-color 0.5s ease;
+	background-color: rgba(0, 0, 0, 0.25);
+	transition: background-color 0.5s ease;
 }
 
 .content {
-  transition: background-color 0.5s ease;
+	transition: background-color 0.5s ease;
 }
 
 /* Добавляем затемняющий слой */
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  transition: opacity 0.5s ease;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 999; /* Выставляем высокий z-index, чтобы он был поверх всего */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.25);
+	transition: opacity 0.5s ease;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 999;
+	/* Выставляем высокий z-index, чтобы он был поверх всего */
 }
 
 .overlay.visible {
-  opacity: 1;
-  pointer-events: all;
+	opacity: 1;
+	pointer-events: all;
 }
 
 
@@ -45,6 +46,7 @@
 	color: var(--dark-blue);
 	font-size: var(--vbfs);
 	font-weight: 500;
+	margin-top: 0;
 }
 
 .MainPart span:nth-child(2) {
@@ -55,9 +57,39 @@
 	font-size: var(--mls);
 }
 
+.PrivacyPolicy .MainPart span:nth-child(2) {
+	margin-bottom: 0px !important;
+	color: var(--light-black);
+	font-size: var(--mbfs);
+	padding: 0px;
+	text-align: left;
+}
+
+.MainPart .Text_subheading {
+	margin-bottom: 15px;
+}
+
+.MainPart .Subheading {
+	margin-bottom: 0px !important;
+	color: var(--light-black);
+	font-size: var(--mbfs);
+}
+
+.Subheading {
+	margin-bottom: 0px !important;
+}
+
 .Heading {
 	font-size: var(--mbfs);
 	color: var(--light-black);
+	margin-bottom: 50px;
+}
+
+.PrivacyPolicy .Heading {
+	font-size: var(--mbfs);
+	color: var(--light-black);
+	margin-bottom: 50px;
+	margin-top: 50px;
 }
 
 .Text_subheading {
@@ -73,7 +105,9 @@
 	font-size: var(--mls) !important;
 }
 
-.Text_subheading span a {
+.Text_subheading a,
+.Text_subheading i {
+	color: var(--dark-blue) !important;
 	padding: 0 !important;
 	gap: 0 !important;
 	color: var(--dark-blue) !important;
@@ -87,6 +121,7 @@
 }
 
 @media (max-width:1440px) {
+
 	.content .Help,
 	.content .InfoAboutUs,
 	.content .Rules,
@@ -110,6 +145,7 @@
 
 
 @media (max-width:1024px) {
+
 	.content .Help,
 	.content .InfoAboutUs,
 	.content .Rules,
@@ -132,6 +168,7 @@
 }
 
 @media (max-width:768px) {
+
 	.content .Help,
 	.content .InfoAboutUs,
 	.content .Rules,
@@ -154,6 +191,7 @@
 }
 
 @media (max-width:426px) {
+
 	.content .Help,
 	.content .InfoAboutUs,
 	.content .Rules,
@@ -185,6 +223,7 @@
 }
 
 @media (max-width:320px) {
+
 	.content .Help,
 	.content .InfoAboutUs,
 	.content .Rules,
