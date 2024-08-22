@@ -197,7 +197,7 @@
   width: calc(100% + 0px);
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 60px;
   background-color: var(--light-gray);
   transition: 0.5s !important;
   background-color: #FFFFFF;
@@ -206,21 +206,22 @@
 }
 
 .ImageMap {
-  height: 180px;
-  object-fit: contain;
+  height: auto;
+  object-fit: cover;
+  max-width: 45%;
 }
 
 .ImageMap img {
-  width: 100%;
   height: 100%;
-
+  width: 100%;
 }
 
 .TextMapSeg {
-  justify-content: space-around;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 110px;
+  padding: 40px 0px;
   color: var(--mtcb);
 }
 
@@ -311,6 +312,17 @@
 }
 
 @media (max-width:1440px) {
+  .MapSegment {
+    gap: 30px;
+  }
+
+  .TextMapSeg {
+    padding: 30px 0px;
+    gap: 70px;
+  }
+
+  
+
   .Map .MainContent .Picking {
     padding: 0px 50px;
   }
@@ -396,9 +408,21 @@
   .AddLink {
     width: 100%;
   }
+
+  .MapSegment {
+    gap: 25px;
+  }
+
+  .TextMapSeg {
+    padding: 25px 0px;
+    gap: 50px;
+  }
 }
 
 @media (max-width:768px) {
+  .TextAddLink span:nth-child(1){
+    font-size: calc(var(--mls) + 4px);
+  }
   .Map .MainContent .Picking {
     padding: 0px 75px;
   }
@@ -419,22 +443,6 @@
   .DescriptionOfServices {
     padding: 20px;
     gap: 0px;
-  }
-
-  .MapSegment>div {
-    width: 40%;
-  }
-
-  .TextMapSeg {
-    gap: 20px;
-  }
-
-  .TextPartMap {
-    gap: 2px;
-  }
-
-  .ImageMap {
-    height: auto;
   }
 
   .AdditionalLinks {
@@ -466,9 +474,26 @@
     justify-content: center;
     width: 20px;
   }
+
+  .MapSegment {
+    gap: 25px;
+  }
+
+  .TextMapSeg {
+    padding: 20px 0px;
+    gap: 50px;
+  }
+
+  
 }
 
 @media (max-width:550px) {
+  .ImageMap {
+    height: auto;
+    object-fit: cover;
+    max-width: 100%;
+  }
+
   .Map .MainContent {
     padding-top: 0px;
   }
@@ -479,8 +504,8 @@
 
   .MapSegment {
     flex-direction: column;
-    width: calc(100% - 40px);
-    padding: 0 20px 20px 20px;
+    width: 100%;
+    padding: 0 0px 20px 0px;
     margin: 30px 0px;
   }
 
@@ -489,13 +514,13 @@
   }
 
   .MapSegment>div {
-    width: calc(100% + 40px);
-    margin-left: -20px;
+    width: 100%;
   }
 
   .TextPartMap,
   .AddNameMapSeg {
     display: flex;
+    align-self: center;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -560,7 +585,7 @@
   }
 
   .TextMapSeg {
-    gap: 15px;
+    gap: 60px;
   }
 
   .MainNameMapSeg {
@@ -570,10 +595,6 @@
     align-items: flex-end;
   }
 
-  .ImageMap {
-    width: 100%;
-    height: auto;
-  }
 
   .AdditionalDescriptions {
     margin: 50px 0px;
@@ -591,7 +612,7 @@
 
 
   .TextMapSeg {
-    gap: 10px;
+    gap: 20px;
   }
 
   .SecondGreeting {
