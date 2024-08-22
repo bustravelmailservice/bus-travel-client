@@ -89,10 +89,16 @@
 	margin-bottom: 50px;
 }
 
-.PrivacyPolicy .Heading {
+.PrivacyPolicy .Heading:nth-child(1) {
 	font-size: var(--mbfs);
 	color: var(--light-black);
 	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+.PrivacyPolicy .Heading {
+	font-size: var(--mbfs);
+	color: var(--light-black);
 	margin-top: 50px;
 }
 
