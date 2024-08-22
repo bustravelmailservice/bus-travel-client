@@ -528,7 +528,7 @@
 
 @media (max-width: 320px) {
   .PickingPart {
-    padding: 60px 75px 35px 20px;
+    padding: 60px 75px 35px 0px;
     width: calc(100% - 60px);
   }
 
