@@ -92,10 +92,10 @@ function Header() {
             <i className="fa-solid fa-xmark"></i>
           </div>
           <div className='links'>
-            <a href="/map">{t('F_Link')}</a>
-            <a href="/travels">{t('S_Link')}</a>
-            <a href="/routes">{t('T_Link')}</a>
-            <a href="/help">{t('Th_Link')}</a>
+            <a href="/map"><span>{t('F_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/travels"><span>{t('S_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/routes"><span>{t('T_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/help"><span>{t('Th_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
           </div>
         </div>
       </div>

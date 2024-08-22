@@ -3,9 +3,10 @@
 }
 
 .User > a,
-.User a > i {
+.User a > i,
+.BurgerButton > i{
   color: var(--light-black) !important;
-  font-size: var(--mls) !important; 
+  font-size: var(--mbfs) !important; 
 }
 
 .search-bar {
