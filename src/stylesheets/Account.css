@@ -262,8 +262,7 @@
 	margin-top: 40px;
 	height: fit-content;
 	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	background-color: var(--mbc);
+	background-color: var(--mtc);
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
