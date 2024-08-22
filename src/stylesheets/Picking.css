@@ -178,6 +178,7 @@
 .picking-search {
   background-color: var(--light-black);
   color: var(--mtc);
+  font-size: var(--mls);
   height: 40px;
   width: 170px;
   border: none;
@@ -193,7 +194,10 @@
   gap: 8px;
 }
 
-
+.picking-search i {
+  color: var(--mtc) !important;
+  font-size: var(--mls) !important;
+}
 
 .picking-search:hover {
   background-color: var(--dark-blue);
