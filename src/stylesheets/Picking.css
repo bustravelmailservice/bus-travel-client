@@ -187,6 +187,9 @@
   align-self: flex-end;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 8px;
 }
 
