@@ -528,8 +528,12 @@
 
 @media (max-width: 320px) {
   .PickingPart {
-    padding: 60px 75px 35px 0px;
+    padding: 60px 75px 0px 35px;
     width: calc(100% - 60px);
+  }
+
+  .picking-container{
+    padding: 20px 15px 65px 50px;
   }
 
   .swap-button {
