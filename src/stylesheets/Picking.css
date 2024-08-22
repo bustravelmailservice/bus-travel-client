@@ -25,6 +25,11 @@
   font-size: var(--mfs) !important;
 }
 
+.css-hlgwow {
+  color: var(--light-black);
+  font-size: var(--mls);
+}
+
 .picking-container {
   margin-bottom: -100px;
   display: flex;
@@ -342,7 +347,7 @@
   .picking-container {
     padding-bottom: 74px;
     gap: 0;
-    
+
   }
 
   .picking-field {
@@ -372,11 +377,11 @@
     width: calc(100% - 0px);
   }
 
-  .additional-fields .picking-field{
+  .additional-fields .picking-field {
     gap: 5px !important;
   }
 
-  .picking-field label{
+  .picking-field label {
     margin-left: 15px !important;
   }
 
@@ -385,7 +390,7 @@
     margin-left: 10px;
   }
 
-  .picking-passengers{
+  .picking-passengers {
     margin-left: 15px;
     gap: 0;
     width: 90px;
@@ -397,7 +402,7 @@
 
 
   #react-select-3-input {
-    margin-left: 20px !important;
+    margin-left: 4px !important;
   }
 
   .from-field .css-13xzpp8-singleValue,
@@ -474,7 +479,7 @@
     height: 18px;
   }
 
-  .TopPicking{
+  .TopPicking {
     padding: 10px 15px;
   }
 
@@ -513,12 +518,12 @@
 }
 
 @media (max-width: 426px) {
-  .picking-search{
+  .picking-search {
     width: calc(100% - 30px);
     height: 30px;
     right: 15px;
   }
-  
+
 }
 
 @media (max-width: 320px) {
