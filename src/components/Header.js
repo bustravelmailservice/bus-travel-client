@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../stylesheets/Header.css';
-/* import LanguageSwitcher from './LanguageSwitcher'; */
 import LogoBig from '../images/logo_big.png';
 import { useTranslation } from 'react-i18next';
 import { StoreContext } from '../store/store';
@@ -9,38 +8,50 @@ function Header() {
   const { t } = useTranslation();
   const store = useContext(StoreContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDimmed, setIsDimmed] = useState(false); // Состояние для затемнения
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      console.log("Token found in localStorage, checking authentication");
       store.checkAuth().then(() => {
         console.log("Authentication check completed");
       }).catch(error => {
         console.error("Error during authentication check:", error);
       });
-    } else {
-      console.log("No token found in localStorage");
     }
+
+    // Обработчик изменения размера окна
+    const handleResize = () => {
+      if (window.innerWidth > 680) {
+        setIsMenuOpen(false);
+        setIsDimmed(false); // Убираем затемнение при увеличении ширины экрана
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Удаление обработчика при размонтировании компонента
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [store]);
 
   const handleLoginClick = () => {
-    console.log("Navigating to login page");
-    window.location.href = '/Authorisation'; // Redirect to login page
+    window.location.href = '/Authorisation'; // Редирект на страницу авторизации
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setIsDimmed(!isDimmed); // Переключаем затемнение при открытии/закрытии меню
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsDimmed(false); // Убираем затемнение при закрытии меню
   };
 
-  console.log("Current auth state:", store.isAuth);
-
   return (
-    <div className="Header">
+    <div className={`Header ${isDimmed ? 'dimmed' : ''}`}>
       <div className="Logo">
         <a href="/">
           <img src={LogoBig} alt="Logo" />
@@ -69,10 +80,6 @@ function Header() {
           )
         }
 
-        {/* <div className="LanguageSwitcher">
-          <LanguageSwitcher />
-        </div>
- */}
         <div className='BurgerButton' onClick={toggleMenu}>
           <i className="fa-solid fa-bars"></i>
         </div>

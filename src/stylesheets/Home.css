@@ -292,7 +292,7 @@
 
 .TextDescSer span:nth-child(2) {
   font-size: var(--mls);
-  color: var(--light-black);
+  color: var(--dark-gray);
   font-weight: 400;
 }
 

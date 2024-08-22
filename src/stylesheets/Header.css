@@ -211,8 +211,9 @@
 		right: 0;
 		height: 100%;
 		width: 50%;
-		background-color: var(--dark-gray);
+		background-color: var(--mtc);
 		font-size: var(--mbfs);
+		color: var(--dark-blue);
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
