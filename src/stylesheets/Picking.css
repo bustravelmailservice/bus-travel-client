@@ -443,11 +443,11 @@
 
   .picking-container {
     padding-bottom: 84px;
-    padding: 20px 15px 30px 15px;
+    padding: 20px 15px 30px 50px;
   }
 
   .picking-search {
-    top: 285px;
+    top: 310px;
   }
 
   .css-qbdosj-Input,
@@ -528,7 +528,7 @@
 
 @media (max-width: 320px) {
   .PickingPart {
-    padding: 60px 75px 0px 20px;
+    padding: 60px 75px 0px 55px;
     width: calc(100% - 60px);
   }
 
