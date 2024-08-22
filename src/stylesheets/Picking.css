@@ -180,7 +180,7 @@
   height: 40px;
   width: 170px;
   border: none;
-  border-radius: 50%;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
   align-self: flex-end;
@@ -387,7 +387,6 @@
 
   .additional-fields .picking-field:nth-child(2) {
     width: 90px;
-    margin-left: 10px;
   }
 
   .picking-passengers {
@@ -521,6 +520,7 @@
   .picking-search {
     width: calc(100% - 30px);
     height: 30px;
+    border-radius: 15px;
     right: 15px;
   }
 
