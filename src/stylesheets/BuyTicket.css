@@ -82,7 +82,7 @@
 .MainInputsNameUser input::placeholder {
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .StageDiv {
