@@ -347,6 +347,10 @@
     align-items: center;
     width: 104px;
   }
+
+  .TopPicking span{
+    font-size: calc(var(--mfs) - 2px);
+  }
 }
 
 
@@ -370,10 +374,9 @@
 
 
   .picking-search {
-    position: absolute;
-    right: 45px;
-    top: 204px;
-    width: calc(100% - 90px);
+    display: flex;
+    align-self: center;
+    text-align: center;
   }
 
   .swap-button {
@@ -457,10 +460,6 @@
   .picking-container {
     padding-bottom: 84px;
     padding: 20px 15px 65px 15px;
-  }
-
-  .picking-search {
-    top: 310px;
   }
 
   .css-qbdosj-Input,
