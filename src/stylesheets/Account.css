@@ -55,7 +55,8 @@
 	display: flex;
 	flex-direction: row;
 	width: 100% !important;
-	align-self: center;
+	align-items: center;
+	justify-content: center;
 }
 
 .TravelsInfo {
