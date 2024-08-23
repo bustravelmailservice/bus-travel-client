@@ -11,7 +11,7 @@
 .User a > i,
 .BurgerButton > i{
   color: var(--light-black) !important;
-  font-size: var(--mbfs) !important; 
+  font-size: calc(var(--mbfs) + 16px) !important; 
 }
 
 .search-bar {

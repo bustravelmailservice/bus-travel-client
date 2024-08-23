@@ -2,7 +2,7 @@
 .content .InfoAboutUs,
 .content .Rules,
 .content .PrivacyPolicy {
-	padding: 60px 19% 150px 19%;
+	padding: 60px 18% 150px 18%;
 	background-color: var(--mtc);
 }
 
