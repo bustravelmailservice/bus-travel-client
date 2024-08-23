@@ -9,6 +9,7 @@ function Header() {
   const store = useContext(StoreContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDimmed, setIsDimmed] = useState(false); // Состояние для затемнения
+  const [currentPath, setCurrentPath] = useState(window.location.pathname); // Текущее положение
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -50,6 +51,10 @@ function Header() {
     setIsDimmed(false); // Убираем затемнение при закрытии меню
   };
 
+  const getLinkClass = (path) => {
+    return currentPath === path ? 'active' : '';
+  };
+
   return (
     <div className="Header">
       {/* Затемняющий слой */}
@@ -62,10 +67,10 @@ function Header() {
       </div>
 
       <div className="links">
-        <a href="/map">{t('F_Link')}</a>
-        <a href={store.isAuth ? "/travels" : "/Authorisation"}>{t('S_Link')}</a>
-        <a href="/routes">{t('T_Link')}</a>
-        <a href="/help">{t('Th_Link')}</a>
+        <a href="/map" className={getLinkClass('/map')}>{t('F_Link')}</a>
+        <a href={store.isAuth ? "/travels" : "/Authorisation"} className={getLinkClass('/travels')}>{t('S_Link')}</a>
+        <a href="/routes" className={getLinkClass('/routes')}>{t('T_Link')}</a>
+        <a href="/help" className={getLinkClass('/help')}>{t('Th_Link')}</a>
       </div>
 
       <div className='UserAndLang'>
@@ -92,10 +97,10 @@ function Header() {
             <i className="fa-solid fa-xmark"></i>
           </div>
           <div className='links'>
-            <a href="/map"><span>{t('F_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
-            <a href="/travels"><span>{t('S_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
-            <a href="/routes"><span>{t('T_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
-            <a href="/help"><span>{t('Th_Link')}</span><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="/map" className={getLinkClass('/map')}><span>{t('F_Link')}</span><i className="fa-solid fa-chevron-right"></i></a>
+            <a href="/travels" className={getLinkClass('/travels')}><span>{t('S_Link')}</span><i className="fa-solid fa-chevron-right"></i></a>
+            <a href="/routes" className={getLinkClass('/routes')}><span>{t('T_Link')}</span><i className="fa-solid fa-chevron-right"></i></a>
+            <a href="/help" className={getLinkClass('/help')}><span>{t('Th_Link')}</span><i className="fa-solid fa-chevron-right"></i></a>
           </div>
         </div>
       </div>

@@ -87,20 +87,9 @@
     justify-content: center;
   }
 
-  .AllRoutesList>*:nth-last-child(-n+4) {
-    justify-self: center;
-  }
-
-  .AllRoutesList>*:nth-last-child(3) {
-    grid-column: span 3;
-  }
-
-  .AllRoutesList>*:nth-last-child(2) {
-    grid-column: span 2;
-  }
-
   .AllRoutesList>*:last-child {
-    grid-column: span 1;
+    justify-self: center;
+    align-self: center;
   }
 }
 

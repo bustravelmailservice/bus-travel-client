@@ -8,6 +8,17 @@
 	font-size: var(--mls)
 }
 
+.links a {
+  text-decoration: none; /* Убираем стандартное подчёркивание у всех ссылок */
+}
+
+.links a.active {
+  text-decoration: underline; /* Подчеркивание */
+  text-decoration-color: var(--dark-blue); /* Используем переменную для цвета подчёркивания */
+  text-decoration-thickness: 2px; /* Толщина подчёркивания (по желанию, можно убрать или изменить) */
+  text-underline-offset: 4px; /* Отступ от текста до линии (по желанию, можно настроить) */
+}
+
 .Navigation {
 	background-color: var(--blue);
 	color: var(--mtc);
