@@ -17,6 +17,7 @@
 .InfoBuyTicketUser h1 {
   font-size: var(--mbfs);
   color: var(--dark-blue);
+  font-weight: 500;
 }
 
 .TicketInfoBuy {
@@ -362,8 +363,8 @@
 
 .RouteSymbolBuyTicket .Circle {
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background-color: var(--dark-blue);
   display: flex;
@@ -494,6 +495,11 @@ body.modal-open {
   .AddInfoTicketBT,
   .PriceBuyTicket {
     font-size: var(--mbfs);
+  }
+
+  .RouteSymbolBuyTicket .Circle {
+    width: 14px;
+    height: 14px;
   }
 }
 
