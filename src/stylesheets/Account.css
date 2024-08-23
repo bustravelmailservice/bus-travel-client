@@ -183,17 +183,10 @@
 	z-index: 999;
 }
 
-.Time, .RouteSymbol, .Route {
+.RouteSymbol, .Route {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-
-.TimeArr {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
 }
 
 .TimeArr{
@@ -203,7 +196,7 @@
 }
 
 .Route {
-  flex-grow: 1; /* Если нужно, чтобы Route заполнял оставшееся пространство */
+  flex-grow: 1; 
 }
 
 .AdditionalInfo {
