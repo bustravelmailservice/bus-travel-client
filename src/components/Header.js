@@ -3,6 +3,7 @@ import '../stylesheets/Header.css';
 import LogoBig from '../images/logo_big.png';
 import { useTranslation } from 'react-i18next';
 import { StoreContext } from '../store/store';
+import LanguageSwitcher from './LanguageSwitcher'; // Импортируем LanguageSwitcher
 
 function Header() {
   const { t } = useTranslation();
@@ -75,6 +76,8 @@ function Header() {
       </div>
 
       <div className='UserAndLang'>
+        <LanguageSwitcher /> {/* Добавляем LanguageSwitcher перед иконкой пользователя */}
+
         {
           store.isAuth ? (
             <div className='User'>
