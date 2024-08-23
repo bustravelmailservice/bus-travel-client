@@ -21,7 +21,7 @@ const BuyTicket = () => {
   const [phone, setPhone] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => {} });
+  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => { } });
 
   const fromToTicketRef = useRef(null);
   const routeSymbolRef = useRef(null);
@@ -61,12 +61,33 @@ const BuyTicket = () => {
     }
   }, [showModal]);
 
-  const calculatePrice = () => {
-    const basePrice = language === 'ua' ? parseInt(travel.priceUA, 10) : parseInt(travel.priceEN, 10);
-    const smallBaggagePrice = smallBaggage * (language === 'ua' ? 150 : 5);
-    const largeBaggagePrice = largeBaggage * (language === 'ua' ? 300 : 10);
-    return basePrice + smallBaggagePrice + largeBaggagePrice;
-  };
+  // Добавляем состояния для цены в евро и гривнах
+  const [priceUA, setPriceUA] = useState(0);
+  const [priceEN, setPriceEN] = useState(0);
+
+  const calculatePrices = useCallback(() => {
+    const basePriceUA = parseInt(travel.priceUA, 10);
+    const basePriceEN = parseInt(travel.priceEN, 10);
+
+    const smallBaggagePriceUA = smallBaggage * 150;
+    const smallBaggagePriceEN = smallBaggage * 5;
+
+    const largeBaggagePriceUA = largeBaggage * 300;
+    const largeBaggagePriceEN = largeBaggage * 10;
+
+    // Вычисляем цены для обеих валют
+    const totalPriceUA = basePriceUA + smallBaggagePriceUA + largeBaggagePriceUA;
+    const totalPriceEN = basePriceEN + smallBaggagePriceEN + largeBaggagePriceEN;
+
+    // Устанавливаем цены в состояния
+    setPriceUA(totalPriceUA);
+    setPriceEN(totalPriceEN);
+  }, [smallBaggage, largeBaggage, travel.priceUA, travel.priceEN]);
+
+
+  useEffect(() => {
+    calculatePrices();
+  }, [calculatePrices]);
 
   const handleBuyTicket = async () => {
     if (!validateInputs()) {
@@ -100,7 +121,8 @@ const BuyTicket = () => {
       return;
     }
 
-    const totalPrice = calculatePrice();
+    // Выбираем цену в зависимости от языка (UA или EN)
+    const selectedPrice = language === 'ua' ? priceUA : priceEN;
 
     const ticketData = {
       from: travel.fromEN,
@@ -110,8 +132,8 @@ const BuyTicket = () => {
       typeEN: travel.typeEN,
       typeUA: travel.typeUA,
       passengers: passengers,
-      priceEN: totalPrice,
-      priceUA: totalPrice,
+      priceEN: priceEN, // Передаем обе цены
+      priceUA: priceUA, // Передаем обе цены
       date_departure: dateDeparture,
       departure: travel.departure,
       duration: travel.duration,
@@ -160,8 +182,6 @@ const BuyTicket = () => {
       setShowModal(true);
     }
   };
-
-  const totalPrice = calculatePrice();
 
   return (
     <div className='BuyTicketUser'>
@@ -290,7 +310,10 @@ const BuyTicket = () => {
             <div className='DurationTicket'><span>{t('DurationTicket')}</span><span>{travel.duration}{t('hours')}</span></div>
           </div>
           <div className='PriceBuyTicket'>
-            <div className='TicketPrice'><span>{t('TotalPrice')}</span><span>{totalPrice}{language === 'ua' ? ' грн' : ' €'}</span></div>
+            <div className='TicketPrice'>
+              <span>{t('TotalPrice')}</span>
+              <span>{language === 'ua' ? priceUA : priceEN}{language === 'ua' ? ' грн' : ' €'}</span>
+            </div>
           </div>
           <div className='ButtonConfirmBuyTicket'>
             <button
