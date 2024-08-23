@@ -418,31 +418,32 @@
 }
 
 .modal-content {
-  width: 80vw;
-  height: 50vh;
+  width: 65.3vw;
+  height: fit-content;
+  padding: 80px 13.9% ;
   background-color: var(--mbc);
-  border-radius: 8px;
+  border-radius: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20vh;
+  gap: 28vh;
 }
 
 .modal-content>span {
-  font-style: var(--vbfs);
-  color: var(--mtcb);
+  font-style: var(--mfs);
+  color: var(--dark-blue);
   text-align: center;
 }
 
 .modal-content>button {
   display: flex;
-  padding: 5px 20px;
-  background-color: var(--blue);
-  font-size: var(--mbfs);
+  padding: 10px 40px;
+  background-color: var(--light-black);
+  font-size: var(--mfs);
   color: var(--mtc);
-  border-radius: 8px;
+  border-radius: calc(1em + 20px);
   transition: 0.5s;
   justify-content: center;
   align-items: center;
