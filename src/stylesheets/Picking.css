@@ -377,6 +377,7 @@
     display: flex;
     align-self: center;
     text-align: center;
+    width: 100%;
   }
 
   .swap-button {
@@ -459,7 +460,7 @@
 
   .picking-container {
     padding-bottom: 84px;
-    padding: 20px 15px 65px 15px;
+    padding: 20px 15px 20px 15px;
   }
 
   .css-qbdosj-Input,
@@ -545,7 +546,7 @@
   }
 
   .picking-container{
-    padding: 20px 15px 65px 15px;
+    padding: 20px 15px 20px 15px;
   }
 
   .swap-button {
