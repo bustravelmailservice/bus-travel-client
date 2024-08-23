@@ -9,7 +9,8 @@ function Header() {
   const store = useContext(StoreContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDimmed, setIsDimmed] = useState(false); // Состояние для затемнения
-  const [currentPath, setCurrentPath] = useState(window.location.pathname); // Текущее положение
+  const [currentPath] = useState(window.location.pathname); // Текущее положение
+
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
