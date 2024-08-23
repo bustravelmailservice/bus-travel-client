@@ -1,13 +1,32 @@
 .LanguageSwitcherSetup {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.Flag{
+	display: flex;
+	align-items: center;
 }
 
 .Flag img {
-  width: var(--mbfs);
-  height: var(--mbfs);
-  border-radius: 50%;
+	width: calc(var(--mbfs) + 12px);
+	height: calc(var(--mbfs) + 12px);
+	border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+	.Flag img {
+		width: calc(var(--mbfs) + 8px);
+		height: calc(var(--mbfs) + 8px);
+	}
+}
+
+@media (max-width: 768px) {
+	.Flag img {
+		width: calc(var(--mbfs) + 4px);
+		height: calc(var(--mbfs) + 4px);
+	}
 }
