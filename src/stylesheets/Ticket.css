@@ -94,8 +94,8 @@
 
 .ProgressSymbol .Circle {
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background-color: var(--dark-blue);
   display: flex;
@@ -104,8 +104,8 @@
 }
 
 .ProgressSymbol .Circle .InnerCircle {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background-color: var(--mtc);
   z-index: 999;
