@@ -72,6 +72,10 @@
 	font-size: var(--mfs);
 }
 
+.links a i{
+	text-decoration: none !important;
+}
+
 .links-container {
 	display: flex;
 	flex-direction: row;
