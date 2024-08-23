@@ -121,9 +121,6 @@ const BuyTicket = () => {
       return;
     }
 
-    // Выбираем цену в зависимости от языка (UA или EN)
-    const selectedPrice = language === 'ua' ? priceUA : priceEN;
-
     const ticketData = {
       from: travel.fromEN,
       fromLocation: travel.fromLocationEN,
