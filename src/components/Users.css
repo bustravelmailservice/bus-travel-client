@@ -2,6 +2,11 @@
   padding: 20px;
 }
 
+.User{
+  display: flex;
+  align-items: center;
+}
+
 .User > a,
 .User a > i,
 .BurgerButton > i{
