@@ -2,16 +2,16 @@
   padding: 20px;
 }
 
-.User{
+.User {
   display: flex;
   align-items: center;
 }
 
-.User > a,
-.User a > i,
-.BurgerButton > i{
+.User>a,
+.User a>i,
+.BurgerButton>i {
   color: var(--light-black) !important;
-  font-size: calc(var(--mbfs) + 16px) !important; 
+  font-size: calc(var(--mbfs) + 16px) !important;
 }
 
 .search-bar {
@@ -44,4 +44,22 @@ th {
 
 .inactive {
   color: red;
+}
+
+@media (max-width:768px) {
+  .User>a,
+  .User a>i,
+  .BurgerButton>i {
+    font-size: calc(var(--mbfs) + 8px) !important;
+  }
+
+}
+
+@media (max-width:320px) {
+  .User>a,
+  .User a>i,
+  .BurgerButton>i {
+    font-size: calc(var(--mbfs) + 4px) !important;
+  }
+
 }
