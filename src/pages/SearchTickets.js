@@ -12,7 +12,7 @@ function SearchTickets() {
   const { from, to, startDate, passengers } = location.state || {};
 
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);  // Изменено на false, чтобы загрузка начиналась при нажатии на кнопку
   const [error, setError] = useState(null);
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
   const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
@@ -23,7 +23,7 @@ function SearchTickets() {
     if (allTravelsLoaded || !from || !to || !startDate) return;
 
     try {
-      setIsLoading(true);
+      setIsLoading(true);  // Начинаем загрузку при нажатии на кнопку
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
@@ -32,7 +32,7 @@ function SearchTickets() {
       console.log('Fetched travels:', travels);
 
       if (travels.length === 0) {
-        setNoRoutesFound(true);  // Если нет маршрутов, показываем сообщение
+        setNoRoutesFound(true);  // Если нет маршрутов, показываем сообщение и скрываем кнопку
         setIsLoading(false);
         return;
       }
@@ -108,14 +108,11 @@ function SearchTickets() {
       setError(error.message || 'Error fetching travels');
       console.error('Error fetching travels:', error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false);  // Завершаем загрузку
     }
   }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels]);
 
-  useEffect(() => {
-    console.log('Received search parameters:', { from, to, startDate, passengers });
-    loadMoreTravels();  // Начать загрузку сразу после загрузки компонента
-  }, [from, to, startDate, passengers, loadMoreTravels]);  // Добавляем loadMoreTravels в зависимости
+  // Убираем useEffect, чтобы загрузка начиналась только при нажатии на кнопку
 
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -155,7 +152,16 @@ function SearchTickets() {
             )}
           </>
         ) : (
-          <div>{t('No tickets found')}</div>
+          <div>
+            {t('No tickets found')}
+            {!noRoutesFound && (
+              <div className="load-more-container">
+                <button onClick={loadMoreTravels} className="load-more-button">
+                  {t('Search more tickets')}
+                </button>
+              </div>
+            )}
+          </div>
         )
       )}
     </div>
