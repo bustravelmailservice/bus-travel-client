@@ -30,8 +30,11 @@ function SearchTickets() {
       const travels = response.data;
       console.log('Fetched travels:', travels);
 
+      // Если нет билетов, сразу показываем сообщение и заканчиваем загрузку
       if (travels.length === 0) {
-        setAllTravelsLoaded(true);  // Если нет билетов, заканчиваем загрузку
+        setAllTravelsLoaded(true);  // Завершаем загрузку, так как билетов нет
+        setVisibleTravels([]);  // Очищаем видимые билеты
+        setIsLoading(false);  // Останавливаем загрузку
         return;
       }
 
