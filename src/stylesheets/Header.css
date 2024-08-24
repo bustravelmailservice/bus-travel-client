@@ -14,17 +14,11 @@
 }
 
 
-.links a.active,
-.links a.active span {
+.links a.active {
 	text-decoration: underline !important;
 	text-decoration-color: var(--dark-blue) !important;
 	text-decoration-thickness: 2px !important;
 	text-underline-offset: 4px !important;
-}
-.links a.active i,
-.links a.active span i{
-	text-decoration: none !important;
-	text-underline-offset: none;
 }
 
 .Navigation {
@@ -212,6 +206,20 @@
 		align-items: center;
 		text-align: center;
 		justify-content: center;
+	}
+
+
+	.links a.active span {
+		text-decoration: underline !important;
+		text-decoration-color: var(--dark-blue) !important;
+		text-decoration-thickness: 2px !important;
+		text-underline-offset: 4px !important;
+	}
+
+	.links a.active i,
+	.links a.active span i {
+		text-decoration: none !important;
+		text-underline-offset: none;
 	}
 }
 
