@@ -11,10 +11,11 @@ function SearchTickets() {
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
-  const [groupedTravels, setGroupedTravels] = useState({});
+  const [allTravels, setAllTravels] = useState([]);  // Хранит все загруженные билеты
+  const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [visibleTravels, setVisibleTravels] = useState(20); // Изначально показываем 20 билетов
+  const [loadedCount, setLoadedCount] = useState(20);  // Количество загруженных билетов
 
   useEffect(() => {
     console.log('Received search parameters:', { from, to, startDate, passengers });
@@ -79,18 +80,9 @@ function SearchTickets() {
 
         console.log('Sorted travels:', filteredTravels);
 
-        const grouped = filteredTravels.reduce((acc, travel) => {
-          const dateKey = travel.date_departure.split('T')[0];
-          if (!acc[dateKey]) {
-            acc[dateKey] = [];
-          }
-          acc[dateKey].push(travel);
-          return acc;
-        }, {});
+        setAllTravels(filteredTravels);  // Сохраняем все билеты
+        setVisibleTravels(filteredTravels.slice(0, 20));  // Показываем только первые 20 билетов
 
-        console.log('Grouped travels:', grouped);
-
-        setGroupedTravels(grouped);
       } catch (error) {
         setError(error.message || 'Error fetching travels');
         console.error('Error fetching travels:', error);
@@ -103,7 +95,11 @@ function SearchTickets() {
   }, [from, to, startDate]);
 
   const loadMoreTravels = () => {
-    setVisibleTravels(prevVisibleTravels => prevVisibleTravels + 20);
+    setVisibleTravels(prevVisibleTravels => [
+      ...prevVisibleTravels,
+      ...allTravels.slice(prevVisibleTravels.length, prevVisibleTravels.length + 20)
+    ]);
+    setLoadedCount(prevLoadedCount => prevLoadedCount + 20);
   };
 
   const formatDate = (dateString) => {
@@ -123,19 +119,17 @@ function SearchTickets() {
       {isLoading ? (
         <div>{t('Loading...')}</div>
       ) : (
-        Object.keys(groupedTravels).length > 0 ? (
+        visibleTravels.length > 0 ? (
           <>
-            {Object.keys(groupedTravels).map(date => (
+            {Object.keys(groupedTravels(visibleTravels)).map(date => (
               <div key={date} className="date-section">
                 <h2>{t('Travels_on')}: {formatDate(date)}</h2>
-                {groupedTravels[date]
-                  .slice(0, visibleTravels)  // Показываем только видимые билеты
-                  .map((travel, index) => (
-                    <Ticket key={index} travel={travel} passengers={passengers} />
-                  ))}
+                {groupedTravels(visibleTravels)[date].map((travel, index) => (
+                  <Ticket key={index} travel={travel} passengers={passengers} />
+                ))}
               </div>
             ))}
-            {Object.keys(groupedTravels).some(date => groupedTravels[date].length > visibleTravels) && (
+            {loadedCount < allTravels.length && (
               <button onClick={loadMoreTravels} className="load-more-button">
                 {t('Load more tickets')}
               </button>
@@ -148,5 +142,17 @@ function SearchTickets() {
     </div>
   );
 }
+
+// Функция для группировки видимых билетов по дате
+const groupedTravels = (travels) => {
+  return travels.reduce((acc, travel) => {
+    const dateKey = travel.date_departure.split('T')[0];
+    if (!acc[dateKey]) {
+      acc[dateKey] = [];
+    }
+    acc[dateKey].push(travel);
+    return acc;
+  }, {});
+};
 
 export default SearchTickets;
