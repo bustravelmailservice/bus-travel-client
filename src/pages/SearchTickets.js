@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/SearchTickets.css';
@@ -12,7 +12,7 @@ function SearchTickets() {
   const { from, to, startDate, passengers } = location.state || {};
 
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
-  const [isLoading, setIsLoading] = useState(false);  // Изменено на false, чтобы загрузка начиналась при нажатии на кнопку
+  const [isLoading, setIsLoading] = useState(true);  // Начальная загрузка включена
   const [error, setError] = useState(null);
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
   const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
@@ -23,7 +23,7 @@ function SearchTickets() {
     if (allTravelsLoaded || !from || !to || !startDate) return;
 
     try {
-      setIsLoading(true);  // Начинаем загрузку при нажатии на кнопку
+      setIsLoading(true);  // Начинаем загрузку
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
@@ -111,6 +111,11 @@ function SearchTickets() {
       setIsLoading(false);  // Завершаем загрузку
     }
   }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels]);
+
+  useEffect(() => {
+    console.log('Received search parameters:', { from, to, startDate, passengers });
+    loadMoreTravels();  // Начать загрузку сразу после загрузки компонента
+  }, [from, to, startDate, passengers, loadMoreTravels]);  // Добавляем loadMoreTravels в зависимости
 
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
