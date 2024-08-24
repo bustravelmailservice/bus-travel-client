@@ -86,11 +86,6 @@
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
   }
-
-  .AllRoutesList>*:last-child {
-    justify-self: center;
-    align-self: center;
-  }
 }
 
 @media (max-width: 1024px) {
