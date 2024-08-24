@@ -12,7 +12,7 @@ function SearchTickets() {
   const { from, to, startDate, passengers } = location.state || {};
 
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
-  const [isLoading, setIsLoading] = useState(true);  // Начальная загрузка включена
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
   const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
@@ -23,7 +23,7 @@ function SearchTickets() {
     if (allTravelsLoaded || !from || !to || !startDate) return;
 
     try {
-      setIsLoading(true);  // Начинаем загрузку
+      setIsLoading(true);
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
@@ -32,8 +32,7 @@ function SearchTickets() {
       console.log('Fetched travels:', travels);
 
       if (travels.length === 0) {
-        setNoRoutesFound(true);  // Если нет маршрутов, показываем сообщение и скрываем кнопку
-        setAllTravelsLoaded(true);  // Установим, что все билеты загружены, чтобы скрыть кнопку
+        setNoRoutesFound(true);  // Если нет маршрутов, показываем сообщение
         setIsLoading(false);
         return;
       }
@@ -102,14 +101,14 @@ function SearchTickets() {
       setLastDate(currentDate);  // Обновляем последнюю обработанную дату
 
       // Проверяем, все ли билеты загружены
-      if (count < 20 || currentTravels.length >= travels.length) {
-        setAllTravelsLoaded(true);  // Если меньше 20 билетов или все билеты загружены, скрываем кнопку
+      if (currentTravels.length >= travels.length) {
+        setAllTravelsLoaded(true);
       }
     } catch (error) {
       setError(error.message || 'Error fetching travels');
       console.error('Error fetching travels:', error);
     } finally {
-      setIsLoading(false);  // Завершаем загрузку
+      setIsLoading(false);
     }
   }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels]);
 
@@ -148,24 +147,13 @@ function SearchTickets() {
               </div>
             ))}
             {!allTravelsLoaded && (
-              <div className="load-more-container">
-                <button onClick={loadMoreTravels} className="load-more-button">
-                  {t('Load more tickets')}
-                </button>
-              </div>
+              <button onClick={loadMoreTravels} className="load-more-button">
+                {t('Load more tickets')}
+              </button>
             )}
           </>
         ) : (
-          <div>
-            {t('No tickets found')}
-            {!noRoutesFound && (
-              <div className="load-more-container">
-                <button onClick={loadMoreTravels} className="load-more-button">
-                  {t('Search more tickets')}
-                </button>
-              </div>
-            )}
-          </div>
+          <div>{t('No tickets found')}</div>
         )
       )}
     </div>
