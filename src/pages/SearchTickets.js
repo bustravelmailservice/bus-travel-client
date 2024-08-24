@@ -36,7 +36,28 @@ function SearchTickets() {
 
         const searchStartDate = new Date(startDate);
 
-        const filteredTravels = travels.filter(travel => {
+        // Логика для обработки ежедневных поездок
+        const expandedTravels = travels.flatMap(travel => {
+          const travelDate = new Date(travel.date_departure);
+
+          // Если рейс ежедневный, создаем копии на каждый день начиная с даты вылета
+          if (travel.isDaily) {
+            const dailyTravels = [];
+            let currentDate = new Date(travelDate);
+            while (currentDate >= searchStartDate) {
+              dailyTravels.push({
+                ...travel,
+                date_departure: currentDate.toISOString()
+              });
+              currentDate.setDate(currentDate.getDate() + 1);
+            }
+            return dailyTravels;
+          }
+
+          return [travel];
+        });
+
+        const filteredTravels = expandedTravels.filter(travel => {
           const travelDate = new Date(travel.date_departure);
           return travelDate >= searchStartDate && travel.fromEN === from && travel.toEN === to;
         });

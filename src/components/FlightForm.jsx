@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography } from '@mui/material';
+import { TextField, Button, Container, Typography, FormControlLabel, Switch } from '@mui/material';
 import axios from 'axios';
 
 const FlightForm = () => {
@@ -25,7 +25,8 @@ const FlightForm = () => {
     baggage: {
       smallBaggage: 0,
       largeBaggage: 0,
-    }
+    },
+    isDaily: false,  // Добавлено состояние для ежедневной поездки
   });
 
   const handleChange = (e) => {
@@ -41,6 +42,10 @@ const FlightForm = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  const handleSwitchChange = (e) => {
+    setFormData({ ...formData, isDaily: e.target.checked });
   };
 
   const handleSubmit = async (e) => {
@@ -75,7 +80,8 @@ const FlightForm = () => {
         baggage: {
           smallBaggage: 0,
           largeBaggage: 0,
-        }
+        },
+        isDaily: false,  // Сброс состояния ежедневной поездки
       });
     } catch (error) {
       console.error('Помилка при створенні рейсу:', error);
@@ -87,6 +93,7 @@ const FlightForm = () => {
     <Container>
       <Typography variant="h4" gutterBottom>Форма створення рейсу</Typography>
       <form onSubmit={handleSubmit}>
+        {/* Остальные поля формы */}
         <TextField label="Звідки (англійською)" name="fromEN" value={formData.fromEN} onChange={handleChange} fullWidth required margin="normal" />
         <TextField label="Звідки (українською)" name="fromUA" value={formData.fromUA} onChange={handleChange} fullWidth required margin="normal" />
         <TextField label="Місце відправлення (EN)" name="fromLocationEN" value={formData.fromLocationEN} onChange={handleChange} fullWidth required margin="normal" />
@@ -107,6 +114,20 @@ const FlightForm = () => {
         <TextField label="Час прильоту" name="arrival" value={formData.arrival} onChange={handleChange} type="time" InputLabelProps={{ shrink: true }} fullWidth required margin="normal" />
         <TextField label="Малий багаж" name="smallBaggage" value={formData.baggage.smallBaggage} onChange={handleChange} type="number" fullWidth required margin="normal" />
         <TextField label="Великий багаж" name="largeBaggage" value={formData.baggage.largeBaggage} onChange={handleChange} type="number" fullWidth required margin="normal" />
+
+        {/* Добавление переключателя для ежедневной поездки */}
+        <FormControlLabel
+          control={
+            <Switch
+              checked={formData.isDaily}
+              onChange={handleSwitchChange}
+              name="isDaily"
+              color="primary"
+            />
+          }
+          label="Ежедневная поездка"
+        />
+
         <Button type="submit" variant="contained" color="primary">Створити рейс</Button>
       </form>
     </Container>
