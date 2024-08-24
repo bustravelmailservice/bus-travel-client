@@ -16,7 +16,6 @@ function SearchTickets() {
   const [error, setError] = useState(null);
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
   const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
-  const [noRoutesFound, setNoRoutesFound] = useState(false);  // Индикатор отсутствия маршрутов
 
   // Используем useCallback для фиксации функции
   const loadMoreTravels = useCallback(async () => {
@@ -32,8 +31,7 @@ function SearchTickets() {
       console.log('Fetched travels:', travels);
 
       if (travels.length === 0) {
-        setNoRoutesFound(true);  // Если нет маршрутов, показываем сообщение
-        setIsLoading(false);
+        setAllTravelsLoaded(true);  // Если нет билетов, заканчиваем загрузку
         return;
       }
 
@@ -72,13 +70,13 @@ function SearchTickets() {
             travel.isDaily &&
             travel.fromEN === from &&
             travel.toEN === to &&
-            travelDate <= currentDate  // Ежедневный билет активен с даты travelDate и далее
+            travelDate <= currentDate
           );
         });
 
         // Добавляем ежедневные билеты
         for (let travel of dailyTravels) {
-          if (!currentTravels.some(t => t.date_departure === currentDate.toISOString())) {
+          if (!currentTravels.some(t => t.date_departure === travel.date_departure)) {
             currentTravels.push({
               ...travel,
               date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
@@ -133,8 +131,6 @@ function SearchTickets() {
       </Helmet>
       {isLoading && visibleTravels.length === 0 ? (
         <div>{t('Loading...')}</div>
-      ) : noRoutesFound ? (
-        <div>{t('No routes found')}</div>
       ) : (
         visibleTravels.length > 0 ? (
           <>
