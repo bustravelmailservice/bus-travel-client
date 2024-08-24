@@ -51,6 +51,18 @@ function SearchTickets() {
           );
         });
 
+        // Добавляем одноразовые билеты
+        for (let travel of oneTimeTravels) {
+          currentTravels.push(travel);
+          count++;
+          if (count >= 20) break;  // Если достигли лимита, выходим из цикла
+        }
+
+        // Прерываем цикл, если одноразовый билет уже добавлен
+        if (oneTimeTravels.length > 0 && count >= 20) {
+          break;
+        }
+
         // Проверяем ежедневные билеты на текущую дату
         const dailyTravels = travels.filter(travel => {
           const travelDate = new Date(travel.date_departure);
@@ -62,23 +74,13 @@ function SearchTickets() {
           );
         });
 
-        // Объединяем одноразовые и ежедневные билеты на текущую дату
-        const combinedTravels = [...oneTimeTravels, ...dailyTravels.map(travel => ({
-          ...travel,
-          date_departure: currentDate.toISOString()
-        }))];
-
-        // Сортируем билеты по времени вылета
-        combinedTravels.sort((a, b) => {
-          const timeA = new Date(a.date_departure).getTime();
-          const timeB = new Date(b.date_departure).getTime();
-          return timeA - timeB;
-        });
-
-        // Добавляем отсортированные билеты в общий список
-        for (let travel of combinedTravels) {
+        // Добавляем ежедневные билеты
+        for (let travel of dailyTravels) {
           if (!currentTravels.some(t => t.date_departure === travel.date_departure)) {
-            currentTravels.push(travel);
+            currentTravels.push({
+              ...travel,
+              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+            });
             count++;
             if (count >= 20) break;  // Если достигли лимита, выходим из цикла
           }
