@@ -20,7 +20,7 @@ const Picking = () => {
   const [passengers, setPassengers] = useState(1);
   const [locale, setLocale] = useState('uk');
   const [cityOptions, setCityOptions] = useState([]);
-  const [isCitySelected, setIsCitySelected] = useState(false);  // Новое состояние
+  const [inputValue, setInputValue] = useState('');  // Добавляем состояние для отслеживания ввода текста
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -96,12 +96,20 @@ const Picking = () => {
             <label>{t('From')}</label>
             <Select
               className="picking-select"
-              value={isCitySelected ? from : null}  // Убираем текст, если еще не был выбран город
+              value={from}
               onChange={(selectedOption) => {
                 setFrom(selectedOption);
-                setIsCitySelected(true);  // Устанавливаем флаг при выборе города
+                setInputValue('');  // Очистка ввода после выбора города
               }}
               options={cityOptions}
+              inputValue={inputValue}  // Добавляем состояние для ввода текста
+              onInputChange={(value, { action }) => {
+                if (action === 'input-change') {
+                  setInputValue(value);  // Обновляем значение ввода
+                }
+              }}
+              placeholder={t('SelectPicking')}  // Добавляем placeholder
+              isClearable  // Включаем возможность очистки поля
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
@@ -125,6 +133,8 @@ const Picking = () => {
               value={to}
               onChange={setTo}
               options={cityOptions}
+              placeholder={t('SelectPicking')}  // Добавляем placeholder
+              isClearable  // Включаем возможность очистки поля
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
