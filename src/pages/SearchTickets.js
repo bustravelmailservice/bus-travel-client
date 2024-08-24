@@ -147,9 +147,11 @@ function SearchTickets() {
               </div>
             ))}
             {!allTravelsLoaded && (
-              <button onClick={loadMoreTravels} className="load-more-button">
-                {t('Load more tickets')}
-              </button>
+              <div className="load-more-container">
+                <button onClick={loadMoreTravels} className="load-more-button">
+                  {t('Load more tickets')}
+                </button>
+              </div>
             )}
           </>
         ) : (
