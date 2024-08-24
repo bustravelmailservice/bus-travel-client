@@ -11,95 +11,85 @@ function SearchTickets() {
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
-  const [allTravels, setAllTravels] = useState([]);  // Хранит все загруженные билеты
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [loadedCount, setLoadedCount] = useState(20);  // Количество загруженных билетов
+  const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
+  const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
 
   useEffect(() => {
     console.log('Received search parameters:', { from, to, startDate, passengers });
+    loadMoreTravels();  // Начать загрузку сразу после загрузки компонента
   }, [from, to, startDate, passengers]);
 
-  useEffect(() => {
-    const fetchTravels = async () => {
-      try {
-        if (!from || !to || !startDate) {
-          throw new Error('Missing search parameters');
-        }
+  const loadMoreTravels = async () => {
+    if (allTravelsLoaded || !from || !to || !startDate) return;
 
-        const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
-          params: { from, to, startDate }
-        });
+    try {
+      setIsLoading(true);
+      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
+        params: { from, to }
+      });
 
-        const travels = response.data;
+      const travels = response.data;
+      console.log('Fetched travels:', travels);
 
-        console.log('Fetched travels:', travels);
+      if (travels.length === 0) {
+        setAllTravelsLoaded(true);  // Если нет билетов, заканчиваем загрузку
+        return;
+      }
 
-        const searchStartDate = new Date(startDate);
+      let currentTravels = [...visibleTravels];  // Копия текущих видимых билетов
+      let currentDate = new Date(lastDate);  // Начальная дата для поиска
+      let count = 0;
 
-        // Логика для обработки ежедневных поездок
-        const expandedTravels = travels.flatMap(travel => {
+      while (count < 20 && currentDate <= new Date(startDate)) {
+        for (let travel of travels) {
           const travelDate = new Date(travel.date_departure);
 
-          // Если рейс ежедневный, создаем копии на каждый день начиная с даты вылета
-          if (travel.isDaily) {
-            const dailyTravels = [];
-            let currentDate = new Date(travelDate);
-            while (currentDate >= searchStartDate) {
-              dailyTravels.push({
-                ...travel,
-                date_departure: currentDate.toISOString()
-              });
-              currentDate.setDate(currentDate.getDate() + 1);
+          // Если дата совпадает с текущей датой и маршрут совпадает
+          if (travelDate.toDateString() === currentDate.toDateString()) {
+            if (!travel.isDaily || !currentTravels.some(t => t.date_departure === travel.date_departure)) {
+              currentTravels.push(travel);
+              count++;
             }
-            return dailyTravels;
           }
 
-          return [travel];
-        });
+          // Если поездка ежедневная и маршрут совпадает
+          if (travel.isDaily && !currentTravels.some(t => t.date_departure === travelDate.toISOString())) {
+            let dailyDate = new Date(travelDate);
+            while (count < 20 && dailyDate >= currentDate) {
+              if (!currentTravels.some(t => t.date_departure === dailyDate.toISOString())) {
+                currentTravels.push({
+                  ...travel,
+                  date_departure: dailyDate.toISOString()
+                });
+                count++;
+              }
+              dailyDate.setDate(dailyDate.getDate() + 1);
+            }
+          }
 
-        const filteredTravels = expandedTravels.filter(travel => {
-          const travelDate = new Date(travel.date_departure);
-          return travelDate >= searchStartDate && travel.fromEN === from && travel.toEN === to;
-        });
+          // Если достигли лимита, выходим из цикла
+          if (count >= 20) break;
+        }
 
-        console.log('Filtered travels:', filteredTravels);
-
-        filteredTravels.sort((a, b) => {
-          const dateA = new Date(a.date_departure);
-          const dateB = new Date(b.date_departure);
-          const timeA = a.departure.split(':').map(Number);
-          const timeB = b.departure.split(':').map(Number);
-        
-          dateA.setHours(timeA[0], timeA[1]);
-          dateB.setHours(timeB[0], timeB[1]);
-        
-          return dateA - dateB;
-        });
-
-        console.log('Sorted travels:', filteredTravels);
-
-        setAllTravels(filteredTravels);  // Сохраняем все билеты
-        setVisibleTravels(filteredTravels.slice(0, 20));  // Показываем только первые 20 билетов
-
-      } catch (error) {
-        setError(error.message || 'Error fetching travels');
-        console.error('Error fetching travels:', error);
-      } finally {
-        setIsLoading(false);
+        // Переходим к следующему дню
+        currentDate.setDate(currentDate.getDate() + 1);
       }
-    };
 
-    fetchTravels();
-  }, [from, to, startDate]);
+      setVisibleTravels(currentTravels);
+      setLastDate(currentDate);  // Обновляем последнюю обработанную дату
 
-  const loadMoreTravels = () => {
-    setVisibleTravels(prevVisibleTravels => [
-      ...prevVisibleTravels,
-      ...allTravels.slice(prevVisibleTravels.length, prevVisibleTravels.length + 20)
-    ]);
-    setLoadedCount(prevLoadedCount => prevLoadedCount + 20);
+      if (currentTravels.length >= travels.length) {
+        setAllTravelsLoaded(true);  // Если все билеты загружены, прекращаем загрузку
+      }
+    } catch (error) {
+      setError(error.message || 'Error fetching travels');
+      console.error('Error fetching travels:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const formatDate = (dateString) => {
@@ -116,7 +106,7 @@ function SearchTickets() {
       <Helmet>
         <title>{t('titles.search')}</title>
       </Helmet>
-      {isLoading ? (
+      {isLoading && visibleTravels.length === 0 ? (
         <div>{t('Loading...')}</div>
       ) : (
         visibleTravels.length > 0 ? (
@@ -129,7 +119,7 @@ function SearchTickets() {
                 ))}
               </div>
             ))}
-            {loadedCount < allTravels.length && (
+            {!allTravelsLoaded && (
               <button onClick={loadMoreTravels} className="load-more-button">
                 {t('Load more tickets')}
               </button>
