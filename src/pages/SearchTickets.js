@@ -39,46 +39,68 @@ function SearchTickets() {
       let currentDate = new Date(lastDate);  // Начальная дата для поиска
       let count = 0;
 
-      while (count < 20 && currentDate <= new Date(startDate)) {
-        for (let travel of travels) {
+      while (count < 20) {
+        // Проверяем одноразовые билеты на текущую дату
+        const oneTimeTravels = travels.filter(travel => {
           const travelDate = new Date(travel.date_departure);
+          return (
+            travelDate.toDateString() === currentDate.toDateString() &&
+            !travel.isDaily &&
+            travel.fromEN === from &&
+            travel.toEN === to
+          );
+        });
 
-          // Если дата совпадает с текущей датой и маршрут совпадает
-          if (travelDate.toDateString() === currentDate.toDateString()) {
-            if (!travel.isDaily || !currentTravels.some(t => t.date_departure === travel.date_departure)) {
-              currentTravels.push(travel);
-              count++;
-            }
+        // Добавляем одноразовые билеты
+        for (let travel of oneTimeTravels) {
+          currentTravels.push(travel);
+          count++;
+          if (count >= 20) break;  // Если достигли лимита, выходим из цикла
+        }
+
+        // Прерываем цикл, если одноразовый билет уже добавлен
+        if (oneTimeTravels.length > 0 && count >= 20) {
+          break;
+        }
+
+        // Проверяем ежедневные билеты на текущую дату
+        const dailyTravels = travels.filter(travel => {
+          const travelDate = new Date(travel.date_departure);
+          return (
+            travel.isDaily &&
+            travel.fromEN === from &&
+            travel.toEN === to &&
+            travelDate <= currentDate
+          );
+        });
+
+        // Добавляем ежедневные билеты
+        for (let travel of dailyTravels) {
+          if (!currentTravels.some(t => t.date_departure === travel.date_departure)) {
+            currentTravels.push({
+              ...travel,
+              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+            });
+            count++;
+            if (count >= 20) break;  // Если достигли лимита, выходим из цикла
           }
-
-          // Если поездка ежедневная и маршрут совпадает
-          if (travel.isDaily && !currentTravels.some(t => t.date_departure === travelDate.toISOString())) {
-            let dailyDate = new Date(travelDate);
-            while (count < 20 && dailyDate >= currentDate) {
-              if (!currentTravels.some(t => t.date_departure === dailyDate.toISOString())) {
-                currentTravels.push({
-                  ...travel,
-                  date_departure: dailyDate.toISOString()
-                });
-                count++;
-              }
-              dailyDate.setDate(dailyDate.getDate() + 1);
-            }
-          }
-
-          // Если достигли лимита, выходим из цикла
-          if (count >= 20) break;
         }
 
         // Переходим к следующему дню
         currentDate.setDate(currentDate.getDate() + 1);
+
+        // Если мы дошли до конца списка и не загрузили 20 билетов, завершаем
+        if (count >= 20) {
+          break;
+        }
       }
 
       setVisibleTravels(currentTravels);
       setLastDate(currentDate);  // Обновляем последнюю обработанную дату
 
+      // Проверяем, все ли билеты загружены
       if (currentTravels.length >= travels.length) {
-        setAllTravelsLoaded(true);  // Если все билеты загружены, прекращаем загрузку
+        setAllTravelsLoaded(true);
       }
     } catch (error) {
       setError(error.message || 'Error fetching travels');
