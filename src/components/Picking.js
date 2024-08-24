@@ -22,6 +22,11 @@ const Picking = () => {
   const [cityOptions, setCityOptions] = useState([]);
   const navigate = useNavigate();
 
+  document.querySelector('.css-1j28y3l-control').addEventListener('click', function () {
+    this.classList.toggle('css-522vqn-control');
+    document.querySelector('.css-13xzpp8-singleValue').style.display = 'none';
+  });
+
   useEffect(() => {
     if (i18n.language === 'ua') {
       setLocale('ua');
