@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/SearchTickets.css';
@@ -17,9 +17,12 @@ function SearchTickets() {
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
   const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
 
-  // Максимальная дата поиска (30 дней вперед от startDate)
-  const maxDate = new Date(startDate);
-  maxDate.setDate(maxDate.getDate() + 30);
+  // Максимальная дата поиска (30 дней вперед от startDate), завернутая в useMemo
+  const maxDate = useMemo(() => {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + 30);
+    return date;
+  }, [startDate]);
 
   // Используем useCallback для фиксации функции
   const loadMoreTravels = useCallback(async () => {
