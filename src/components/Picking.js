@@ -20,6 +20,7 @@ const Picking = () => {
   const [passengers, setPassengers] = useState(1);
   const [locale, setLocale] = useState('uk');
   const [cityOptions, setCityOptions] = useState([]);
+  const [isCitySelected, setIsCitySelected] = useState(false);  // Новое состояние
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,8 +96,11 @@ const Picking = () => {
             <label>{t('From')}</label>
             <Select
               className="picking-select"
-              value={from}
-              onChange={setFrom}
+              value={isCitySelected ? from : null}  // Убираем текст, если еще не был выбран город
+              onChange={(selectedOption) => {
+                setFrom(selectedOption);
+                setIsCitySelected(true);  // Устанавливаем флаг при выборе города
+              }}
               options={cityOptions}
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
