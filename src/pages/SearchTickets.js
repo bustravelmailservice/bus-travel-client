@@ -17,9 +17,13 @@ function SearchTickets() {
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
   const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
 
+  // Максимальная дата поиска (30 дней вперед от startDate)
+  const maxDate = new Date(startDate);
+  maxDate.setDate(maxDate.getDate() + 30);
+
   // Используем useCallback для фиксации функции
   const loadMoreTravels = useCallback(async () => {
-    if (allTravelsLoaded || !from || !to || !startDate) return;
+    if (allTravelsLoaded || !from || !to || !startDate || lastDate > maxDate) return;
 
     try {
       setIsLoading(true);
@@ -42,7 +46,7 @@ function SearchTickets() {
       let currentDate = new Date(lastDate);  // Начальная дата для поиска
       let count = 0;
 
-      while (count < 20) {
+      while (count < 20 && currentDate <= maxDate) {
         // Проверяем одноразовые билеты на текущую дату
         const oneTimeTravels = travels.filter(travel => {
           const travelDate = new Date(travel.date_departure);
@@ -92,8 +96,9 @@ function SearchTickets() {
         // Переходим к следующему дню
         currentDate.setDate(currentDate.getDate() + 1);
 
-        // Если мы дошли до конца списка и не загрузили 20 билетов, завершаем
-        if (count >= 20) {
+        // Если текущая дата превышает лимит в 30 дней, завершаем поиск
+        if (currentDate > maxDate) {
+          setAllTravelsLoaded(true);
           break;
         }
       }
@@ -102,7 +107,7 @@ function SearchTickets() {
       setLastDate(currentDate);  // Обновляем последнюю обработанную дату
 
       // Проверяем, все ли билеты загружены
-      if (currentTravels.length >= travels.length) {
+      if (currentTravels.length >= travels.length || currentDate > maxDate) {
         setAllTravelsLoaded(true);
       }
     } catch (error) {
@@ -111,7 +116,7 @@ function SearchTickets() {
     } finally {
       setIsLoading(false);
     }
-  }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels]);
+  }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels, maxDate]);
 
   useEffect(() => {
     console.log('Received search parameters:', { from, to, startDate, passengers });
