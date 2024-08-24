@@ -20,7 +20,7 @@ const Picking = () => {
   const [passengers, setPassengers] = useState(1);
   const [locale, setLocale] = useState('uk');
   const [cityOptions, setCityOptions] = useState([]);
-  const [inputValue, setInputValue] = useState('');  // Добавляем состояние для отслеживания ввода текста
+  const [inputValue, setInputValue] = useState('');  // Состояние для отслеживания ввода текста
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const Picking = () => {
   return (
     <div className='picking'>
       <div className='TopPicking'>
-        <i class="fa-solid fa-ticket"></i>
+        <i className="fa-solid fa-ticket"></i>
         <span>{t("Search_Trips_Span")}</span>
       </div>
       <div className="picking-container">
@@ -105,11 +105,10 @@ const Picking = () => {
               inputValue={inputValue}  // Добавляем состояние для ввода текста
               onInputChange={(value, { action }) => {
                 if (action === 'input-change') {
-                  setInputValue(value);  // Обновляем значение ввода
+                  setInputValue(value || '');  // Обновляем значение ввода, проверяем на пустую строку
                 }
               }}
               placeholder={t('SelectPicking')}  // Добавляем placeholder
-              isClearable  // Включаем возможность очистки поля
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
@@ -134,7 +133,6 @@ const Picking = () => {
               onChange={setTo}
               options={cityOptions}
               placeholder={t('SelectPicking')}  // Добавляем placeholder
-              isClearable  // Включаем возможность очистки поля
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
@@ -178,7 +176,7 @@ const Picking = () => {
               <button onClick={() => setPassengers(Math.min(passengers + 1, 120))}>+</button>
             </div>
           </div>
-          <button className="picking-search" onClick={handleSearch}><i class="fa-solid fa-magnifying-glass"></i>{t('Search')}</button>
+          <button className="picking-search" onClick={handleSearch}><i className="fa-solid fa-magnifying-glass"></i>{t('Search')}</button>
         </div>
       </div>
     </div>
