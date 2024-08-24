@@ -208,7 +208,7 @@
 	}
 
 
-	.links a.active span {
+	.links a.active {
 		text-decoration: none !important;
 		text-underline-offset: 0px !important;
 	}
