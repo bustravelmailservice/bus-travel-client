@@ -33,6 +33,7 @@ function SearchTickets() {
 
       if (travels.length === 0) {
         setNoRoutesFound(true);  // Если нет маршрутов, показываем сообщение и скрываем кнопку
+        setAllTravelsLoaded(true);  // Установим, что все билеты загружены, чтобы скрыть кнопку
         setIsLoading(false);
         return;
       }
@@ -101,8 +102,8 @@ function SearchTickets() {
       setLastDate(currentDate);  // Обновляем последнюю обработанную дату
 
       // Проверяем, все ли билеты загружены
-      if (currentTravels.length >= travels.length) {
-        setAllTravelsLoaded(true);
+      if (count < 20 || currentTravels.length >= travels.length) {
+        setAllTravelsLoaded(true);  // Если меньше 20 билетов или все билеты загружены, скрываем кнопку
       }
     } catch (error) {
       setError(error.message || 'Error fetching travels');
