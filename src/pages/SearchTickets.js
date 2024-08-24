@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/SearchTickets.css';
@@ -111,8 +111,6 @@ function SearchTickets() {
       setIsLoading(false);  // Завершаем загрузку
     }
   }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels]);
-
-  // Убираем useEffect, чтобы загрузка начиналась только при нажатии на кнопку
 
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
