@@ -108,7 +108,7 @@ const Picking = () => {
                   setInputValue(value || '');  // Обновляем значение ввода, проверяем на пустую строку
                 }
               }}
-              placeholder={t('SelectPicking')}  // Добавляем placeholder
+              placeholder={!inputValue ? t('SelectPicking') : ''}  // Добавляем placeholder, если нет текста
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
