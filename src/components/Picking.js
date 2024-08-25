@@ -41,8 +41,6 @@ const Picking = () => {
           label: i18n.language === 'ua' ? city.ukrainian : city.value
         }));
         setCityOptions(options);
-        setFrom(options[0]);
-        setTo(options[1]);
       } catch (error) {
         console.error('Error fetching cities:', error);
       }
@@ -64,12 +62,9 @@ const Picking = () => {
   };
 
   const handleSearch = () => {
-    console.log('Search parameters:', {
-      from: from.value,
-      to: to.value,
-      startDate: startDate,
-      passengers: passengers
-    });
+    if (!from || !to) {
+      return; // Предотвращение поиска без указания городов
+    }
     navigate('/search', {
       state: {
         from: from.value,  // Передаем название города
@@ -79,10 +74,6 @@ const Picking = () => {
       }
     });
   };
-
-  if (!from || !to) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className='picking'>
@@ -108,7 +99,7 @@ const Picking = () => {
                   setInputValue(value || '');  // Обновляем значение ввода, проверяем на пустую строку
                 }
               }}
-              placeholder={!inputValue ? t('SelectPicking') : ''}  // Добавляем placeholder, если нет текста
+              placeholder={inputValue === '' && !from ? t('SelectPicking') : ''}  // Отображение placeholder, если inputValue и from пустые
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
@@ -132,7 +123,7 @@ const Picking = () => {
               value={to}
               onChange={setTo}
               options={cityOptions}
-              placeholder={t('SelectPicking')}  // Добавляем placeholder
+              placeholder={!to ? t('SelectPicking') : ''}  // Добавляем placeholder, если to пустой
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
