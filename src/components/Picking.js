@@ -99,7 +99,7 @@ const Picking = () => {
                   setInputValue(value || '');  // Обновляем значение ввода, проверяем на пустую строку
                 }
               }}
-              placeholder={inputValue === '' && !from ? t('SelectPicking') : ''}  // Отображение placeholder, если inputValue и from пустые
+              placeholder={inputValue === '' && !from ? t('Select') : ''}  // Отображение placeholder, если inputValue и from пустые
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
@@ -123,7 +123,7 @@ const Picking = () => {
               value={to}
               onChange={setTo}
               options={cityOptions}
-              placeholder={!to ? t('SelectPicking') : ''}  // Добавляем placeholder, если to пустой
+              placeholder={!to ? t('Select') : ''}  // Добавляем placeholder, если to пустой
               components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
               styles={{
                 control: (provided) => ({
