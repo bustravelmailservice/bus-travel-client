@@ -21,7 +21,7 @@ const BuyTicket = () => {
   const [phone, setPhone] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => {} });
+  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => { } });
 
   const [NumberPassengers, setNumberPassengers] = useState(1); // Состояние для количества пассажиров
   const fromToTicketRef = useRef(null);
@@ -285,7 +285,7 @@ const BuyTicket = () => {
           <div className='NPassengers StageDiv FourthStage'>
             <div className='NameTitle NameTitleNPassengers'>
               <span className='Stage'>4</span>
-              <span className='NameTitleBuyTicket NameTitleBuyTicketNPassengers'>{t('NameTitleBuyTicketNPassengers')}</span>
+              <span className='NameTitleBuyTicket NameTitleBuyTicketNPassengers'>{t('NameTitleBuyTicketNumberofPassengers')}</span>
             </div>
             <div className='NPassengers'>
               <div className='NumberPassengers'>
@@ -298,7 +298,7 @@ const BuyTicket = () => {
                   />
                   <button onClick={() => handleNumberPassengers(1)}>+</button>
                 </div>
-                <div className='NPassDivInfo'><span >{NumberPassengers}</span><span>{t('NPassDivInfo')}</span></div>
+                <div className='NPassDivInfo'><span >{NumberPassengers}</span><span>{t('NunmberofPassDivInfo')}</span></div>
               </div>
             </div>
           </div>
