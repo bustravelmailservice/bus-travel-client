@@ -15,7 +15,7 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
 
-      const apiUrl = `${process.env.REACT_APP_API_URL}/api/users`;
+      const apiUrl = `${process.env.REACT_APP_API_URL}api/users`;
       console.log('Fetching users from:', apiUrl);
 
       const response = await axios.get(apiUrl);

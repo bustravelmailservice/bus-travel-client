@@ -280,5 +280,7 @@
   "ua": "ua",
   "FailedBuyTicket": "Ticket order failed, try checking the data!",
   "SuccesBuyTicket": "You have been successful in booking a ticket! You will be contacted shortly.",
-  "Search_Trips_Span": "Search for bus services"
+  "Search_Trips_Span": "Search for bus services",
+  "NameTitleBuyTicketNumberofPassengers": "Number of passengers",
+  "NunmberofPassDivInfo": "passengers"
 }

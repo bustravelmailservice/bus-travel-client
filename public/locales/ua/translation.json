@@ -271,5 +271,7 @@
   "ua": "ua",
   "FailedBuyTicket": "Не вдалося замовити квиток, спробуйте перевірити данні!",
   "SuccesBuyTicket": "Вдалось замовити квиток! Через деякий час з вами зв'яжуться.",
-  "Search_Trips_Span": "Пошук автобусних рейсів"
+  "Search_Trips_Span": "Пошук автобусних рейсів",
+  "NameTitleBuyTicketNumberofPassengers":"Кількість пасажирів",
+  "NunmberofPassDivInfo": "пасажирів"
 }
