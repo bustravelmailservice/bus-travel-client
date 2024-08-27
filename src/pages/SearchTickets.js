@@ -12,7 +12,6 @@ function SearchTickets() {
   const { from, to, startDate, passengers } = location.state || {};
 
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
-  const [dailyTravels, setDailyTravels] = useState([]);  // Хранит ежедневные билеты для дальнейшего использования
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,6 +27,9 @@ function SearchTickets() {
       const travels = response.data;
       console.log('Fetched travels:', travels);
 
+      let foundTravels = [];
+
+      // Фильтрация одноразовых поездок
       const filteredOneTimeTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
@@ -38,6 +40,10 @@ function SearchTickets() {
         );
       });
 
+      // Добавляем одноразовые поездки в foundTravels
+      foundTravels.push(...filteredOneTimeTravels);
+
+      // Фильтрация и добавление ежедневных поездок
       const filteredDailyTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
@@ -48,33 +54,29 @@ function SearchTickets() {
         );
       });
 
-      // Сохраняем ежедневные поездки для последующего использования
-      setDailyTravels(filteredDailyTravels);
-
-      // Объединяем одноразовые поездки и ежедневные поездки, начиная с даты startDate
-      const combinedTravels = [];
-
-      // Добавляем одноразовые поездки, если их дата совпадает или позже startDate
-      combinedTravels.push(...filteredOneTimeTravels);
-
-      // Добавляем ежедневные поездки, начиная с даты startDate
-      filteredDailyTravels.forEach(travel => {
+      // Добавляем ежедневные поездки начиная с даты startDate
+      for (let travel of filteredDailyTravels) {
         let currentDate = new Date(startDate);
-        while (currentDate <= new Date(travel.date_departure)) {
-          combinedTravels.push({
+        while (foundTravels.length < 20 && currentDate <= new Date('2024-06-30')) {  // Ограничение до 20 поездок
+          foundTravels.push({
             ...travel,
-            date_departure: currentDate.toISOString() // Устанавливаем текущую дату для ежедневного билета
+            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
           });
           currentDate.setDate(currentDate.getDate() + 1);  // Переход к следующему дню
         }
+        if (foundTravels.length >= 20) break;  // Прекращаем поиск, если набрано 20 поездок
+      }
+
+      // Сортируем поездки по дате и времени отправления
+      foundTravels.sort((a, b) => {
+        const dateA = new Date(a.date_departure);
+        const dateB = new Date(b.date_departure);
+        return dateA - dateB;  // Сортировка по дате
       });
 
-      // Сортируем поездки по дате отправления
-      combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+      setVisibleTravels(foundTravels.slice(0, 20)); // Ограничиваем результат первыми 20 поездками
 
-      setVisibleTravels(combinedTravels.slice(0, 20)); // Ограничиваем результат первыми 20 поездками
-
-      if (combinedTravels.length === 0) {
+      if (foundTravels.length === 0) {
         setError(t('No tickets found'));
       }
     } catch (error) {
