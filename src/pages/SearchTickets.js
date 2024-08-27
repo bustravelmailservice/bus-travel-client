@@ -11,15 +11,14 @@ function SearchTickets() {
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
-  const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые поездки
+  const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
+  const [dailyTravels, setDailyTravels] = useState([]);  // Хранит ежедневные билеты для дальнейшего использования
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const maxTravels = 20;
-
-  // Используем useCallback для фиксации функции
   const loadTravels = useCallback(async () => {
-    const initialDate = new Date('2024-06-01');  // Перемещаем сюда инициализацию initialDate
+    if (!from || !to || !startDate) return;
+
     try {
       setIsLoading(true);
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
@@ -29,47 +28,66 @@ function SearchTickets() {
       const travels = response.data;
       console.log('Fetched travels:', travels);
 
-      let currentTravels = [];
-      let currentDate = new Date(initialDate);  // Начальная дата для поиска
-      let count = 0;
+      const filteredOneTimeTravels = travels.filter(travel => {
+        const travelDate = new Date(travel.date_departure);
+        return (
+          !travel.isDaily &&
+          travelDate >= new Date(startDate) &&
+          travel.fromEN === from &&
+          travel.toEN === to
+        );
+      });
 
-      // Цикл для поиска поездок до заполнения массива на 20 поездок
-      while (count < maxTravels) {
-        // Добавляем все поездки на текущую дату
-        const dailyTravels = travels.filter(travel => {
-          const travelDate = new Date(travel.date_departure);
-          return (
-            (travelDate.toDateString() === currentDate.toDateString() || travel.isDaily) &&
-            travel.fromEN === from &&
-            travel.toEN === to
-          );
-        });
+      const filteredDailyTravels = travels.filter(travel => {
+        const travelDate = new Date(travel.date_departure);
+        return (
+          travel.isDaily &&
+          travelDate >= new Date('2024-06-01') &&  // Загружаем все ежедневные поездки начиная с 01.06.2024
+          travel.fromEN === from &&
+          travel.toEN === to
+        );
+      });
 
-        for (let travel of dailyTravels) {
-          currentTravels.push({
+      // Сохраняем ежедневные поездки для последующего использования
+      setDailyTravels(filteredDailyTravels);
+
+      // Объединяем одноразовые поездки и ежедневные поездки, начиная с даты startDate
+      const combinedTravels = [];
+
+      // Добавляем одноразовые поездки, если их дата совпадает или позже startDate
+      combinedTravels.push(...filteredOneTimeTravels);
+
+      // Добавляем ежедневные поездки, начиная с даты startDate
+      filteredDailyTravels.forEach(travel => {
+        let currentDate = new Date(startDate);
+        while (currentDate <= new Date(travel.date_departure)) {
+          combinedTravels.push({
             ...travel,
-            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневных поездок
+            date_departure: currentDate.toISOString() // Устанавливаем текущую дату для ежедневного билета
           });
-          count++;
-          if (count >= maxTravels) break;  // Если достигли лимита, выходим из цикла
+          currentDate.setDate(currentDate.getDate() + 1);  // Переход к следующему дню
         }
+      });
 
-        // Переходим к следующему дню
-        currentDate.setDate(currentDate.getDate() + 1);
+      // Сортируем поездки по дате отправления
+      combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+
+      setVisibleTravels(combinedTravels.slice(0, 20)); // Ограничиваем результат первыми 20 поездками
+
+      if (combinedTravels.length === 0) {
+        setError(t('No tickets found'));
       }
-
-      setVisibleTravels(currentTravels);
     } catch (error) {
       setError(error.message || 'Error fetching travels');
       console.error('Error fetching travels:', error);
     } finally {
       setIsLoading(false);
     }
-  }, [from, to]);
+  }, [from, to, startDate, t]);
 
   useEffect(() => {
     console.log('Received search parameters:', { from, to, startDate, passengers });
-    loadTravels();  // Начать загрузку сразу после загрузки компонента
+    loadTravels(); // Начать загрузку сразу после загрузки компонента
   }, [from, to, startDate, passengers, loadTravels]);
 
   const formatDate = (dateString) => {
@@ -108,7 +126,7 @@ function SearchTickets() {
   );
 }
 
-// Функция для группировки поездок по дате
+// Функция для группировки видимых билетов по дате
 const groupedTravels = (travels) => {
   return travels.reduce((acc, travel) => {
     const dateKey = travel.date_departure.split('T')[0];
