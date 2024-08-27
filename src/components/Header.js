@@ -86,9 +86,9 @@ function Header() {
               </a>
             </div>
           ) : (
-            <div className='NotLogged'>
+            <a href='/Authorisation' className='NotLogged'>
               <a href='/Authorisation' onClick={handleLoginClick}>{t('ProposeLogin')}</a>
-            </div>
+            </a>
           )
         }
 

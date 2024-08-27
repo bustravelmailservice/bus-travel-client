@@ -15,12 +15,11 @@ function SearchTickets() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Фиксированная дата начала поиска - 01.06.2024
-  const initialDate = new Date('2024-06-01');
   const maxTravels = 20;
 
   // Используем useCallback для фиксации функции
   const loadTravels = useCallback(async () => {
+    const initialDate = new Date('2024-06-01');  // Перемещаем сюда инициализацию initialDate
     try {
       setIsLoading(true);
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {

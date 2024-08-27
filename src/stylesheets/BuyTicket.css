@@ -125,14 +125,16 @@
   flex-direction: column;
 }
 
-.picking-baggage {
+.picking-baggage,
+.picking-NumberPassengers {
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
 }
 
-.picking-baggage input {
+.picking-baggage input,
+.picking-NumberPassengers input{
   width: 60px;
   height: 36px;
   border: none;
@@ -144,7 +146,8 @@
   background-color: var(--mtc);
 }
 
-.picking-baggage input:focus-visible {
+.picking-baggage input:focus-visible,
+.picking-NumberPassengers input:focus-visible{
   outline: none;
 }
 
@@ -159,7 +162,8 @@
   margin-top: 20px;
 }
 
-.picking-baggage button {
+.picking-baggage button,
+.picking-NumberPassengers button {
   width: 15px;
   height: 15px;
   border-radius: 50%;
@@ -515,7 +519,8 @@ body.modal-open {
     width: calc(100% - 10px) !important;
   }
 
-  .picking-baggage input {
+  .picking-baggage input,
+  .picking-NumberPassengers input {
     width: 40px;
     height: 26px;
   }

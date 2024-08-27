@@ -11,7 +11,7 @@ const BuyTicket = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const { travel, passengers, language } = location.state || {};
+  const { travel, language } = location.state || {};
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -21,8 +21,9 @@ const BuyTicket = () => {
   const [phone, setPhone] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => { } });
+  const [modalContent, setModalContent] = useState({ text: '', buttonText: '', onClick: () => {} });
 
+  const [NumberPassengers, setNumberPassengers] = useState(1); // Состояние для количества пассажиров
   const fromToTicketRef = useRef(null);
   const routeSymbolRef = useRef(null);
 
@@ -39,6 +40,10 @@ const BuyTicket = () => {
 
   const handleLargeBaggageChange = (amount) => {
     setLargeBaggage(Math.max(0, Math.min(20, largeBaggage + amount)));
+  };
+
+  const handleNumberPassengers = (amount) => {
+    setNumberPassengers((prev) => Math.max(1, Math.min(10, prev + amount)));
   };
 
   const validateInputs = useCallback(() => {
@@ -61,13 +66,13 @@ const BuyTicket = () => {
     }
   }, [showModal]);
 
-  // Добавляем состояния для цены в евро и гривнах
+  // Состояния для цены в евро и гривнах
   const [priceUA, setPriceUA] = useState(0);
   const [priceEN, setPriceEN] = useState(0);
 
   const calculatePrices = useCallback(() => {
-    const basePriceUA = parseInt(travel.priceUA, 10);
-    const basePriceEN = parseInt(travel.priceEN, 10);
+    const basePriceUA = parseInt(travel.priceUA, 10) * NumberPassengers;
+    const basePriceEN = parseInt(travel.priceEN, 10) * NumberPassengers;
 
     const smallBaggagePriceUA = smallBaggage * 150;
     const smallBaggagePriceEN = smallBaggage * 5;
@@ -75,15 +80,12 @@ const BuyTicket = () => {
     const largeBaggagePriceUA = largeBaggage * 300;
     const largeBaggagePriceEN = largeBaggage * 10;
 
-    // Вычисляем цены для обеих валют
     const totalPriceUA = basePriceUA + smallBaggagePriceUA + largeBaggagePriceUA;
     const totalPriceEN = basePriceEN + smallBaggagePriceEN + largeBaggagePriceEN;
 
-    // Устанавливаем цены в состояния
     setPriceUA(totalPriceUA);
     setPriceEN(totalPriceEN);
-  }, [smallBaggage, largeBaggage, travel.priceUA, travel.priceEN]);
-
+  }, [smallBaggage, largeBaggage, travel.priceUA, travel.priceEN, NumberPassengers]);
 
   useEffect(() => {
     calculatePrices();
@@ -94,7 +96,7 @@ const BuyTicket = () => {
       setModalContent({
         text: t('FailedBuyTicket'),
         buttonText: 'OK',
-        onClick: () => setShowModal(false)
+        onClick: () => setShowModal(false),
       });
       setShowModal(true);
       return;
@@ -115,7 +117,7 @@ const BuyTicket = () => {
       setModalContent({
         text: t('FailedBuyTicket'),
         buttonText: 'OK',
-        onClick: () => setShowModal(false)
+        onClick: () => setShowModal(false),
       });
       setShowModal(true);
       return;
@@ -128,9 +130,9 @@ const BuyTicket = () => {
       toLocation: travel.toLocationEN,
       typeEN: travel.typeEN,
       typeUA: travel.typeUA,
-      passengers: passengers,
-      priceEN: priceEN, // Передаем обе цены
-      priceUA: priceUA, // Передаем обе цены
+      passengers: NumberPassengers, // Передаем количество пассажиров
+      priceEN: priceEN,
+      priceUA: priceUA,
       date_departure: dateDeparture,
       departure: travel.departure,
       duration: travel.duration,
@@ -141,12 +143,12 @@ const BuyTicket = () => {
       lastName,
       email,
       phone,
-      language
+      language,
     };
 
     try {
       const token = localStorage.getItem('accessToken');
-      const customHeader = 'expectedHeaderValue'; // Replace with your actual header value
+      const customHeader = 'expectedHeaderValue'; // Замените на ваше значение
 
       if (!token) {
         throw new Error('No token found');
@@ -155,8 +157,8 @@ const BuyTicket = () => {
       const response = await axios.post('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets', ticketData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'x-custom-header': customHeader
-        }
+          'x-custom-header': customHeader,
+        },
       });
       console.log('Ticket created successfully:', response.data);
 
@@ -166,7 +168,7 @@ const BuyTicket = () => {
         onClick: () => {
           setShowModal(false);
           navigate('/account');
-        }
+        },
       });
       setShowModal(true);
     } catch (error) {
@@ -174,7 +176,7 @@ const BuyTicket = () => {
       setModalContent({
         text: t('FailedBuyTicket'),
         buttonText: 'OK',
-        onClick: () => setShowModal(false)
+        onClick: () => setShowModal(false),
       });
       setShowModal(true);
     }
@@ -183,7 +185,7 @@ const BuyTicket = () => {
   return (
     <div className='BuyTicketUser'>
       <Helmet>
-        <title>{t('titles.buy-ticket')}</title> {/* Установите заголовок страницы */}
+        <title>{t('titles.buy-ticket')}</title>
       </Helmet>
       <div className='InfoBuyTicketUser'>
         <h1>{t('BuyTicketTextUser')}</h1>
@@ -279,16 +281,35 @@ const BuyTicket = () => {
               </div>
             </div>
           </div>
+
+          <div className='NPassengers StageDiv FourthStage'>
+            <div className='NameTitle NameTitleNPassengers'>
+              <span className='Stage'>4</span>
+              <span className='NameTitleBuyTicket NameTitleBuyTicketNPassengers'>{t('NameTitleBuyTicketNPassengers')}</span>
+            </div>
+            <div className='NPassengers'>
+              <div className='NumberPassengers'>
+                <div className='picking-NumberPassengers'>
+                  <button onClick={() => handleNumberPassengers(-1)}>-</button>
+                  <input
+                    type='number'
+                    value={NumberPassengers}
+                    readOnly
+                  />
+                  <button onClick={() => handleNumberPassengers(1)}>+</button>
+                </div>
+                <div><span>{NumberPassengers}</span></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className='AddInfoTicketBuy'>
           <div className='ProgressTicketBuyVertical'>
             <div className='RouteSymbolBuyTicket' ref={routeSymbolRef}>
               <div className='Line'></div>
-              <div className='Circle top'>
-              </div>
-              <div className='Circle bottom'>
-              </div>
+              <div className='Circle top'></div>
+              <div className='Circle bottom'></div>
             </div>
             <div className='FromToTicketTicketBuyVertical' ref={fromToTicketRef}>
               <div className='FromTicketBuy'>
