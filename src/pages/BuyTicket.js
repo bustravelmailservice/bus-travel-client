@@ -298,7 +298,7 @@ const BuyTicket = () => {
                   />
                   <button onClick={() => handleNumberPassengers(1)}>+</button>
                 </div>
-                <div><span>{NumberPassengers}</span></div>
+                <div className='NPassDivInfo'><span >{NumberPassengers}</span><span>{t('NPassDivInfo')}</span></div>
               </div>
             </div>
           </div>

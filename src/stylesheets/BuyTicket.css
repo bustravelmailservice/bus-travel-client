@@ -162,6 +162,14 @@
   margin-top: 20px;
 }
 
+.NPassDivInfo{
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  font-size: var(--mls);
+  color: var(--dark-gray);
+}
+
 .picking-baggage button,
 .picking-NumberPassengers button {
   width: 15px;
