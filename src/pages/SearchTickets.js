@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react'; // Добавлен useMemo
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/SearchTickets.css';
@@ -52,10 +52,6 @@ function SearchTickets() {
       });
       console.log('Фильтрованные одноразовые поездки:', filteredOneTimeTravels);
 
-      // Добавляем одноразовые поездки в foundTravels
-      foundTravels.push(...filteredOneTimeTravels);
-      console.log('Добавлены одноразовые поездки в foundTravels:', foundTravels);
-
       // Фильтрация ежедневных поездок, которые активны с 01.06.2024 и не позже maxDate
       const filteredDailyTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
@@ -69,28 +65,22 @@ function SearchTickets() {
       });
       console.log('Фильтрованные ежедневные поездки:', filteredDailyTravels);
 
-      // Добавляем ежедневные поездки, начиная с даты пользователя, но не позже maxDate
-      while (foundTravels.length < 20 && currentDate <= maxDate) {
-        // Добавляем ежедневные поездки, если они активны на currentDate
+      // Добавляем одноразовые поездки в foundTravels
+      foundTravels.push(...filteredOneTimeTravels);
+
+      // Добавляем ежедневные поездки в foundTravels на каждую дату от startDate до maxDate
+      while (currentDate <= maxDate) {
         filteredDailyTravels.forEach(travel => {
-          if (foundTravels.length < 20 && currentDate <= maxDate) {
-            foundTravels.push({
-              ...travel,
-              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
-            });
-            console.log(`Добавлена ежедневная поездка на ${currentDate.toISOString()}:`, travel);
-          }
+          foundTravels.push({
+            ...travel,
+            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+          });
+          console.log(`Добавлена ежедневная поездка на ${currentDate.toISOString()}:`, travel);
         });
 
         // Увеличиваем дату на один день
         currentDate.setDate(currentDate.getDate() + 1);
         console.log('Текущая дата увеличена на один день:', currentDate);
-
-        // Если больше нет одноразовых поездок и ежедневных поездок, выходим из цикла
-        if (filteredOneTimeTravels.length === 0 && filteredDailyTravels.length === 0) {
-          console.log('Нет больше одноразовых или ежедневных поездок. Остановка.');
-          break;
-        }
       }
 
       // Сортируем поездки по дате и времени отправления
@@ -101,7 +91,8 @@ function SearchTickets() {
       });
       console.log('Отсортированные поездки:', foundTravels);
 
-      setVisibleTravels(foundTravels.slice(0, 20)); // Ограничиваем результат первыми 20 поездками
+      // Ограничиваем результат первыми 20 поездками для отображения
+      setVisibleTravels(foundTravels.slice(0, 20));
       console.log('Итоговые видимые поездки:', foundTravels.slice(0, 20));
 
       if (foundTravels.length === 0) {
