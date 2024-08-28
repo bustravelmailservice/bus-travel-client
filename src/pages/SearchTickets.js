@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
 function SearchTickets() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
@@ -52,14 +52,18 @@ function SearchTickets() {
       // Шаг 1: Фильтрация одноразовых поездок
       const oneTimeTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
-        return (
+        const isMatch = (
           !travel.isDaily &&
           travelDate >= new Date(startDate) &&
           travelDate <= endDate &&
-          travel.fromEN === from &&
-          travel.toEN === to
+          travel.fromEN.trim().toLowerCase() === from.trim().toLowerCase() &&
+          travel.toEN.trim().toLowerCase() === to.trim().toLowerCase()
         );
+        console.log('Проверка одноразовой поездки:', travel, 'Результат:', isMatch);
+        return isMatch;
       });
+
+      console.log('Отфильтрованные одноразовые поездки:', oneTimeTravels);
 
       oneTimeTravels.forEach(travel => {
         currentTravels.push(travel);
@@ -68,14 +72,18 @@ function SearchTickets() {
       // Шаг 2: Фильтрация и добавление ежедневных поездок
       const dailyTravels = travels.filter(travel => {
         const travelCreationDate = new Date(travel.date_departure);
-        return (
+        const isMatch = (
           travel.isDaily &&
           travelCreationDate >= dailyStartDate &&
           travelCreationDate <= endDate &&
-          travel.fromEN === from &&
-          travel.toEN === to
+          travel.fromEN.trim().toLowerCase() === from.trim().toLowerCase() &&
+          travel.toEN.trim().toLowerCase() === to.trim().toLowerCase()
         );
+        console.log('Проверка ежедневной поездки:', travel, 'Результат:', isMatch);
+        return isMatch;
       });
+
+      console.log('Отфильтрованные ежедневные поездки:', dailyTravels);
 
       let currentDate = new Date(startDate);
 
@@ -86,13 +94,19 @@ function SearchTickets() {
               ...travel,
               date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
             });
+            console.log('Добавлена ежедневная поездка на дату:', currentDate.toISOString());
           }
         });
         currentDate.setDate(currentDate.getDate() + 1);
       }
 
+      // Логирование перед сортировкой
+      console.log('Массив поездок перед сортировкой:', currentTravels);
+
       // Сортировка поездок по дате и времени отправления
       currentTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+      
+      // Логирование после сортировки
       console.log('Отсортированные поездки:', currentTravels);
 
       // Обрезаем массив до 20 поездок
