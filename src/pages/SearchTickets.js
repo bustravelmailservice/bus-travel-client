@@ -47,7 +47,8 @@ function SearchTickets() {
         return;
       }
 
-      let currentTravels = [];
+      let oneTimeTravelsArray = [];
+      let dailyTravelsArray = [];
 
       // Шаг 1: Фильтрация одноразовых поездок
       const oneTimeTravels = travels.filter(travel => {
@@ -66,7 +67,7 @@ function SearchTickets() {
       console.log('Отфильтрованные одноразовые поездки:', oneTimeTravels);
 
       oneTimeTravels.forEach(travel => {
-        currentTravels.push(travel);
+        oneTimeTravelsArray.push(travel);
       });
 
       // Шаг 2: Фильтрация и добавление ежедневных поездок
@@ -74,7 +75,6 @@ function SearchTickets() {
         const travelCreationDate = new Date(travel.date_departure);
         const isMatch = (
           travel.isDaily &&
-          travelCreationDate >= dailyStartDate &&
           travelCreationDate <= endDate &&
           travel.fromEN.trim().toLowerCase() === from.trim().toLowerCase() &&
           travel.toEN.trim().toLowerCase() === to.trim().toLowerCase()
@@ -87,10 +87,10 @@ function SearchTickets() {
 
       let currentDate = new Date(startDate);
 
-      while (currentTravels.length < 20 && currentDate <= endDate) {
+      while (dailyTravelsArray.length < 20 && currentDate <= endDate) {
         dailyTravels.forEach(travel => {
-          if (currentTravels.length < 20) {
-            currentTravels.push({
+          if (currentDate >= new Date(travel.date_departure) && dailyTravelsArray.length < 20) {
+            dailyTravelsArray.push({
               ...travel,
               date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
             });
@@ -101,16 +101,20 @@ function SearchTickets() {
       }
 
       // Логирование перед сортировкой
-      console.log('Массив поездок перед сортировкой:', currentTravels);
+      console.log('Массив одноразовых поездок:', oneTimeTravelsArray);
+      console.log('Массив ежедневных поездок:', dailyTravelsArray);
+
+      // Объединение массивов и сортировка
+      const combinedTravels = [...oneTimeTravelsArray, ...dailyTravelsArray];
 
       // Сортировка поездок по дате и времени отправления
-      currentTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
-      
+      combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+
       // Логирование после сортировки
-      console.log('Отсортированные поездки:', currentTravels);
+      console.log('Объединенные и отсортированные поездки:', combinedTravels);
 
       // Обрезаем массив до 20 поездок
-      const finalTravels = currentTravels.slice(0, 20);
+      const finalTravels = combinedTravels.slice(0, 20);
       console.log('Итоговые поездки:', finalTravels);
 
       // Устанавливаем поездки и останавливаем загрузку
@@ -122,7 +126,8 @@ function SearchTickets() {
       console.error('Ошибка при загрузке поездок:', error);
       setIsLoading(false);
     }
-  }, [from, to, startDate, endDate, dailyStartDate]);
+  }, [from, to, startDate, endDate]);
+
 
   useEffect(() => {
     loadTravels();
