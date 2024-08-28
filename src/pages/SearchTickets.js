@@ -28,13 +28,14 @@ function SearchTickets() {
       console.log('Fetched travels:', travels);
 
       let foundTravels = [];
+      let currentDate = new Date(startDate);  // Начинаем с даты, которую указал пользователь
 
-      // Фильтрация одноразовых поездок
+      // Фильтрация одноразовых поездок, которые начинаются с текущей даты или позже
       const filteredOneTimeTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
           !travel.isDaily &&
-          travelDate >= new Date(startDate) &&
+          travelDate >= currentDate &&
           travel.fromEN === from &&
           travel.toEN === to
         );
@@ -43,28 +44,36 @@ function SearchTickets() {
       // Добавляем одноразовые поездки в foundTravels
       foundTravels.push(...filteredOneTimeTravels);
 
-      // Фильтрация и добавление ежедневных поездок
+      // Фильтрация ежедневных поездок, которые начинаются с 01.06.2024
       const filteredDailyTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
           travel.isDaily &&
-          travelDate >= new Date('2024-06-01') &&  // Загружаем все ежедневные поездки начиная с 01.06.2024
+          travelDate >= new Date('2024-06-01') &&
           travel.fromEN === from &&
           travel.toEN === to
         );
       });
 
-      // Добавляем ежедневные поездки начиная с даты startDate
-      for (let travel of filteredDailyTravels) {
-        let currentDate = new Date(startDate);
-        while (foundTravels.length < 20 && currentDate <= new Date('2024-06-30')) {  // Ограничение до 20 поездок
-          foundTravels.push({
-            ...travel,
-            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
-          });
-          currentDate.setDate(currentDate.getDate() + 1);  // Переход к следующему дню
+      // Добавляем ежедневные поездки, начиная с даты пользователя
+      while (foundTravels.length < 20) {
+        // Добавляем ежедневные поездки, если они активны с currentDate
+        filteredDailyTravels.forEach(travel => {
+          if (foundTravels.length < 20) {
+            foundTravels.push({
+              ...travel,
+              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+            });
+          }
+        });
+
+        // Увеличиваем дату на один день
+        currentDate.setDate(currentDate.getDate() + 1);
+
+        // Если текущая дата уже после всех одноразовых и ежедневных поездок, выходим из цикла
+        if (filteredOneTimeTravels.length === 0 && filteredDailyTravels.length === 0) {
+          break;
         }
-        if (foundTravels.length >= 20) break;  // Прекращаем поиск, если набрано 20 поездок
       }
 
       // Сортируем поездки по дате и времени отправления
