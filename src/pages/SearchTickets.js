@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
 function SearchTickets() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
