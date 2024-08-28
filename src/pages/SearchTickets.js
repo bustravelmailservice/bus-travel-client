@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react'; // Добавлен useMemo
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/SearchTickets.css';
