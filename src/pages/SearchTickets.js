@@ -53,13 +53,21 @@ function SearchTickets() {
         // Проверяем одноразовые билеты на текущую дату
         const oneTimeTravels = travels.filter(travel => {
           const travelDate = new Date(travel.date_departure);
+          const isCorrectDate = travelDate.toDateString() === currentDate.toDateString();
+          const isCorrectFrom = travel.fromEN.toLowerCase() === from.toLowerCase();
+          const isCorrectTo = travel.toEN.toLowerCase() === to.toLowerCase();
+        
+          console.log(`Checking travel: ${travel.fromEN} to ${travel.toEN}, Date: ${travelDate}, isDaily: ${travel.isDaily}`);
+          console.log(`isCorrectFrom: ${isCorrectFrom}, isCorrectTo: ${isCorrectTo}, isCorrectDate: ${isCorrectDate}`);
+        
           return (
-            travelDate.toDateString() === currentDate.toDateString() &&
+            isCorrectDate &&
             !travel.isDaily &&
-            travel.fromEN === from &&
-            travel.toEN === to
+            isCorrectFrom &&
+            isCorrectTo
           );
         });
+        
 
         // Добавляем одноразовые билеты
         for (let travel of oneTimeTravels) {
