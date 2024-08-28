@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+/* import { useTranslation } from 'react-i18next'; */
 import '../stylesheets/SearchTickets.css';
 import Ticket from '../components/Ticket';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
 function SearchTickets() {
-  const { t } = useTranslation();
+  /* const { t } = useTranslation(); */
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
