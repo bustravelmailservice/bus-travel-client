@@ -15,6 +15,13 @@ function SearchTickets() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Рассчитываем максимальную дату поиска: дата пользователя + 2 месяца
+  const maxDate = useMemo(() => {
+    const date = new Date(startDate);
+    date.setMonth(date.getMonth() + 2);  // Добавляем 2 месяца
+    return date;
+  }, [startDate]);
+
   const loadTravels = useCallback(async () => {
     if (!from || !to || !startDate) return;
 
@@ -32,12 +39,13 @@ function SearchTickets() {
       let foundTravels = [];
       let currentDate = new Date(startDate);  // Начинаем с даты, которую указал пользователь
 
-      // Фильтрация одноразовых поездок, которые начинаются с текущей даты или позже
+      // Фильтрация одноразовых поездок, которые начинаются с текущей даты и не позже maxDate
       const filteredOneTimeTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
           !travel.isDaily &&
           travelDate >= currentDate &&
+          travelDate <= maxDate &&  // Ограничение по maxDate
           travel.fromEN === from &&
           travel.toEN === to
         );
@@ -48,23 +56,24 @@ function SearchTickets() {
       foundTravels.push(...filteredOneTimeTravels);
       console.log('Добавлены одноразовые поездки в foundTravels:', foundTravels);
 
-      // Фильтрация ежедневных поездок, которые активны с 01.06.2024
+      // Фильтрация ежедневных поездок, которые активны с 01.06.2024 и не позже maxDate
       const filteredDailyTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
           travel.isDaily &&
           travelDate <= currentDate &&  // Проверяем, что поездка была активна на дату currentDate или ранее
+          travelDate <= maxDate &&  // Ограничение по maxDate
           travel.fromEN === from &&
           travel.toEN === to
         );
       });
       console.log('Фильтрованные ежедневные поездки:', filteredDailyTravels);
 
-      // Добавляем ежедневные поездки, начиная с даты пользователя
-      while (foundTravels.length < 20) {
+      // Добавляем ежедневные поездки, начиная с даты пользователя, но не позже maxDate
+      while (foundTravels.length < 20 && currentDate <= maxDate) {
         // Добавляем ежедневные поездки, если они активны на currentDate
         filteredDailyTravels.forEach(travel => {
-          if (foundTravels.length < 20) {
+          if (foundTravels.length < 20 && currentDate <= maxDate) {
             foundTravels.push({
               ...travel,
               date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
@@ -105,7 +114,7 @@ function SearchTickets() {
       setIsLoading(false);
       console.log('Загрузка поездок завершена.');
     }
-  }, [from, to, startDate, t]);
+  }, [from, to, startDate, maxDate, t]);
 
   useEffect(() => {
     console.log('Получены параметры поиска:', { from, to, startDate, passengers });
