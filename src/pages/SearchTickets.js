@@ -11,6 +11,8 @@ function SearchTickets() {
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
+  console.log('Переданные параметры из компонента Picking:', { from, to, startDate, passengers });
+
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,6 +25,7 @@ function SearchTickets() {
   }, [startDate]);
 
   const addDailyTravels = useCallback((travels, currentTravels, currentDate, maxDate) => {
+    console.log('Добавляем ежедневные поездки:', travels, 'Текущая дата:', currentDate, 'Максимальная дата:', maxDate);
     while (currentTravels.length < 20 && currentDate <= maxDate) {
       travels.forEach(travel => {
         if (currentTravels.length < 20) {
@@ -38,10 +41,12 @@ function SearchTickets() {
         break;
       }
     }
+    console.log('Текущие поездки после добавления ежедневных:', currentTravels);
     return currentTravels;
   }, []);
 
   const addOneTimeTravels = useCallback((travels, currentTravels, currentDate, maxDate) => {
+    console.log('Добавляем одноразовые поездки:', travels, 'Текущая дата:', currentDate, 'Максимальная дата:', maxDate);
     while (currentTravels.length < 20 && currentDate <= maxDate) {
       const filteredTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
@@ -65,6 +70,7 @@ function SearchTickets() {
         break;
       }
     }
+    console.log('Текущие поездки после добавления одноразовых:', currentTravels);
     return currentTravels;
   }, [from, to]);
 
@@ -72,13 +78,16 @@ function SearchTickets() {
   const loadMoreTravels = useCallback(async () => {
     try {
       setIsLoading(true);
+      console.log('Начинаем загрузку поездок...');
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
 
+      console.log('Ответ от сервера:', response.data);
       const travels = response.data;
 
       if (travels.length === 0) {
+        console.log('Поездки не найдены');
         setVisibleTravels([]);
         setIsLoading(false);
         return;
@@ -99,6 +108,8 @@ function SearchTickets() {
         );
       });
 
+      console.log('Ежедневные поездки после фильтрации:', dailyTravels);
+
       // Добавление ежедневных поездок
       currentTravels = addDailyTravels(dailyTravels, currentTravels, currentDate, maxDate);
 
@@ -110,9 +121,11 @@ function SearchTickets() {
 
       // Сортировка поездок по дате и времени отправления
       currentTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+      console.log('Отсортированные поездки:', currentTravels);
 
       // Обрезаем массив до 20 поездок
       const finalTravels = currentTravels.slice(0, 20);
+      console.log('Итоговые поездки:', finalTravels);
 
       // Устанавливаем поездки и останавливаем загрузку
       setVisibleTravels(finalTravels);
@@ -120,7 +133,7 @@ function SearchTickets() {
 
     } catch (error) {
       setError(error.message || 'Error fetching travels');
-      console.error('Error fetching travels:', error);
+      console.error('Ошибка при загрузке поездок:', error);
       setIsLoading(false);
     }
   }, [from, to, startDate, maxDate, addDailyTravels, addOneTimeTravels]);
@@ -141,16 +154,16 @@ function SearchTickets() {
   return (
     <div className='SearchTickets'>
       <Helmet>
-        <title>{t('titles.search')}</title>
+        <title>titles.search</title>
       </Helmet>
       {isLoading ? (
-        <div>{t('Loading...')}</div>
+        <div>Loading...</div>
       ) : (
         visibleTravels.length > 0 ? (
           <>
             {Object.keys(groupedTravels(visibleTravels)).map(date => (
               <div key={date} className="date-section">
-                <h2>{t('Travels_on')}: {formatDate(date)}</h2>
+                <h2>Travels_on: {formatDate(date)}</h2>
                 {groupedTravels(visibleTravels)[date].map((travel, index) => (
                   <Ticket key={index} travel={travel} passengers={passengers} />
                 ))}
@@ -158,7 +171,7 @@ function SearchTickets() {
             ))}
           </>
         ) : (
-          <div>{t('No tickets found')}</div>
+          <div>No tickets found</div>
         )
       )}
     </div>
