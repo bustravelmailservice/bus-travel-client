@@ -74,11 +74,11 @@ const BuyTicket = () => {
     const basePriceUA = parseInt(travel.priceUA, 10) * NumberPassengers;
     const basePriceEN = parseInt(travel.priceEN, 10) * NumberPassengers;
 
-    const smallBaggagePriceUA = smallBaggage * 150;
-    const smallBaggagePriceEN = smallBaggage * 5;
+    const smallBaggagePriceUA = smallBaggage * 450;
+    const smallBaggagePriceEN = smallBaggage * 10;
 
-    const largeBaggagePriceUA = largeBaggage * 300;
-    const largeBaggagePriceEN = largeBaggage * 10;
+    const largeBaggagePriceUA = largeBaggage * 900;
+    const largeBaggagePriceEN = largeBaggage * 20;
 
     const totalPriceUA = basePriceUA + smallBaggagePriceUA + largeBaggagePriceUA;
     const totalPriceEN = basePriceEN + smallBaggagePriceEN + largeBaggagePriceEN;
