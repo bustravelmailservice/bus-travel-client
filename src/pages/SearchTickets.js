@@ -14,7 +14,6 @@ function SearchTickets() {
   const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
 
   // Максимальная дата поиска (2 месяца вперед от startDate)
   const maxDate = useMemo(() => {
@@ -26,10 +25,12 @@ function SearchTickets() {
   const addDailyTravels = useCallback((travels, currentTravels, currentDate, maxDate) => {
     while (currentTravels.length < 20 && currentDate <= maxDate) {
       travels.forEach(travel => {
-        currentTravels.push({
-          ...travel,
-          date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
-        });
+        if (currentTravels.length < 20) {
+          currentTravels.push({
+            ...travel,
+            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+          });
+        }
       });
       currentDate.setDate(currentDate.getDate() + 1);
 
@@ -42,7 +43,7 @@ function SearchTickets() {
 
   const addOneTimeTravels = useCallback((travels, currentTravels, currentDate, maxDate) => {
     while (currentTravels.length < 20 && currentDate <= maxDate) {
-      const oneTimeTravels = travels.filter(travel => {
+      const filteredTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
           travelDate.toDateString() === currentDate.toDateString() &&
@@ -52,8 +53,10 @@ function SearchTickets() {
         );
       });
 
-      oneTimeTravels.forEach(travel => {
-        currentTravels.push(travel);
+      filteredTravels.forEach(travel => {
+        if (currentTravels.length < 20) {
+          currentTravels.push(travel);
+        }
       });
 
       currentDate.setDate(currentDate.getDate() + 1);
@@ -81,10 +84,10 @@ function SearchTickets() {
         return;
       }
 
+      let currentDate = new Date(startDate);
       let currentTravels = [];
-      let currentDate = new Date(lastDate);
 
-      // Фильтрация ежедневных поездок в нужном периоде
+      // Шаг 1: Фильтрация ежедневных поездок в нужном периоде
       const dailyTravels = travels.filter(travel => {
         const travelCreationDate = new Date(travel.date_departure);
         return (
@@ -99,25 +102,28 @@ function SearchTickets() {
       // Добавление ежедневных поездок
       currentTravels = addDailyTravels(dailyTravels, currentTravels, currentDate, maxDate);
 
-      // Добавление одноразовых поездок
-      currentTravels = addOneTimeTravels(travels, currentTravels, currentDate, maxDate);
+      // Если уже набрано 20 поездок, прекращаем добавление одноразовых поездок
+      if (currentTravels.length < 20) {
+        // Шаг 2: Добавление одноразовых поездок
+        currentTravels = addOneTimeTravels(travels, currentTravels, currentDate, maxDate);
+      }
 
       // Сортировка поездок по дате и времени отправления
       currentTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
 
       // Обрезаем массив до 20 поездок
-      currentTravels = currentTravels.slice(0, 20);
+      const finalTravels = currentTravels.slice(0, 20);
 
-      setVisibleTravels(currentTravels);
-      setLastDate(currentDate);  // Обновляем последнюю обработанную дату
+      // Устанавливаем поездки и останавливаем загрузку
+      setVisibleTravels(finalTravels);
+      setIsLoading(false);
 
     } catch (error) {
       setError(error.message || 'Error fetching travels');
       console.error('Error fetching travels:', error);
-    } finally {
       setIsLoading(false);
     }
-  }, [from, to, lastDate, maxDate, addDailyTravels, addOneTimeTravels]);
+  }, [from, to, startDate, maxDate, addDailyTravels, addOneTimeTravels]);
 
   useEffect(() => {
     loadMoreTravels();
@@ -137,7 +143,7 @@ function SearchTickets() {
       <Helmet>
         <title>{t('titles.search')}</title>
       </Helmet>
-      {isLoading && visibleTravels.length === 0 ? (
+      {isLoading ? (
         <div>{t('Loading...')}</div>
       ) : (
         visibleTravels.length > 0 ? (
