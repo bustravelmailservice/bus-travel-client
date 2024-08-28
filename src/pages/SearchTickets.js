@@ -44,12 +44,12 @@ function SearchTickets() {
       // Добавляем одноразовые поездки в foundTravels
       foundTravels.push(...filteredOneTimeTravels);
 
-      // Фильтрация ежедневных поездок, которые начинаются с 01.06.2024
+      // Фильтрация ежедневных поездок, которые активны с 01.06.2024
       const filteredDailyTravels = travels.filter(travel => {
         const travelDate = new Date(travel.date_departure);
         return (
           travel.isDaily &&
-          travelDate >= new Date('2024-06-01') &&
+          travelDate <= currentDate &&  // Проверяем, что поездка была активна на дату currentDate или ранее
           travel.fromEN === from &&
           travel.toEN === to
         );
@@ -57,7 +57,7 @@ function SearchTickets() {
 
       // Добавляем ежедневные поездки, начиная с даты пользователя
       while (foundTravels.length < 20) {
-        // Добавляем ежедневные поездки, если они активны с currentDate
+        // Добавляем ежедневные поездки, если они активны на currentDate
         filteredDailyTravels.forEach(travel => {
           if (foundTravels.length < 20) {
             foundTravels.push({
@@ -70,7 +70,7 @@ function SearchTickets() {
         // Увеличиваем дату на один день
         currentDate.setDate(currentDate.getDate() + 1);
 
-        // Если текущая дата уже после всех одноразовых и ежедневных поездок, выходим из цикла
+        // Если больше нет одноразовых поездок и ежедневных поездок, выходим из цикла
         if (filteredOneTimeTravels.length === 0 && filteredDailyTravels.length === 0) {
           break;
         }
