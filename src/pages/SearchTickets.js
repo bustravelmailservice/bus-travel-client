@@ -15,19 +15,58 @@ function SearchTickets() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastDate, setLastDate] = useState(new Date(startDate));  // Последняя дата, до которой мы подгрузили билеты
-  const [allTravelsLoaded, setAllTravelsLoaded] = useState(false);  // Индикатор того, что все билеты загружены
 
-  // Максимальная дата поиска (30 дней вперед от startDate), завернутая в useMemo
+  // Максимальная дата поиска (2 месяца вперед от startDate)
   const maxDate = useMemo(() => {
     const date = new Date(startDate);
     date.setMonth(date.getMonth() + 2);  // +2 месяца к startDate
     return date;
   }, [startDate]);
 
-  // Используем useCallback для фиксации функции
-  const loadMoreTravels = useCallback(async () => {
-    if (allTravelsLoaded || !from || !to || !startDate || lastDate > maxDate) return;
+  const addDailyTravels = useCallback((travels, currentTravels, currentDate, maxDate) => {
+    while (currentTravels.length < 20 && currentDate <= maxDate) {
+      travels.forEach(travel => {
+        currentTravels.push({
+          ...travel,
+          date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+        });
+      });
+      currentDate.setDate(currentDate.getDate() + 1);
 
+      if (currentTravels.length >= 20) {
+        break;
+      }
+    }
+    return currentTravels;
+  }, []);
+
+  const addOneTimeTravels = useCallback((travels, currentTravels, currentDate, maxDate) => {
+    while (currentTravels.length < 20 && currentDate <= maxDate) {
+      const oneTimeTravels = travels.filter(travel => {
+        const travelDate = new Date(travel.date_departure);
+        return (
+          travelDate.toDateString() === currentDate.toDateString() &&
+          !travel.isDaily &&
+          travel.fromEN === from &&
+          travel.toEN === to
+        );
+      });
+
+      oneTimeTravels.forEach(travel => {
+        currentTravels.push(travel);
+      });
+
+      currentDate.setDate(currentDate.getDate() + 1);
+
+      if (currentTravels.length >= 20) {
+        break;
+      }
+    }
+    return currentTravels;
+  }, [from, to]);
+
+  // Функция для загрузки поездок
+  const loadMoreTravels = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
@@ -35,107 +74,54 @@ function SearchTickets() {
       });
 
       const travels = response.data;
-      console.log('Fetched travels:', travels);
 
-      // Если нет билетов, сразу показываем сообщение и заканчиваем загрузку
       if (travels.length === 0) {
-        setAllTravelsLoaded(true);  // Завершаем загрузку, так как билетов нет
-        setVisibleTravels([]);  // Очищаем видимые билеты
-        setIsLoading(false);  // Останавливаем загрузку
+        setVisibleTravels([]);
+        setIsLoading(false);
         return;
       }
 
-      let currentTravels = [...visibleTravels];  // Копия текущих видимых билетов
-      let currentDate = new Date(lastDate);  // Начальная дата для поиска
-      let count = currentTravels.length;
+      let currentTravels = [];
+      let currentDate = new Date(lastDate);
 
-      while (count < 20 && currentDate <= maxDate) {
-        // Проверяем одноразовые билеты на текущую дату
-        const oneTimeTravels = travels.filter(travel => {
-          const travelDate = new Date(travel.date_departure);
-          const isCorrectDate = travelDate.toDateString() === currentDate.toDateString();
-          const isCorrectFrom = travel.fromEN.toLowerCase() === from.toLowerCase();
-          const isCorrectTo = travel.toEN.toLowerCase() === to.toLowerCase();
-        
-          console.log(`Checking travel: ${travel.fromEN} to ${travel.toEN}, Date: ${travelDate}, isDaily: ${travel.isDaily}`);
-          console.log(`isCorrectFrom: ${isCorrectFrom}, isCorrectTo: ${isCorrectTo}, isCorrectDate: ${isCorrectDate}`);
-        
-          return (
-            isCorrectDate &&
-            !travel.isDaily &&
-            isCorrectFrom &&
-            isCorrectTo
-          );
-        });
-        
+      // Фильтрация ежедневных поездок в нужном периоде
+      const dailyTravels = travels.filter(travel => {
+        const travelCreationDate = new Date(travel.date_departure);
+        return (
+          travel.isDaily &&
+          travel.fromEN === from &&
+          travel.toEN === to &&
+          travelCreationDate >= new Date('2024-06-01') &&  // Начальная дата фильтрации ежедневных поездок
+          travelCreationDate <= maxDate
+        );
+      });
 
-        // Добавляем одноразовые билеты
-        for (let travel of oneTimeTravels) {
-          currentTravels.push(travel);
-          count++;
-          if (count >= 20) break;  // Если достигли лимита, выходим из цикла
-        }
+      // Добавление ежедневных поездок
+      currentTravels = addDailyTravels(dailyTravels, currentTravels, currentDate, maxDate);
 
-        // Прерываем цикл, если одноразовый билет уже добавлен
-        if (oneTimeTravels.length > 0 && count >= 20) {
-          break;
-        }
+      // Добавление одноразовых поездок
+      currentTravels = addOneTimeTravels(travels, currentTravels, currentDate, maxDate);
 
-        // Проверяем ежедневные билеты на текущую дату
-        const dailyTravels = travels.filter(travel => {
-          const travelCreationDate = new Date(travel.creation_date);  // Дата создания ежедневной поездки
-          return (
-            travel.isDaily &&
-            travel.fromEN === from &&
-            travel.toEN === to &&
-            travelCreationDate <= currentDate
-          );
-        });
-
-        // Добавляем ежедневные билеты
-        for (let travel of dailyTravels) {
-          if (!currentTravels.some(t => t.date_departure === travel.date_departure)) {
-            currentTravels.push({
-              ...travel,
-              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
-            });
-            count++;
-            if (count >= 20) break;  // Если достигли лимита, выходим из цикла
-          }
-        }
-
-        // Переходим к следующему дню
-        currentDate.setDate(currentDate.getDate() + 1);
-
-        // Если текущая дата превышает лимит в 2 месяца, завершаем поиск
-        if (currentDate > maxDate) {
-          setAllTravelsLoaded(true);
-          break;
-        }
-      }
-
-      // Сортируем поездки по дате и времени отправления
+      // Сортировка поездок по дате и времени отправления
       currentTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+
+      // Обрезаем массив до 20 поездок
+      currentTravels = currentTravels.slice(0, 20);
 
       setVisibleTravels(currentTravels);
       setLastDate(currentDate);  // Обновляем последнюю обработанную дату
 
-      // Проверяем, все ли билеты загружены
-      if (currentTravels.length >= travels.length || currentDate > maxDate) {
-        setAllTravelsLoaded(true);
-      }
     } catch (error) {
       setError(error.message || 'Error fetching travels');
       console.error('Error fetching travels:', error);
     } finally {
       setIsLoading(false);
     }
-  }, [allTravelsLoaded, from, to, startDate, lastDate, visibleTravels, maxDate]);
+  }, [from, to, lastDate, maxDate, addDailyTravels, addOneTimeTravels]);
 
   useEffect(() => {
-    console.log('Received search parameters:', { from, to, startDate, passengers });
-    loadMoreTravels();  // Начать загрузку сразу после загрузки компонента
-  }, [from, to, startDate, passengers, loadMoreTravels]);  // Добавляем loadMoreTravels в зависимости
+    loadMoreTravels();
+  }, [loadMoreTravels]);
 
   const formatDate = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -164,11 +150,6 @@ function SearchTickets() {
                 ))}
               </div>
             ))}
-            {!allTravelsLoaded && (
-              <button onClick={loadMoreTravels} className="load-more-button">
-                {t('Load more tickets')}
-              </button>
-            )}
           </>
         ) : (
           <div>{t('No tickets found')}</div>
