@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
 function SearchTickets() {
-  const { t } = useTranslation();
+  const { t } = useTranslation();  // Удалили 'i18n' за ненадобностью
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
@@ -24,8 +24,7 @@ function SearchTickets() {
     return date;
   }, [startDate]);
 
-  // Дата начала поиска для ежедневных поездок (01.06.2024)
-  const dailyStartDate = useMemo(() => new Date('2024-06-01'), []);
+  // Удалено dailyStartDate
 
   // Функция для загрузки поездок
   const loadTravels = useCallback(async () => {
@@ -109,7 +108,7 @@ function SearchTickets() {
 
       // Сортировка поездок по дате и времени отправления
       combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
-
+      
       // Логирование после сортировки
       console.log('Объединенные и отсортированные поездки:', combinedTravels);
 
@@ -127,7 +126,6 @@ function SearchTickets() {
       setIsLoading(false);
     }
   }, [from, to, startDate, endDate]);
-
 
   useEffect(() => {
     loadTravels();
