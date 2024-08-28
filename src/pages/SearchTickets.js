@@ -29,12 +29,14 @@ function SearchTickets() {
       console.log('Начало загрузки поездок');
       setIsLoading(true);
 
+      console.log('Запрос с параметрами:', { from, to, startDate });
+
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
 
       const travels = response.data;
-      console.log('Полученные поездки:', travels);
+      console.log('Полученные поездки с сервера:', travels);
 
       let foundTravels = [];
       let currentDate = new Date(startDate);  // Начинаем с даты, которую указал пользователь
