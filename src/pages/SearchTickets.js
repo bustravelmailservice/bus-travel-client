@@ -19,13 +19,15 @@ function SearchTickets() {
     if (!from || !to || !startDate) return;
 
     try {
+      console.log('Начало загрузки поездок');
       setIsLoading(true);
+
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
 
       const travels = response.data;
-      console.log('Fetched travels:', travels);
+      console.log('Полученные поездки:', travels);
 
       let foundTravels = [];
       let currentDate = new Date(startDate);  // Начинаем с даты, которую указал пользователь
@@ -40,9 +42,11 @@ function SearchTickets() {
           travel.toEN === to
         );
       });
+      console.log('Фильтрованные одноразовые поездки:', filteredOneTimeTravels);
 
       // Добавляем одноразовые поездки в foundTravels
       foundTravels.push(...filteredOneTimeTravels);
+      console.log('Добавлены одноразовые поездки в foundTravels:', foundTravels);
 
       // Фильтрация ежедневных поездок, которые активны с 01.06.2024
       const filteredDailyTravels = travels.filter(travel => {
@@ -54,6 +58,7 @@ function SearchTickets() {
           travel.toEN === to
         );
       });
+      console.log('Фильтрованные ежедневные поездки:', filteredDailyTravels);
 
       // Добавляем ежедневные поездки, начиная с даты пользователя
       while (foundTravels.length < 20) {
@@ -64,14 +69,17 @@ function SearchTickets() {
               ...travel,
               date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
             });
+            console.log(`Добавлена ежедневная поездка на ${currentDate.toISOString()}:`, travel);
           }
         });
 
         // Увеличиваем дату на один день
         currentDate.setDate(currentDate.getDate() + 1);
+        console.log('Текущая дата увеличена на один день:', currentDate);
 
         // Если больше нет одноразовых поездок и ежедневных поездок, выходим из цикла
         if (filteredOneTimeTravels.length === 0 && filteredDailyTravels.length === 0) {
+          console.log('Нет больше одноразовых или ежедневных поездок. Остановка.');
           break;
         }
       }
@@ -82,22 +90,25 @@ function SearchTickets() {
         const dateB = new Date(b.date_departure);
         return dateA - dateB;  // Сортировка по дате
       });
+      console.log('Отсортированные поездки:', foundTravels);
 
       setVisibleTravels(foundTravels.slice(0, 20)); // Ограничиваем результат первыми 20 поездками
+      console.log('Итоговые видимые поездки:', foundTravels.slice(0, 20));
 
       if (foundTravels.length === 0) {
         setError(t('No tickets found'));
       }
     } catch (error) {
       setError(error.message || 'Error fetching travels');
-      console.error('Error fetching travels:', error);
+      console.error('Ошибка при загрузке поездок:', error);
     } finally {
       setIsLoading(false);
+      console.log('Загрузка поездок завершена.');
     }
   }, [from, to, startDate, t]);
 
   useEffect(() => {
-    console.log('Received search parameters:', { from, to, startDate, passengers });
+    console.log('Получены параметры поиска:', { from, to, startDate, passengers });
     loadTravels(); // Начать загрузку сразу после загрузки компонента
   }, [from, to, startDate, passengers, loadTravels]);
 
