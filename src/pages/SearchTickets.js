@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 
 function SearchTickets() {
-  const { t } = useTranslation();  // Удалили 'i18n' за ненадобностью
+  const { t } = useTranslation();
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
@@ -23,8 +23,6 @@ function SearchTickets() {
     date.setDate(date.getDate() + 20);  // +20 дней к startDate
     return date;
   }, [startDate]);
-
-  // Удалено dailyStartDate
 
   // Функция для загрузки поездок
   const loadTravels = useCallback(async () => {
@@ -46,74 +44,32 @@ function SearchTickets() {
         return;
       }
 
-      let oneTimeTravelsArray = [];
-      let dailyTravelsArray = [];
-
-      // Шаг 1: Фильтрация одноразовых поездок
-      const oneTimeTravels = travels.filter(travel => {
-        const travelDate = new Date(travel.date_departure);
-        const isMatch = (
-          !travel.isDaily &&
-          travelDate >= new Date(startDate) &&
-          travelDate <= endDate &&
-          travel.fromEN.trim().toLowerCase() === from.trim().toLowerCase() &&
-          travel.toEN.trim().toLowerCase() === to.trim().toLowerCase()
-        );
-        console.log('Проверка одноразовой поездки:', travel, 'Результат:', isMatch);
-        return isMatch;
-      });
-
-      console.log('Отфильтрованные одноразовые поездки:', oneTimeTravels);
-
-      oneTimeTravels.forEach(travel => {
-        oneTimeTravelsArray.push(travel);
-      });
-
-      // Шаг 2: Фильтрация и добавление ежедневных поездок
-      const dailyTravels = travels.filter(travel => {
-        const travelCreationDate = new Date(travel.date_departure);
-        const isMatch = (
-          travel.isDaily &&
-          travelCreationDate <= endDate &&
-          travel.fromEN.trim().toLowerCase() === from.trim().toLowerCase() &&
-          travel.toEN.trim().toLowerCase() === to.trim().toLowerCase()
-        );
-        console.log('Проверка ежедневной поездки:', travel, 'Результат:', isMatch);
-        return isMatch;
-      });
-
-      console.log('Отфильтрованные ежедневные поездки:', dailyTravels);
-
+      let displayedTravels = [];
       let currentDate = new Date(startDate);
 
-      while (dailyTravelsArray.length < 20 && currentDate <= endDate) {
-        dailyTravels.forEach(travel => {
-          if (currentDate >= new Date(travel.date_departure) && dailyTravelsArray.length < 20) {
-            dailyTravelsArray.push({
-              ...travel,
-              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
-            });
-            console.log('Добавлена ежедневная поездка на дату:', currentDate.toISOString());
-          }
+      while (displayedTravels.length < 20 && currentDate <= endDate) {
+        travels.forEach(travel => {
+          // Вставляем поездку в каждый день от startDate до endDate
+          displayedTravels.push({
+            ...travel,
+            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для поездки
+          });
+          console.log('Добавлена поездка на дату:', currentDate.toISOString());
         });
         currentDate.setDate(currentDate.getDate() + 1);
       }
 
       // Логирование перед сортировкой
-      console.log('Массив одноразовых поездок:', oneTimeTravelsArray);
-      console.log('Массив ежедневных поездок:', dailyTravelsArray);
-
-      // Объединение массивов и сортировка
-      const combinedTravels = [...oneTimeTravelsArray, ...dailyTravelsArray];
+      console.log('Массив всех поездок:', displayedTravels);
 
       // Сортировка поездок по дате и времени отправления
-      combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
+      displayedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
       
       // Логирование после сортировки
-      console.log('Объединенные и отсортированные поездки:', combinedTravels);
+      console.log('Отсортированные поездки:', displayedTravels);
 
       // Обрезаем массив до 20 поездок
-      const finalTravels = combinedTravels.slice(0, 20);
+      const finalTravels = displayedTravels.slice(0, 20);
       console.log('Итоговые поездки:', finalTravels);
 
       // Устанавливаем поездки и останавливаем загрузку
