@@ -88,35 +88,18 @@ function SearchTickets() {
 
       while (dailyTravelsArray.length < 20 && currentDate <= endDate) {
         dailyTravels.forEach(travel => {
-          if (currentDate >= new Date(travel.date_departure) && dailyTravelsArray.length < 20) {
+          const travelDepartureDate = new Date(travel.date_departure);
 
-            // Разбиваем дату отправления на дату и время
-            const travelTime = new Date(travel.date_departure).toISOString().split('T')[1]; // Получаем только время (например, "15:30:00.000Z")
+          if (currentDate >= travelDepartureDate && dailyTravelsArray.length < 20) {
+            // Вычисляем фактическую дату отправления, учитывая разницу между startDate и date_departure
+            const actualDepartureDate = new Date(travelDepartureDate);
+            actualDepartureDate.setDate(actualDepartureDate.getDate() + (currentDate - new Date(startDate)) / (1000 * 60 * 60 * 24));
 
-            // Создаем новую дату отправления с сохранением времени
-            const updatedDepartureDate = new Date(currentDate);
-            updatedDepartureDate.setUTCHours(
-              new Date(travel.date_departure).getUTCHours(),
-              new Date(travel.date_departure).getUTCMinutes(),
-              new Date(travel.date_departure).getUTCSeconds()
-            );
-
-            // Создаем новый билет с обновленной датой отправления
-            const newTravel = {
+            dailyTravelsArray.push({
               ...travel,
-              date_departure: updatedDepartureDate.toISOString()  // Устанавливаем новую дату и время отправления для ежедневного билета
-            };
-
-            dailyTravelsArray.push(newTravel);
-
-            // Логирование билета
-            console.log('Добавлен билет:', {
-              from: newTravel.fromEN,
-              to: newTravel.toEN,
-              date_departure: newTravel.date_departure,
-              date_arrival: newTravel.date_arrival, // Логируем дату прибытия, если она есть
-              isDaily: newTravel.isDaily
+              date_departure: actualDepartureDate.toISOString()  // Устанавливаем вычисленную дату отправления
             });
+            console.log('Добавлена ежедневная поездка на дату:', actualDepartureDate.toISOString());
           }
         });
         currentDate.setDate(currentDate.getDate() + 1);
