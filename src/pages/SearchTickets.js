@@ -89,11 +89,34 @@ function SearchTickets() {
       while (dailyTravelsArray.length < 20 && currentDate <= endDate) {
         dailyTravels.forEach(travel => {
           if (currentDate >= new Date(travel.date_departure) && dailyTravelsArray.length < 20) {
-            dailyTravelsArray.push({
+
+            // Разбиваем дату отправления на дату и время
+            const travelTime = new Date(travel.date_departure).toISOString().split('T')[1]; // Получаем только время (например, "15:30:00.000Z")
+
+            // Создаем новую дату отправления с сохранением времени
+            const updatedDepartureDate = new Date(currentDate);
+            updatedDepartureDate.setUTCHours(
+              new Date(travel.date_departure).getUTCHours(),
+              new Date(travel.date_departure).getUTCMinutes(),
+              new Date(travel.date_departure).getUTCSeconds()
+            );
+
+            // Создаем новый билет с обновленной датой отправления
+            const newTravel = {
               ...travel,
-              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
+              date_departure: updatedDepartureDate.toISOString()  // Устанавливаем новую дату и время отправления для ежедневного билета
+            };
+
+            dailyTravelsArray.push(newTravel);
+
+            // Логирование билета
+            console.log('Добавлен билет:', {
+              from: newTravel.fromEN,
+              to: newTravel.toEN,
+              date_departure: newTravel.date_departure,
+              date_arrival: newTravel.date_arrival, // Логируем дату прибытия, если она есть
+              isDaily: newTravel.isDaily
             });
-            console.log('Добавлена ежедневная поездка на дату:', currentDate.toISOString());
           }
         });
         currentDate.setDate(currentDate.getDate() + 1);
@@ -108,7 +131,7 @@ function SearchTickets() {
 
       // Сортировка поездок по дате и времени отправления
       combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
-      
+
       // Логирование после сортировки
       console.log('Объединенные и отсортированные поездки:', combinedTravels);
 
