@@ -88,18 +88,12 @@ function SearchTickets() {
 
       while (dailyTravelsArray.length < 20 && currentDate <= endDate) {
         dailyTravels.forEach(travel => {
-          const travelDepartureDate = new Date(travel.date_departure);
-
-          if (currentDate >= travelDepartureDate && dailyTravelsArray.length < 20) {
-            // Вычисляем фактическую дату отправления, учитывая разницу между startDate и date_departure
-            const actualDepartureDate = new Date(travelDepartureDate);
-            actualDepartureDate.setDate(actualDepartureDate.getDate() + (currentDate - new Date(startDate)) / (1000 * 60 * 60 * 24));
-
+          if (currentDate >= new Date(travel.date_departure) && dailyTravelsArray.length < 20) {
             dailyTravelsArray.push({
               ...travel,
-              date_departure: actualDepartureDate.toISOString()  // Устанавливаем вычисленную дату отправления
+              date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для ежедневного билета
             });
-            console.log('Добавлена ежедневная поездка на дату:', actualDepartureDate.toISOString());
+            console.log('Добавлена ежедневная поездка на дату:', currentDate.toISOString());
           }
         });
         currentDate.setDate(currentDate.getDate() + 1);
@@ -114,7 +108,7 @@ function SearchTickets() {
 
       // Сортировка поездок по дате и времени отправления
       combinedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
-
+      
       // Логирование после сортировки
       console.log('Объединенные и отсортированные поездки:', combinedTravels);
 
