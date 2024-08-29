@@ -11,34 +11,41 @@ function SearchTickets() {
   const location = useLocation();
   const { from, to, startDate, passengers } = location.state || {};
 
-  console.log('Переданные параметры:', { from, to, startDate, passengers });
+  console.log('Передані параметри:', { from, to, startDate, passengers });
 
-  const [visibleTravels, setVisibleTravels] = useState([]);  // Хранит видимые билеты
+  const [visibleTravels, setVisibleTravels] = useState([]);  // Масив для збереження видимих квитків
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Максимальная дата поиска (20 дней вперед от startDate)
+  // Максимальна дата пошуку (20 днів вперед від startDate)
   const endDate = useMemo(() => {
     const date = new Date(startDate);
-    date.setDate(date.getDate() + 20);  // +20 дней к startDate
+    date.setDate(date.getDate() + 20);  // +20 днів до дати старту
     return date;
   }, [startDate]);
 
-  // Функция для загрузки поездок
+  // Функція для розрахунку дати прибуття
+  const calculateArrivalDate = (departureDate, duration) => {
+    const arrivalDate = new Date(departureDate);
+    arrivalDate.setHours(arrivalDate.getHours() + duration);
+    return arrivalDate.toISOString();
+  };
+
+  // Функція для завантаження подорожей
   const loadTravels = useCallback(async () => {
     try {
       setIsLoading(true);
-      console.log('Начинаем загрузку поездок...');
+      console.log('Початок завантаження подорожей...');
 
       const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
         params: { from, to }
       });
 
-      console.log('Ответ от сервера:', response.data);
+      console.log('Відповідь від сервера:', response.data);
       const travels = response.data;
 
       if (travels.length === 0) {
-        console.log('Поездки не найдены');
+        console.log('Подорожі не знайдено');
         setVisibleTravels([]);
         setIsLoading(false);
         return;
@@ -49,36 +56,48 @@ function SearchTickets() {
 
       while (displayedTravels.length < 20 && currentDate <= endDate) {
         travels.forEach(travel => {
-          // Вставляем поездку в каждый день от startDate до endDate
-          displayedTravels.push({
-            ...travel,
-            date_departure: currentDate.toISOString()  // Устанавливаем текущую дату для поездки
-          });
-          console.log('Добавлена поездка на дату:', currentDate.toISOString());
+          // Фільтруємо по містам відправлення і прибуття
+          if (
+            travel.fromEN.trim().toLowerCase() === from.trim().toLowerCase() &&
+            travel.toEN.trim().toLowerCase() === to.trim().toLowerCase()
+          ) {
+            // Розраховуємо нову дату відправлення і прибуття
+            const departureDate = currentDate.toISOString();
+            const arrivalDate = calculateArrivalDate(departureDate, travel.duration);
+
+            // Додаємо подорож з новими датами
+            displayedTravels.push({
+              ...travel,
+              date_departure: departureDate,  // Задаємо нову дату відправлення
+              date_arrival: arrivalDate       // Розрахована дата прибуття
+            });
+
+            console.log('Додано подорож на дату:', departureDate);
+          }
         });
-        currentDate.setDate(currentDate.getDate() + 1);
+        currentDate.setDate(currentDate.getDate() + 1);  // Перехід до наступного дня
       }
 
-      // Логирование перед сортировкой
-      console.log('Массив всех поездок:', displayedTravels);
+      // Лог перед сортуванням
+      console.log('Масив подорожей перед сортуванням:', displayedTravels);
 
-      // Сортировка поездок по дате и времени отправления
+      // Сортування подорожей за датою відправлення
       displayedTravels.sort((a, b) => new Date(a.date_departure) - new Date(b.date_departure));
       
-      // Логирование после сортировки
-      console.log('Отсортированные поездки:', displayedTravels);
+      // Лог після сортування
+      console.log('Відсортовані подорожі:', displayedTravels);
 
-      // Обрезаем массив до 20 поездок
+      // Обрізаємо масив до 20 подорожей
       const finalTravels = displayedTravels.slice(0, 20);
-      console.log('Итоговые поездки:', finalTravels);
+      console.log('Фінальні подорожі:', finalTravels);
 
-      // Устанавливаем поездки и останавливаем загрузку
+      // Встановлюємо подорожі та зупиняємо завантаження
       setVisibleTravels(finalTravels);
       setIsLoading(false);
 
     } catch (error) {
-      setError(error.message || 'Error fetching travels');
-      console.error('Ошибка при загрузке поездок:', error);
+      setError(error.message || 'Помилка завантаження подорожей');
+      console.error('Помилка завантаження подорожей:', error);
       setIsLoading(false);
     }
   }, [from, to, startDate, endDate]);
@@ -123,7 +142,7 @@ function SearchTickets() {
   );
 }
 
-// Функция для группировки видимых билетов по дате
+// Функція для групування подорожей за датами
 const groupedTravels = (travels) => {
   return travels.reduce((acc, travel) => {
     const dateKey = travel.date_departure.split('T')[0];
