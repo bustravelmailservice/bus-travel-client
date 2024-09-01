@@ -37,9 +37,7 @@ function SearchTickets() {
       setIsLoading(true);
       console.log('Початок завантаження подорожей...');
 
-      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/', {
-        params: { from, to }
-      });
+      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/flights/');
 
       console.log('Відповідь від сервера:', response.data);
       const travels = response.data;
