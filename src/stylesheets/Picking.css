@@ -219,7 +219,7 @@
   margin-right: 0 !important;
 }
 
-.to-field .css-13xzpp8-singleValue {
+.to-field .css-1jqq78o-placeholder {
   margin-left: 20px !important;
   margin-right: 0 !important;
 }
@@ -523,6 +523,11 @@
   .picking-datepicker {
     height: 22px !important;
     padding-left: 13px;
+  }
+
+  .to-field .css-1jqq78o-placeholder {
+    margin-left: 00px !important;
+    margin-right: 0 !important;
   }
 }
 

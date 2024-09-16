@@ -19,8 +19,8 @@ import Registration from './pages/Registration.tsx';
 import SearchTickets from './pages/SearchTickets.js';
 import BuyTicket from './pages/BuyTicket.js';
 import AdminPanel from './pages/AdminPanel';
-import PageTitle from './components/PageTitle'; // Импортируйте новый компонент
-import { HelmetProvider } from 'react-helmet-async'; // Импортируйте HelmetProvider
+import PageTitle from './components/PageTitle';
+import { HelmetProvider } from 'react-helmet-async';
 import './i18n';
 
 function App() {

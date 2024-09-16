@@ -3,15 +3,14 @@ import '../stylesheets/Header.css';
 import LogoBig from '../images/logo_big.png';
 import { useTranslation } from 'react-i18next';
 import { StoreContext } from '../store/store';
-import LanguageSwitcher from './LanguageSwitcher'; // Импортируем LanguageSwitcher
+import LanguageSwitcher from './LanguageSwitcher'; // Імпортуємо оновлений LanguageSwitcher
 
 function Header() {
   const { t } = useTranslation();
   const store = useContext(StoreContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDimmed, setIsDimmed] = useState(false); // Состояние для затемнения
-  const [currentPath] = useState(window.location.pathname); // Текущее положение
-
+  const [isDimmed, setIsDimmed] = useState(false); 
+  const [currentPath] = useState(window.location.pathname); 
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -23,34 +22,32 @@ function Header() {
       });
     }
 
-    // Обработчик изменения размера окна
     const handleResize = () => {
       if (window.innerWidth > 680) {
         setIsMenuOpen(false);
-        setIsDimmed(false); // Убираем затемнение при увеличении ширины экрана
+        setIsDimmed(false); 
       }
     };
 
     window.addEventListener('resize', handleResize);
 
-    // Удаление обработчика при размонтировании компонента
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [store]);
 
   const handleLoginClick = () => {
-    window.location.href = '/Authorisation'; // Редирект на страницу авторизации
+    window.location.href = '/Authorisation'; 
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    setIsDimmed(!isDimmed); // Переключаем затемнение при открытии/закрытии меню
+    setIsDimmed(!isDimmed); 
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-    setIsDimmed(false); // Убираем затемнение при закрытии меню
+    setIsDimmed(false); 
   };
 
   const getLinkClass = (path) => {
@@ -59,7 +56,6 @@ function Header() {
 
   return (
     <div className="Header">
-      {/* Затемняющий слой */}
       <div className={`overlay ${isDimmed ? 'visible' : ''}`} onClick={closeMenu}></div>
 
       <div className="Logo">
@@ -76,7 +72,7 @@ function Header() {
       </div>
 
       <div className='UserAndLang'>
-        <LanguageSwitcher /> {/* Добавляем LanguageSwitcher перед иконкой пользователя */}
+        <LanguageSwitcher /> 
 
         {
           store.isAuth ? (
