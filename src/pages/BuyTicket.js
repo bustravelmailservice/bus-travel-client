@@ -154,7 +154,7 @@ const BuyTicket = () => {
         throw new Error('No token found');
       }
 
-      const response = await axios.post('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets', ticketData, {
+      const response = await axios.post('https://bus-travel-release-a957e5cad187.herokuapp.com/api/tickets', ticketData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'x-custom-header': customHeader,

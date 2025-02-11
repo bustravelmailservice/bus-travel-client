@@ -30,7 +30,7 @@ const TicketManagement = () => {
         throw new Error('No token found');
       }
 
-      const response = await axios.get('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/all-tickets', {
+      const response = await axios.get('https://bus-travel-release-a957e5cad187.herokuapp.com/api/all-tickets', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -56,7 +56,7 @@ const TicketManagement = () => {
         throw new Error('No token found');
       }
 
-      await axios.put(`https://bus-travel-release-7e3983a29e39.herokuapp.com/api/tickets/toggle/${id}`, null, {
+      await axios.put(`https://bus-travel-release-a957e5cad187.herokuapp.com/api/tickets/toggle/${id}`, null, {
         headers: {
           Authorization: `Bearer ${token}`
         }

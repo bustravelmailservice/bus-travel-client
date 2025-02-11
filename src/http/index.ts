@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_URL = 'https://bus-travel-release-7e3983a29e39.herokuapp.com/api';
+export const API_URL = 'https://bus-travel-release-a957e5cad187.herokuapp.com/api';
 
 const $api = axios.create({
 	withCredentials: true,

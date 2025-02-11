@@ -31,7 +31,7 @@ function App() {
       store.checkAuth();
     }
 
-    fetch('https://bus-travel-release-7e3983a29e39.herokuapp.com/api/endpoint')
+    fetch('https://bus-travel-release-a957e5cad187.herokuapp.com/api/endpoint')
       .then(response => response.json())
       .then(data => {
         console.log(data);
