@@ -39,7 +39,7 @@ function Account() {
         return;
       }
 
-      const response = await axios.get('https://bus-travel-release-a957e5cad187.herokuapp.com/api/tickets/', {
+      const response = await axios.get('https://bus-travel-1ffad4a532a5.herokuapp.com/api/tickets/', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

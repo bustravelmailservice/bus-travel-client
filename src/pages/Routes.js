@@ -12,7 +12,7 @@ function Routes() {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get('https://bus-travel-release-a957e5cad187.herokuapp.com/api/cities');
+        const response = await axios.get('https://bus-travel-1ffad4a532a5.herokuapp.com/api/cities');
         setCities(response.data);
       } catch (error) {
         console.error('Error fetching cities:', error);

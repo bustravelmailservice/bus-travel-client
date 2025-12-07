@@ -52,7 +52,7 @@ const FlightForm = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.post('https://bus-travel-release-a957e5cad187.herokuapp.com/api/flights/create', formData, {
+      await axios.post('https://bus-travel-1ffad4a532a5.herokuapp.com/api/flights/create', formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
